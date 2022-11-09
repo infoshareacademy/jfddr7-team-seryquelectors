@@ -71,9 +71,9 @@ export const LandingPage = () => {
         </h1>
         <h2>Simpler meetings in Gdańsk</h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-          ultrices odio orci, ut vehicula metus facilisis eget. Curabitur at
-          orci sit amet risus gravida feugiat.
+          Szukasz towarzysza do wspólnej aktywności? Dobrze trafiłeś!
+          Niezależnie od tego czy chcesz iść poćwiczyć na siłownię czy szukasz
+          przyjaciela do wspólnej nauki, GoGather ma dla ciebie towarzysza.
         </p>
       </div>
       <div className={styles.formWrapper}>
@@ -93,7 +93,7 @@ export const LandingPage = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit">Zaloguj</button>
+          <button type="submit">Zaloguj / Zarejestruj</button>
           {error ? <p>{error}</p> : null}
         </form>
       </div>
