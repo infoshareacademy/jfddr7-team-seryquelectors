@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, useMap, Marker, Popup, useMapEvents } from "react-leaflet";
+import { useMap, Marker, Popup, useMapEvents } from "react-leaflet";
 import { useState } from "react";
 
 const LocationMarker = () => {
@@ -24,9 +24,11 @@ const LocationMarker = () => {
   return (
     <>
       {positions.map((position) => (
-        <Marker position={[position.lat, position.lng]}>
-          <Popup>You are here</Popup>
-        </Marker>
+        <>
+          <Marker position={[position.lat, position.lng]}>
+            <Popup>You are here</Popup>
+          </Marker>
+        </>
       ))}
     </>
   );
