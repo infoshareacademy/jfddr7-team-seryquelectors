@@ -1,6 +1,10 @@
-.wrapper {
-	height: 100vh;
+.mapWrapper {
+  height: 90vh;
+  width: 80%;
 }
 .leaflet-container {
-	height: 100vh;
+  height: 90vh;
+}
+.wrapper {
+  display: flex;
 }

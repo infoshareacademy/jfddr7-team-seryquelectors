@@ -25,3 +25,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.leaflet-bar a {
+  background-color: #006994;
+  color: white;
+}
+
+.leaflet-bar a:hover {
+  background-color: #006994;
+  color: white;
+}
