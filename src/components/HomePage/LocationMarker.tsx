@@ -9,8 +9,8 @@ const LocationMarker = () => {
     lng: number;
   }
 
-  const { position, setPosition, allEvents } = useContext(AuthContext);
-  const [showForm, setShowForm] = useState(false);
+  const { position, setPosition, allEvents, setShowForm, showForm } =
+    useContext(AuthContext);
 
   // const map = useMapEvents({
   //   click() {},
@@ -21,7 +21,6 @@ const LocationMarker = () => {
     setShowForm(true);
     //setPositions([...positions, { lat: e.latlng.lat, lng: e.latlng.lng }]);
     setPosition([e.latlng.lat, e.latlng.lng]);
-    console.log(position);
   });
   // console.log(position);
 

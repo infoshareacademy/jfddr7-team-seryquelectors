@@ -36,7 +36,6 @@ function App() {
         events.push(doc.data());
       });
       setAllEvents(events);
-      console.log(events);
     });
   };
 
