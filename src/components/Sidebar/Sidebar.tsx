@@ -14,36 +14,38 @@ export const Sidebar = () => {
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const { position, setPosition } = useContext(AuthContext);
+  const { position, user } = useContext(AuthContext);
 
-  const addEvent = async (): Promise<void> => {
+  const addEvent = async (e: any): Promise<void> => {
+    e.preventDefault();
     await addDoc(collection(db, "events"), {
       name: name,
       description: description,
       position: position,
+      email: user,
     });
   };
 
   return (
     <div className={styles.SidebarWrapper}>
-      <form>
-        {/* <input placeholder="latitude"></input>
+      {/* <input placeholder="latitude"></input>
         <input placeholder="longtitude"></input> */}
+      <form onSubmit={addEvent}>
         <input
           placeholder="name"
           onChange={(e) => {
             setName(e.target.value);
             console.log(name);
           }}
-        ></input>
+        />
         <input
           placeholder="description"
           onChange={(e) => {
             setDescription(e.target.value);
             console.log(description);
           }}
-        ></input>
-        <button onClick={addEvent}>Add Event</button>
+        />
+        <button>Add Event</button>
       </form>
     </div>
   );
