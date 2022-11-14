@@ -1,5 +1,7 @@
-import { useMap, Marker, Popup, useMapEvents } from "react-leaflet";
-import { useState } from "react";
+import { useMap, Marker, Popup, useMapEvents, Tooltip } from "react-leaflet";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../providers/global";
+import { DocumentData } from "firebase/firestore";
 
 const LocationMarker = () => {
   interface Position {
@@ -7,7 +9,8 @@ const LocationMarker = () => {
     lng: number;
   }
 
-  const [positions, setPositions] = useState<Position[]>([]);
+  const { position, setPosition, allEvents, setShowForm, showForm } =
+    useContext(AuthContext);
 
   // const map = useMapEvents({
   //   click() {},
@@ -15,21 +18,26 @@ const LocationMarker = () => {
   const map = useMap();
 
   map.on("click", function (e: any) {
-    setPositions([...positions, { lat: e.latlng.lat, lng: e.latlng.lng }]);
-
-    console.log(positions);
+    setShowForm(true);
+    //setPositions([...positions, { lat: e.latlng.lat, lng: e.latlng.lng }]);
+    setPosition([e.latlng.lat, e.latlng.lng]);
   });
   // console.log(position);
 
   return (
     <>
-      {positions.map((position) => (
-        <>
-          <Marker position={[position.lat, position.lng]}>
-            <Popup>You are here</Popup>
+      {allEvents.map((e: DocumentData, i) => {
+        return (
+          <Marker key={i} position={e.position}>
+            <Tooltip>
+              <>
+                {e.name} <br /> {e.email} <br /> {e.description}
+              </>
+            </Tooltip>
           </Marker>
-        </>
-      ))}
+        );
+      })}
+      <Marker position={position}></Marker>
     </>
   );
 };
