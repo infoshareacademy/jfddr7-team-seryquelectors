@@ -1,4 +1,4 @@
-import { useMap, Marker, Popup, useMapEvents } from "react-leaflet";
+import { useMap, Marker, Popup, useMapEvents, Tooltip } from "react-leaflet";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/global";
 import { DocumentData } from "firebase/firestore";
@@ -30,17 +30,15 @@ const LocationMarker = () => {
       {allEvents.map((e: DocumentData, i) => {
         return (
           <Marker key={i} position={e.position}>
-            <Popup>
+            <Tooltip>
               <>
                 {e.name} <br /> {e.email} <br /> {e.description}
               </>
-            </Popup>
+            </Tooltip>
           </Marker>
         );
       })}
-      <Marker position={position}>
-        <Popup>You are here</Popup>
-      </Marker>
+      <Marker position={position}></Marker>
     </>
   );
 };
