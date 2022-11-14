@@ -1,6 +1,7 @@
 {
   "name": "jfddr7-team-seryquelectors",
   "version": "0.1.0",
+  "homepage": "https://infoshareacademy.github.io/jfddr7-team-seryquelectors",
   "private": true,
   "dependencies": {
     "@googlemaps/react-wrapper": "^1.1.35",
@@ -12,6 +13,7 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "firebase": "^9.13.0",
+    "gh-pages": "^4.0.0",
     "leaflet": "^1.9.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -25,13 +27,24 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "CI=false npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
+    "plugins": [
+      "react-hooks",
+      "@typescript-eslint"
+    ],
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "react-app/jest",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+      "@typescript-eslint/no-unused-vars": "warn",
+      "react-hooks/exhaustive-deps": "warn"
+    }
   },
   "browserslist": {
     "production": [
@@ -47,6 +60,9 @@
   },
   "devDependencies": {
     "@types/google.maps": "^3.50.5",
-    "@types/leaflet": "^1.9.0"
+    "@types/leaflet": "^1.9.0",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.42.1",
+    "eslint-plugin-react-hooks": "^4.6.0"
   }
 }
