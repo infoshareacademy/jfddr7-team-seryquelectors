@@ -37,7 +37,6 @@ export const Sidebar = () => {
           placeholder="name"
           onChange={(e) => {
             setName(e.target.value);
-            console.log(name);
           }}
           value={name}
         />
@@ -45,7 +44,6 @@ export const Sidebar = () => {
           placeholder="description"
           onChange={(e) => {
             setDescription(e.target.value);
-            console.log(description);
           }}
           value={description}
         />
