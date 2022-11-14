@@ -6,6 +6,8 @@ interface AuthContextState {
   setUser: (user: string | null) => void;
   position: LatLngExpression;
   setPosition: (position: LatLngExpression) => void;
+  allEvents: object[];
+  setAllEvents: (event: object[]) => void;
 }
 
 interface AuthProviderProps {
@@ -19,9 +21,12 @@ export const AuthContext = createContext(defaultAuthContextValue);
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<string | null>("");
   const [position, setPosition] = useState<LatLngExpression>([0, 0]);
+  const [allEvents, setAllEvents] = useState<object[]>([]);
 
   return (
-    <AuthContext.Provider value={{ user, setUser, position, setPosition }}>
+    <AuthContext.Provider
+      value={{ user, setUser, position, setPosition, allEvents, setAllEvents }}
+    >
       {children}
     </AuthContext.Provider>
   );

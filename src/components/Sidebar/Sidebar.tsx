@@ -24,6 +24,8 @@ export const Sidebar = () => {
       position: position,
       email: user,
     });
+    setName("");
+    setDescription("");
   };
 
   return (
@@ -37,6 +39,7 @@ export const Sidebar = () => {
             setName(e.target.value);
             console.log(name);
           }}
+          value={name}
         />
         <input
           placeholder="description"
@@ -44,6 +47,7 @@ export const Sidebar = () => {
             setDescription(e.target.value);
             console.log(description);
           }}
+          value={description}
         />
         <button>Add Event</button>
       </form>
