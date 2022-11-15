@@ -8,6 +8,11 @@
   width: 100%;
   filter: rotate(90deg);
 }
+
+.navFilling {
+  height: 10vh;
+}
+
 .leaflet-container {
   height: 90vh;
 }

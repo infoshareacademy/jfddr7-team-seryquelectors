@@ -29,11 +29,14 @@ code {
 }
 
 .leaflet-bar a {
-  background-color: #008dc7;
+  background-color: #394653;
   color: white;
+  box-shadow: none;
+  border-radius: 0px;
 }
 
 .leaflet-bar a:hover {
-  background-color: #006994;
+  background-color: #394653;
   color: white;
+  border-radius: 0px;
 }

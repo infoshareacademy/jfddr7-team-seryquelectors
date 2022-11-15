@@ -15,9 +15,7 @@ export const Navbar = () => {
       <button
         onClick={() => setIsClosed(!isClosed)}
         style={{
-          width: "40px",
-          height: "40px",
-          margin: "30px 30px 10px 50px",
+          margin: " 0px  0px  0px 20px ",
           background: "transparent",
           border: "none",
         }}

@@ -1,5 +1,5 @@
 .wrapper {
-  background-color: #006994;
+  background-color: #394653;
   min-height: 100vh;
   display: flex;
   padding: 0;
@@ -16,7 +16,7 @@
   right: 0px;
   bottom: 0px;
   left: 0px;
-  opacity: 0.35;
+  opacity: 0.25;
 }
 
 .wrapper h1 {
@@ -116,14 +116,13 @@
 .formWrapper form button {
   font-weight: 300;
   position: relative;
-  background-color: #006994;
+  background-color: #566294;
   color: white;
   border: none;
   box-sizing: border-box;
   padding: 6px;
   margin-top: 25px;
   font-size: 20px;
-  background-color: #4fa976;
 }
 
 .formWrapper form button:hover {
