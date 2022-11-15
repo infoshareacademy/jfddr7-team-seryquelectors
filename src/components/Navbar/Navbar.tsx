@@ -2,11 +2,33 @@ import styles from "./Navbar.module.css";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { BurgerClose as Icon } from "react-icons-animated";
+import { Sidebar } from "../Sidebar/Sidebar";
 
 export const Navbar = () => {
   const navigate = useNavigate();
+  const [isClosed, setIsClosed] = useState<boolean>(false);
+
   return (
     <div className={styles.NavbarWrapper}>
+      <button
+        onClick={() => setIsClosed(!isClosed)}
+        style={{
+          width: "40px",
+          height: "40px",
+          display: "grid",
+          placeItems: "center",
+          margin: "30px 30px 10px 50px",
+          background: "transparent",
+          border: "none",
+        }}
+      >
+        <Icon isClosed={isClosed} />
+      </button>
+
+      {isClosed ? <Sidebar /> : null}
+
       <h1>
         <svg
           xmlns="http://www.w3.org/2000/svg"
