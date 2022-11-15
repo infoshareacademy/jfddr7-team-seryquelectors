@@ -21,7 +21,7 @@
 
 .wrapper h1 {
   position: relative;
-  font-weight: 200;
+  font-weight: 500;
   letter-spacing: 4px;
   font-size: 35px;
   text-align: center;
@@ -38,7 +38,7 @@
   position: relative;
   margin-top: 30px;
   text-align: center;
-  font-weight: 500;
+  font-weight: 300;
   font-size: 45px;
 }
 
@@ -54,6 +54,8 @@
 }
 
 .about p {
+  font-weight: 300;
+  font-size: 18px;
   position: relative;
   padding: 40px;
   text-align: center;
@@ -67,6 +69,10 @@
   justify-content: center;
   align-items: center;
   align-content: center;
+}
+
+.formWrapper h1 {
+  font-weight: 300;
 }
 
 .formWrapper form {
@@ -87,23 +93,28 @@
   box-sizing: border-box;
   padding: 6px;
   margin-top: 25px;
+  font-weight: 300;
 }
 
 .formWrapper form input:focus {
   outline: none;
   border: none;
   border-bottom: 2px solid white;
+  font-weight: 300;
 }
 
 .formWrapper form input::placeholder {
   color: white;
+  font-weight: 300;
 }
 
 .formWrapper form input:-ms-input-placeholder {
   color: white;
+  font-weight: 300;
 }
 
 .formWrapper form button {
+  font-weight: 300;
   position: relative;
   background-color: #006994;
   color: white;
@@ -112,10 +123,11 @@
   padding: 6px;
   margin-top: 25px;
   font-size: 20px;
-  background-color: rgb(79, 169, 118);
+  background-color: #4fa976;
 }
 
 .formWrapper form button:hover {
+  font-weight: 300;
   cursor: pointer;
 }
 
