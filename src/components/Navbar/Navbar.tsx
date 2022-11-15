@@ -17,8 +17,6 @@ export const Navbar = () => {
         style={{
           width: "40px",
           height: "40px",
-          display: "grid",
-          placeItems: "center",
           margin: "30px 30px 10px 50px",
           background: "transparent",
           border: "none",
