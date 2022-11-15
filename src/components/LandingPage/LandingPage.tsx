@@ -53,10 +53,10 @@ export const LandingPage = () => {
           </svg>
           GoGather
         </h1>
-        <h2>Simpler meetings in Gdańsk</h2>
+        <h2>Łatwiejsze spotkania w Gdańsku</h2>
         <p>
-          Szukasz towarzysza do wspólnej aktywności? Dobrze trafiłeś! Niezależnie od tego czy chcesz iść poćwiczyć na siłownię czy szukasz przyjaciela
-          do wspólnej nauki, GoGather ma dla ciebie towarzysza.
+          Szukasz towarzysza do wspólnej aktywności? Dobrze trafiłeś! <br /> Niezależnie od tego czy chcesz iść poćwiczyć na siłownię czy szukasz przyjaciela
+          do wspólnej nauki, <br /> GoGather ma dla ciebie towarzysza.
         </p>
       </div>
       <div className={styles.formWrapper}>

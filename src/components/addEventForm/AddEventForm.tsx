@@ -93,7 +93,7 @@ const AddEventForm = () => {
 					value={description}
 					required
 				/>
-				<button>Add Event</button>
+				<button>Dodaj wydarzenie</button>
 			</form>
 		</div>
 	);
