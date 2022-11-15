@@ -9,6 +9,7 @@
   box-sizing: border-box;
   padding: 10px;
   height: 90vh;
+  margin-top: 10vh;
 }
 
 .SidebarWrapper form {
