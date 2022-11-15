@@ -7,9 +7,13 @@
   /* background-color: rgba(0, 141, 199, 0.8); */
   color: white;
   box-sizing: border-box;
-  padding: 10px;
   height: 90vh;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  overflow-y: scroll;
+  padding: 15px;
   margin-top: 10vh;
+
 }
 
 .SidebarWrapper form {
@@ -66,4 +70,42 @@
 
 .SidebarWrapper form button:hover {
   cursor: pointer;
+}
+
+.eventCard {
+  background: rgb(200, 200, 200);
+  color: black;
+  padding: 5px 0;
+  border-radius: 10px;
+  margin: 5px 0;
+}
+
+.eventCard p {
+  background: white;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px 5px;
+}
+
+.detailsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.detailsWrapper details summary {
+  flex-grow: 1;
+  font-size: 12px;
+}
+
+.category {
+  font-size: 12px;
+}
+
+.description {
+  font-size: 12px;
+}
+
+.email {
+  font-size: 12px;
 }
