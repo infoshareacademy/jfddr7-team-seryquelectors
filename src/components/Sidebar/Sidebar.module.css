@@ -1,9 +1,8 @@
 .SidebarWrapper {
   position: absolute;
-  z-index: 1000;
+  z-index: -1;
   width: 22.5%;
   background-color: #006994;
-  opacity: 0.8;
   /* background-color: rgba(0, 141, 199, 0.8); */
   color: white;
   box-sizing: border-box;

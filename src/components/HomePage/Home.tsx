@@ -11,7 +11,7 @@ export const Home: React.FC = () => {
   return (
     <div className="navMapSideWrapper">
       <Navbar />
-
+      <div className={styles.navFilling}></div>
       <div className={styles.wrapper}>
         {/* <Sidebar /> */}
         <MapContainer
