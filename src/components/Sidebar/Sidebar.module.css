@@ -12,6 +12,8 @@
   -webkit-backdrop-filter: blur(16px);
   overflow-y: scroll;
   padding: 15px;
+  margin-top: 10vh;
+
 }
 
 .SidebarWrapper form {

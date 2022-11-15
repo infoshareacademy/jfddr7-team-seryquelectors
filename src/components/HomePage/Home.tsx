@@ -13,7 +13,7 @@ export const Home: React.FC = () => {
       <Navbar />
 
       <div className={styles.wrapper}>
-        <Sidebar />
+        {/* <Sidebar /> */}
         <MapContainer
           center={[54.352024, 18.646639]}
           zoom={13}

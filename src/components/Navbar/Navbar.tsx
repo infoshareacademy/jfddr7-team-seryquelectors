@@ -4,14 +4,33 @@ import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/global";
+import { useState } from "react";
+import { BurgerClose as Icon } from "react-icons-animated";
+import { Sidebar } from "../Sidebar/Sidebar";
 
 export const Navbar = () => {
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
+  const [isClosed, setIsClosed] = useState<boolean>(false);
 
   return (
     <div className={styles.NavbarWrapper}>
+      <button
+        onClick={() => setIsClosed(!isClosed)}
+        style={{
+          width: "40px",
+          height: "40px",
+          margin: "30px 30px 10px 50px",
+          background: "transparent",
+          border: "none",
+        }}
+      >
+        <Icon isClosed={isClosed} />
+      </button>
+
+      {isClosed ? <Sidebar /> : null}
+
       <h1>
         <svg xmlns="http://www.w3.org/2000/svg" enableBackground="new 0 0 24 24" height="45px" viewBox="0 0 24 24" width="45px" fill="#FFFFFF">
           <rect fill="none" height="45" width="45" />
