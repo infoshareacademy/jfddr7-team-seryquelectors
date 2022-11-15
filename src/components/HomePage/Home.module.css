@@ -1,6 +1,12 @@
+.navMapSideWrapper {
+  position: relative;
+  height: 90vh;
+  display: flex;
+}
 .mapWrapper {
   height: 90vh;
-  width: 80%;
+  width: 100%;
+  filter: rotate(90deg);
 }
 .leaflet-container {
   height: 90vh;

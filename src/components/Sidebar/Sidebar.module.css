@@ -1,5 +1,68 @@
 .SidebarWrapper {
-  width: 20%;
+  position: absolute;
+  z-index: 1000;
+  width: 22.5%;
+  background-color: #006994;
+  opacity: 0.8;
+  /* background-color: rgba(0, 141, 199, 0.8); */
+  color: white;
+  box-sizing: border-box;
+  padding: 10px;
+  height: 90vh;
+}
+
+.SidebarWrapper form {
+  background-color: transparent;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.SidebarWrapper form button {
+  background-color: #4fa976;
+  color: white;
+  border: none;
+}
+
+.SidebarWrapper form input {
+  position: relative;
+  color: white;
+  background-color: transparent;
+  font-size: 20px;
+  border: none;
+  border-bottom: 2px solid white;
+  box-sizing: border-box;
+  padding: 6px;
+  margin-top: 25px;
+  font-weight: 300;
+}
+
+.SidebarWrapper form input:focus {
+  font-weight: 300;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid white;
+}
+
+.SidebarWrapper form input::placeholder {
+  font-weight: 300;
+  color: white;
+}
+
+.SidebarWrapper form button {
+  font-weight: 300;
+  width: 100%;
+  position: relative;
   background-color: #006994;
   color: white;
+  border: none;
+  box-sizing: border-box;
+  padding: 6px;
+  margin-top: 25px;
+  font-size: 20px;
+  background-color: #4fa976;
+}
+
+.SidebarWrapper form button:hover {
+  cursor: pointer;
 }

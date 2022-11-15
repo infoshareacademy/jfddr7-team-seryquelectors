@@ -9,8 +9,9 @@ import { Navbar } from "../Navbar/Navbar";
 
 export const Home: React.FC = () => {
   return (
-    <div>
+    <div className="navMapSideWrapper">
       <Navbar />
+
       <div className={styles.wrapper}>
         <Sidebar />
         <MapContainer
