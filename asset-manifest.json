@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/jfddr7-team-seryquelectors/static/css/main.31dbf35d.css",
-    "main.js": "/jfddr7-team-seryquelectors/static/js/main.0cbbd2ec.js",
+    "main.css": "/jfddr7-team-seryquelectors/static/css/main.3759f467.css",
+    "main.js": "/jfddr7-team-seryquelectors/static/js/main.0d995f4d.js",
     "static/js/787.009912c4.chunk.js": "/jfddr7-team-seryquelectors/static/js/787.009912c4.chunk.js",
     "static/media/gdansk-7505686.jpg": "/jfddr7-team-seryquelectors/static/media/gdansk-7505686.ff151ca798eadc561246.jpg",
     "index.html": "/jfddr7-team-seryquelectors/index.html",
-    "main.31dbf35d.css.map": "/jfddr7-team-seryquelectors/static/css/main.31dbf35d.css.map",
-    "main.0cbbd2ec.js.map": "/jfddr7-team-seryquelectors/static/js/main.0cbbd2ec.js.map",
+    "main.3759f467.css.map": "/jfddr7-team-seryquelectors/static/css/main.3759f467.css.map",
+    "main.0d995f4d.js.map": "/jfddr7-team-seryquelectors/static/js/main.0d995f4d.js.map",
     "787.009912c4.chunk.js.map": "/jfddr7-team-seryquelectors/static/js/787.009912c4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.31dbf35d.css",
-    "static/js/main.0cbbd2ec.js"
+    "static/css/main.3759f467.css",
+    "static/js/main.0d995f4d.js"
   ]
 }
