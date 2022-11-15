@@ -39,8 +39,7 @@
   margin: 5px;
   box-sizing: border-box;
   padding: 6px;
-  margin-top: 25px;
-  background: rgb(194, 194, 194);
+  background: #fff;
   border-radius: 20px;
   font-weight: 300;
 }
@@ -49,14 +48,14 @@
   font-weight: 300;
   outline: none;
   border: none;
-  background: rgb(194, 194, 194);
+  background: #fff;
   border-radius: 20px;
   border-bottom: 2px solid white;
 }
 
 .SidebarWrapper form input::placeholder {
   font-weight: 300;
-  background: rgb(194, 194, 194);
+  background: #fff;
   border-radius: 20px;
 }
 
@@ -72,10 +71,12 @@
   margin-top: 25px;
   font-size: 20px;
   background-color: #4fa976;
+  border-radius: 20px;
 }
 
 .SidebarWrapper form button:hover {
   cursor: pointer;
+  border-radius: 20px;
 }
 
 .SidebarWrapper select {
