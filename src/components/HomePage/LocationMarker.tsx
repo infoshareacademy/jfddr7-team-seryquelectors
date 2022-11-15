@@ -31,7 +31,7 @@ const LocationMarker = () => {
           <Marker key={i} position={e.position}>
             <Tooltip>
               <>
-                {e.name} <br /> {e.email} <br /> {e.description}
+                {e.name} <br /> {e.description}
               </>
             </Tooltip>
           </Marker>

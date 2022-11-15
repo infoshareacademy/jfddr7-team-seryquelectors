@@ -46,7 +46,7 @@ const AddEventForm = () => {
 				className={styles.form}
 			>
 				<input
-					placeholder="nazwa"
+					placeholder="imię"
 					onChange={(e) => {
 						setName(e.target.value);
 					}}
@@ -60,6 +60,7 @@ const AddEventForm = () => {
 					onChange={(e) => {
 						setCategory(e.target.value);
 					}}
+					value={category}
 				>
 					<option value="">Wybierz kategorię</option>
 					<option value="sport">Sport</option>
