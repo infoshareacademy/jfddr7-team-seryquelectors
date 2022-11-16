@@ -131,7 +131,7 @@
   cursor: pointer;
 }
 
-form p {
+.error {
   background: tomato;
   text-align: center;
   margin-top: 10px;
