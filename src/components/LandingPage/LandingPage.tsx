@@ -18,6 +18,7 @@ export const LandingPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<null | string>(null);
   const { setUser } = useContext(AuthContext);
+  const [showLogin, setShowLogin] = useState(true);
 
   const handleLogin: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
@@ -55,6 +56,10 @@ export const LandingPage = () => {
       .catch(() => {
         setError("Wystąpił błąd");
       });
+  };
+
+  const toogleLoginButton = () => {
+    setShowLogin(!showLogin);
   };
 
   return (
@@ -99,14 +104,19 @@ export const LandingPage = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit" onClick={handleLogin}>
-            Zaloguj
-          </button>
+          {showLogin ? (
+            <button type="submit" onClick={handleLogin}>
+              Zaloguj
+            </button>
+          ) : (
+            <button type="submit" onClick={handleRegister}>
+              Zarejestruj
+            </button>
+          )}
           {error ? <p className={styles.error}>{error}</p> : null}
-          <p>Nie masz konta? Zarejestruj się</p>
-          <button type="submit" onClick={handleRegister}>
-            Zarejestruj
-          </button>
+          <a onClick={toogleLoginButton} className={styles.toogleButton}>
+            Nie masz konta? Zarejestruj się
+          </a>
         </form>
       </div>
     </div>
