@@ -1,6 +1,13 @@
 import React, { createContext, useState, FC, ReactNode } from "react";
 import { LatLngExpression } from "leaflet";
-
+import {
+  collection,
+  DocumentData,
+  getDoc,
+  getDocs,
+  QuerySnapshot,
+} from "firebase/firestore";
+import { db } from "../firebase";
 interface AuthContextState {
   user: string | null;
   setUser: (user: string | null) => void;
@@ -10,6 +17,7 @@ interface AuthContextState {
   setAllEvents: (event: object[]) => void;
   showForm: boolean;
   setShowForm: (e: boolean) => void;
+  fetchEvents: () => void;
 }
 
 interface AuthProviderProps {
@@ -26,6 +34,17 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [allEvents, setAllEvents] = useState<object[]>([]);
   const [showForm, setShowForm] = useState(false);
 
+  const fetchEvents = (): void => {
+    getDocs(collection(db, "events")).then((querySnapshot) => {
+      const events: object[] = [];
+      querySnapshot.forEach((doc) => {
+        events.push(doc.data());
+      });
+      setAllEvents(events);
+      console.log("a");
+    });
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -37,6 +56,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         setAllEvents,
         showForm,
         setShowForm,
+        fetchEvents,
       }}
     >
       {children}

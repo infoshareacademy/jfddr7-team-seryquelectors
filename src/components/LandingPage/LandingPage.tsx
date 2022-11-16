@@ -109,9 +109,12 @@ export const LandingPage = () => {
               Zaloguj
             </button>
           ) : (
-            <button type="submit" onClick={handleRegister}>
-              Zarejestruj
-            </button>
+            <>
+              <input placeholder="imie" />
+              <button type="submit" onClick={handleRegister}>
+                Zarejestruj
+              </button>
+            </>
           )}
           {error ? <p className={styles.error}>{error}</p> : null}
           <a onClick={toogleLoginButton} className={styles.toogleButton}>

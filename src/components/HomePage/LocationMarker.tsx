@@ -2,6 +2,7 @@ import { useMap, Marker, Popup, useMapEvents, Tooltip } from "react-leaflet";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/global";
 import { DocumentData } from "firebase/firestore";
+// import { myIcon } from "../../images/Icon";
 
 const LocationMarker = () => {
   interface Position {

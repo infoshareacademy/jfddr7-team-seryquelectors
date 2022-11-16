@@ -10,7 +10,8 @@ const AddEventForm = () => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [category, setCategory] = useState("");
-  const { position, user } = useContext(AuthContext);
+  const [participants, setParticipants] = useState([]);
+  const { position, user, fetchEvents, allEvents } = useContext(AuthContext);
 
   //   interface addForm {
   //     name: string;
@@ -29,12 +30,15 @@ const AddEventForm = () => {
       date: date,
       time: time,
       category: category,
+      participants: participants,
     });
     setName("");
     setDescription("");
     setTime("");
     setDate("");
     setCategory("");
+    setParticipants([]);
+    fetchEvents();
   };
 
   return (

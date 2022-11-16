@@ -1,6 +1,6 @@
-import { FC, ReactElement } from "react";
+import { FC, ReactElement, useContext } from "react";
 import styles from "./EventCard.module.css";
-
+import { AuthContext } from "../../providers/global";
 interface Props {
   name: string;
   category: string;
@@ -10,7 +10,18 @@ interface Props {
   email: string;
 }
 
-const EventCard = ({ name, category, description, date, time, email } : Props): ReactElement => {
+const EventCard = ({
+  name,
+  category,
+  description,
+  date,
+  time,
+  email,
+}: Props): ReactElement => {
+  const { user } = useContext(AuthContext);
+
+  const handleJoin = (): void => {};
+
   return (
     <div className={styles.eventCard}>
       <p className={styles.eventName}>{name}</p>
@@ -19,10 +30,7 @@ const EventCard = ({ name, category, description, date, time, email } : Props): 
       <div className={styles.detailsWrapper}>
         <p className={styles.date}>{date}</p>
         <p className={styles.time}>{time}</p>
-        <details>
-          <summary>Pokaż adres e-mail:</summary>
-          <p className={styles.email}>{email}</p>
-        </details>
+        {email !== user ? <button onClick={handleJoin}>Dołącz</button> : null}
       </div>
     </div>
   );
