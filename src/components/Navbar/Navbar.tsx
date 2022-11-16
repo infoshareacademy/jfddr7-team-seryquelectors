@@ -44,9 +44,9 @@ export const Navbar = () => {
           navigate("/");
         }}
         xmlns="http://www.w3.org/2000/svg"
-        height="24px"
+        height="35px"
         viewBox="0 0 24 24"
-        width="24px"
+        width="35px"
         fill="#FFFFFF"
       >
         <path d="M0 0h24v24H0z" fill="none" />
