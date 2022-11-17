@@ -4,6 +4,8 @@ import { db } from "../../firebase";
 import { AuthContext } from "../../providers/global";
 import styles from "./AddEventForm.module.css";
 
+/* A */
+
 const AddEventForm = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -105,6 +107,7 @@ const AddEventForm = () => {
       </form>
     </div>
   );
+
 };
 
 export default AddEventForm;

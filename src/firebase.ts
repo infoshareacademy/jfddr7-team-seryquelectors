@@ -4,6 +4,7 @@ import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
+
   // apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   // authDomain: "gogather-c6cdc.firebaseapp.com",
   // projectId: "gogather-c6cdc",
@@ -16,6 +17,7 @@ const firebaseConfig = {
   storageBucket: "morningproject-d427d.appspot.com",
   messagingSenderId: "640544320239",
   appId: "1:640544320239:web:0deeaeb7de06c2f849491a",
+
 };
 
 const app = initializeApp(firebaseConfig);

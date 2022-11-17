@@ -10,6 +10,7 @@ interface Props {
   date: string;
   time: string;
   email: string;
+
   participants: string[];
   key: string;
 }
@@ -39,10 +40,12 @@ const EventCard = ({ name, category, description, date, time, email, participant
       <div className={styles.detailsWrapper}>
         <p className={styles.date}>{date}</p>
         <p className={styles.time}>{time}</p>
+
         {email !== user ? <button onClick={() => handleJoin(key)}>Dołącz</button> : null}
         {/* {participants.indexOf(email) > -1 && email !== user ? <button onClick={() => handleLeave(key)}>Opuść</button> : null} */}
         {/* {email === user ? <button onClick={() => handleDelete(key)}>Usuń</button> : null} */}
         <button onClick={() => handleLeave(key)}>Opuść</button>
+
       </div>
     </div>
   );
