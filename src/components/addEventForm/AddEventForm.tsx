@@ -13,8 +13,15 @@ const AddEventForm = () => {
   const [time, setTime] = useState("");
   const [category, setCategory] = useState("");
   const [participants, setParticipants] = useState([]);
-  const { position, user, fetchEvents, allEvents, setPosition, setShowForm, name } = useContext(AuthContext);
-
+  const {
+    position,
+    user,
+    fetchEvents,
+    allEvents,
+    setPosition,
+    setShowForm,
+    name,
+  } = useContext(AuthContext);
 
   //   interface addForm {
   //     name: string;
@@ -25,14 +32,11 @@ const AddEventForm = () => {
 
   const addEvent = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
-
-    await addDoc(collection(db, "events"), {
-      //   name: name,
-
     const eventRef = doc(collection(db, "events"));
     console.log(eventRef);
     const { id } = eventRef;
     console.log(id);
+
     await setDoc(eventRef, {
       name: name,
       description: description,
@@ -42,13 +46,9 @@ const AddEventForm = () => {
       time: time,
       category: category,
       participants: participants,
-
-    });
-    // setName("");
-
       id: id,
     }).then((r) => console.log(r));
-    setName("");
+
     setDescription("");
     setTime("");
     setDate("");
@@ -65,15 +65,6 @@ const AddEventForm = () => {
       {/* <input placeholder="latitude"></input>
         <input placeholder="longtitude"></input> */}
       <form onSubmit={addEvent} className={styles.form}>
-
-        <input
-          placeholder="imię"
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-          value={name}
-          required
-        /> */}
         <p>{name}</p>
 
         <select
@@ -120,7 +111,6 @@ const AddEventForm = () => {
       </form>
     </div>
   );
-
 };
 
 export default AddEventForm;
