@@ -65,6 +65,7 @@ const AddEventForm = () => {
 						setCategory(e.target.value);
 					}}
 					value={category}
+					required
 				>
 					<option value="">Wybierz kategorię</option>
 					<option value="sport">Sport</option>
