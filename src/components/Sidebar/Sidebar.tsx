@@ -14,7 +14,7 @@ export const Sidebar = () => {
   const otherEvents = allEvents.filter((e: DocumentData) => e.email !== user);
   // && e.team.indexOf(user) == -1
 
-  const [sidebar, setSidebar] = useState<any>(null);
+  const [sidebar, setSidebar] = useState<any>("");
   // useEffect(() => {}, []);
 
   return (
@@ -55,47 +55,46 @@ export const Sidebar = () => {
       </div>
 
       <div className={styles.events}>
-        {sidebar === "myEvents" ||
-        sidebar === "eventsIParticipateIn" ||
-        sidebar === "upcommingEvents" ||
-        sidebar === "addEvent" ? (
-          <>
-            {showForm ? <AddEventForm /> : null}
-            <details>
-              <summary>Twoje wydarzenia ({userEvents.length}):</summary>
+        {sidebar === "myEvents" ? (
+          <details>
+            <summary>Twoje wydarzenia ({userEvents.length}):</summary>
 
-              {userEvents.map((e: DocumentData) => {
-                return (
-                  <EventCard
-                    name={e.name}
-                    category={e.category}
-                    description={e.description}
-                    date={e.date}
-                    time={e.time}
-                    email={e.email}
-                  />
-                );
-              })}
-            </details>
-            <details>
-              <summary>Biorę udział w (0):</summary>
-            </details>
-            <details>
-              <summary>Nadchodzące wydarzenia ({otherEvents.length}):</summary>
-              {otherEvents.map((e: DocumentData) => {
-                return (
-                  <EventCard
-                    name={e.name}
-                    category={e.category}
-                    description={e.description}
-                    date={e.date}
-                    time={e.time}
-                    email={e.email}
-                  />
-                );
-              })}
-            </details>
-          </>
+            {userEvents.map((e: DocumentData) => {
+              return (
+                <EventCard
+                  name={e.name}
+                  category={e.category}
+                  description={e.description}
+                  date={e.date}
+                  time={e.time}
+                  email={e.email}
+                />
+              );
+            })}
+          </details>
+        ) : null || sidebar === "eventsIParticipateIn" ? (
+          <details>
+            <summary>Biorę udział w (0):</summary>
+          </details>
+        ) : null}
+        {sidebar === "upcommingEvents" ? (
+          <details>
+            <summary>Nadchodzące wydarzenia ({otherEvents.length}):</summary>
+            {otherEvents.map((e: DocumentData) => {
+              return (
+                <EventCard
+                  name={e.name}
+                  category={e.category}
+                  description={e.description}
+                  date={e.date}
+                  time={e.time}
+                  email={e.email}
+                />
+              );
+            })}
+          </details>
+        ) : null || sidebar === "addEvent" ? (
+          <>{showForm ? <AddEventForm /> : null}</>
         ) : null}
       </div>
     </div>
