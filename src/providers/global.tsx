@@ -1,14 +1,6 @@
 import React, { createContext, useState, FC, ReactNode } from "react";
 import { LatLngExpression } from "leaflet";
-import {
-  collection,
-  DocumentData,
-  getDoc,
-  getDocs,
-  query,
-  QuerySnapshot,
-  where,
-} from "firebase/firestore";
+import { collection, DocumentData, getDoc, getDocs, query, QuerySnapshot, where } from "firebase/firestore";
 import { db } from "../firebase";
 
 interface AuthContextState {
@@ -47,9 +39,7 @@ export const AuthContext = createContext(defaultAuthContextValue);
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<string | null>("");
-  const [position, setPosition] = useState<LatLngExpression>([
-    54.352024, 18.646639,
-  ]);
+  const [position, setPosition] = useState<LatLngExpression>([54.352024, 18.646639]);
   const [allEvents, setAllEvents] = useState<object[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState<string | null>("");
@@ -63,21 +53,17 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         events.push(doc.data());
       });
       setAllEvents(events);
-      console.log("a");
     });
   };
 
   const fetchUsers = (): void => {
-    getDocs(query(collection(db, "users"), where("email", "==", user))).then(
-      (querySnapshot) => {
-        const user: UserData[] = [];
-        querySnapshot.forEach((doc) => {
-          user.push(doc.data() as UserData);
-        });
-        setCurrentUser(user[0]);
-        console.log("a");
-      }
-    );
+    getDocs(query(collection(db, "users"), where("email", "==", user))).then((querySnapshot) => {
+      const user: UserData[] = [];
+      querySnapshot.forEach((doc) => {
+        user.push(doc.data() as UserData);
+      });
+      setCurrentUser(user[0]);
+    });
   };
 
   return (
