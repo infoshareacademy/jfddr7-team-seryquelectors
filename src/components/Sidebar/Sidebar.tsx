@@ -1,6 +1,6 @@
 import { addDoc, collection, DocumentData } from "firebase/firestore";
 import { emit } from "process";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { db } from "../../firebase";
 import { AuthContext } from "../../providers/global";
 import AddEventForm from "../addEventForm/AddEventForm";
@@ -8,20 +8,32 @@ import EventCard from "../EventCard/EventCard";
 import styles from "./Sidebar.module.css";
 
 export const Sidebar = () => {
-  const { showForm, user, allEvents } = useContext(AuthContext);
+  const { showForm, user, allEvents, fetchEvents, fetchUsers, currentUser } =
+    useContext(AuthContext);
   const userEvents = allEvents.filter((e: DocumentData) => e.email === user);
   // const participateEvents = allEvents.filter((e: DocumentData) => e.team.indexOf(user) > -1);
   const otherEvents = allEvents.filter((e: DocumentData) => e.email !== user);
   // && e.team.indexOf(user) == -1
 
   const [sidebar, setSidebar] = useState<any>("upcommingEvents");
-  // useEffect(() => {}, []);
+  useEffect(() => {
+    fetchEvents();
+    fetchUsers();
+  }, []);
+
+  // const userName = userDoc[0].name;
+
+  // const userName = userDoc.name;
+  // console.log(userDoc);
+  // console.log(allEvents);
+  // console.log(userName);
 
   return (
     <div className={styles.SidebarWrapper}>
       <div className={styles.options}>
         <div className={styles.user}>
-          <p>Wojciech Lamperski</p>
+          <p>{currentUser.name}</p>
+
           <img src="#" />
         </div>
         <button
@@ -76,9 +88,7 @@ export const Sidebar = () => {
             })}
           </>
         ) : null || sidebar === "eventsIParticipateIn" ? (
-          <details>
-            <summary>Biorę udział w (0):</summary>
-          </details>
+          <p>Biorę udział w (0):</p>
         ) : null}
         {sidebar === "upcommingEvents" ? (
           <>

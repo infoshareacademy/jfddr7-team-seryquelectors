@@ -1,7 +1,7 @@
 import { FC, ReactElement, useContext } from "react";
 import styles from "./EventCard.module.css";
 import { AuthContext } from "../../providers/global";
-import { deleteDoc, doc, setDoc } from "firebase/firestore";
+import { deleteDoc, doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 interface Props {
   name: string;
@@ -35,8 +35,9 @@ const EventCard = ({
   };
 
   const handleLeave = async (id: string): Promise<void> => {
-    const docReference = doc(db, "events", `${id}`);
-    console.log(docReference.id);
+    const docReference = getDoc(doc(db, "events", `${id}`));
+    console.log(docReference);
+
     // await setDoc(doc(db, "events", `${key}`), { participants: participants.filter((el) => el !== email) });
   };
 
