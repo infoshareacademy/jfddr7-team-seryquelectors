@@ -2,7 +2,7 @@ import { useMap, Marker, Popup, useMapEvents, Tooltip } from "react-leaflet";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/global";
 import { DocumentData } from "firebase/firestore";
-import { greenIcon, goldIcon, violetIcon, greyIcon } from "../../images/Icon";
+import { greenIcon, goldIcon, violetIcon } from "../../images/Icon";
 
 const LocationMarker = () => {
 	interface Position {
@@ -27,13 +27,11 @@ const LocationMarker = () => {
 	return (
 		<>
 			{allEvents.map((e: DocumentData, i) => {
-				let eventIcon = greyIcon;
+				let eventIcon = greenIcon;
 				if (e.category === "nauka") {
 					eventIcon = violetIcon;
 				} else if (e.category === "kultura") {
 					eventIcon = goldIcon;
-				} else if (e.category === "sport") {
-					eventIcon = greenIcon;
 				}
 				return (
 					<Marker
