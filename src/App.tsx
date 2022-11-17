@@ -6,7 +6,13 @@ import { useContext, useEffect } from "react";
 import { AuthContext } from "./providers/global";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "./firebase";
-import { collection, DocumentData, getDoc, getDocs, QuerySnapshot } from "firebase/firestore";
+import {
+  collection,
+  DocumentData,
+  getDoc,
+  getDocs,
+  QuerySnapshot,
+} from "firebase/firestore";
 
 function App() {
   const { user, setUser, allEvents, setAllEvents } = useContext(AuthContext);
