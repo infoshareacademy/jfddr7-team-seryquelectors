@@ -150,11 +150,10 @@
 .textarea {
   position: relative;
   margin-top: 20px;
-  box-sizing: border-box;
-  width: inherit;
+  resize: none;
+  outline: transparent;
 }
 
-.textarea:active {
-  border: none;
-  box-sizing: border-box;
+.textarea:focus {
+  resize: none;
 }
