@@ -12,7 +12,6 @@
   display: flex;
   flex-direction: column;
 }
-
 .options {
   margin-top: 5px;
   background-color: #232c34;
@@ -100,25 +99,26 @@
   background: #fff;
   border-radius: 3px;
   width: 100%;
-  font-weight: 300;
+  font-weight: 200;
 }
 
 .SidebarWrapper form input:focus {
-  font-weight: 300;
+  font-weight: 200;
   outline: none;
   border: none;
   background: #fff;
-  border-radius: 20px;
+  border-radius: 3px;
   border-bottom: 2px solid white;
 }
 
 .SidebarWrapper form input::placeholder {
-  font-weight: 300;
+  font-weight: 200;
   background: #fff;
-  border-radius: 20px;
+  border-radius: 3px;
 }
 
 .SidebarWrapper form button {
+  margin: 5px;
   font-weight: 300;
   width: 100%;
   position: relative;
@@ -127,7 +127,7 @@
   box-sizing: border-box;
   padding: 6px;
   margin-top: 25px;
-  background-color: #4fa976;
+  background-color: #566294;
   border-radius: 3px;
 }
 
@@ -145,8 +145,8 @@
   font-weight: 200;
   border-radius: 3px;
   width: 100%;
-  padding: 10px;
-  margin: 3px;
+  padding: 3px;
+  margin: 5px;
 }
 
 .SidebarWrapper textarea {
@@ -160,6 +160,6 @@
   width: 100%;
   font-weight: 200;
   border-radius: 3px;
-  padding: 10px;
+  padding: 3px;
   resize: none;
 }

@@ -14,7 +14,7 @@ export const Sidebar = () => {
   const otherEvents = allEvents.filter((e: DocumentData) => e.email !== user);
   // && e.team.indexOf(user) == -1
 
-  const [sidebar, setSidebar] = useState<any>("");
+  const [sidebar, setSidebar] = useState<any>("upcommingEvents");
   // useEffect(() => {}, []);
 
   return (
@@ -56,8 +56,8 @@ export const Sidebar = () => {
 
       <div className={styles.events}>
         {sidebar === "myEvents" ? (
-          <details>
-            <summary>Twoje wydarzenia ({userEvents.length}):</summary>
+          <>
+            <p>Twoje wydarzenia ({userEvents.length}):</p>
 
             {userEvents.map((e: DocumentData) => {
               return (
@@ -71,15 +71,15 @@ export const Sidebar = () => {
                 />
               );
             })}
-          </details>
+          </>
         ) : null || sidebar === "eventsIParticipateIn" ? (
           <details>
             <summary>Biorę udział w (0):</summary>
           </details>
         ) : null}
         {sidebar === "upcommingEvents" ? (
-          <details>
-            <summary>Nadchodzące wydarzenia ({otherEvents.length}):</summary>
+          <>
+            <p>Nadchodzące wydarzenia ({otherEvents.length}):</p>
             {otherEvents.map((e: DocumentData) => {
               return (
                 <EventCard
@@ -92,9 +92,15 @@ export const Sidebar = () => {
                 />
               );
             })}
-          </details>
+          </>
         ) : null || sidebar === "addEvent" ? (
-          <>{showForm ? <AddEventForm /> : null}</>
+          <>
+            {showForm ? (
+              <AddEventForm />
+            ) : (
+              <p>Proszę wybierz miejsce spotkania</p>
+            )}
+          </>
         ) : null}
       </div>
     </div>

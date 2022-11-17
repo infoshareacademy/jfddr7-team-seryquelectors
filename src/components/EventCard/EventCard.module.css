@@ -1,13 +1,12 @@
 .eventCard {
-  background: rgb(200, 200, 200);
   color: black;
+  border: 1px solid white;
   padding: 5px 0;
-  margin: 10px 0;
+  margin: 10px 5px;
+  color: white;
 }
 
 .eventCard p {
-  background: white;
-  border-radius: 10px;
   padding: 5px;
   margin: 5px 5px;
 }
