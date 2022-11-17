@@ -1,6 +1,6 @@
 import { addDoc, collection, DocumentData } from "firebase/firestore";
 import { emit } from "process";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { db } from "../../firebase";
 import { AuthContext } from "../../providers/global";
 import AddEventForm from "../addEventForm/AddEventForm";
@@ -8,9 +8,11 @@ import EventCard from "../EventCard/EventCard";
 import styles from "./Sidebar.module.css";
 
 export const Sidebar = () => {
-  const { showForm, user, allEvents } = useContext(AuthContext);
+  const { showForm, user, allEvents, fetchEvents } = useContext(AuthContext);
   const userEvents = allEvents.filter((e: DocumentData) => e.email === user);
-  // const participateEvents = allEvents.filter((e: DocumentData) => e.team.indexOf(user) > -1);
+  const participateEvents = allEvents.filter(
+    (e: DocumentData) => e.participants?.indexOf(user) > -1
+  );
   const otherEvents = allEvents.filter((e: DocumentData) => e.email !== user);
   // && e.team.indexOf(user) == -1
 

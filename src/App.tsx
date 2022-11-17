@@ -6,6 +6,7 @@ import { useContext, useEffect } from "react";
 import { AuthContext } from "./providers/global";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "./firebase";
+
 import {
   collection,
   DocumentData,
@@ -15,7 +16,7 @@ import {
 } from "firebase/firestore";
 
 function App() {
-  const { user, setUser, allEvents, setAllEvents } = useContext(AuthContext);
+  const { user, setUser, fetchEvents } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,17 +30,9 @@ function App() {
     });
   }, []);
 
-  const fetchEvents = (): void => {
-    getDocs(collection(db, "events")).then((querySnapshot) => {
-      const events: object[] = [];
-      querySnapshot.forEach((doc) => {
-        events.push(doc.data());
-      });
-      setAllEvents(events);
-    });
-  };
-
-  useEffect(() => fetchEvents(), []);
+  useEffect(() => {
+    fetchEvents();
+  }, []);
 
   if (user) {
     return (
