@@ -1,5 +1,5 @@
 .NavbarWrapper {
-  background-color: #394653;
+  background-color: #232c34;
   color: white;
   height: 10vh;
   display: flex;
@@ -26,7 +26,6 @@
   height: 100%;
   margin-right: 15px;
 }
-
 
 .NavbarWrapper button {
   margin: 0;

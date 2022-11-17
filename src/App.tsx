@@ -7,6 +7,14 @@ import { AuthContext } from "./providers/global";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "./firebase";
 
+import {
+  collection,
+  DocumentData,
+  getDoc,
+  getDocs,
+  QuerySnapshot,
+} from "firebase/firestore";
+
 function App() {
   const { user, setUser, fetchEvents } = useContext(AuthContext);
   const navigate = useNavigate();
