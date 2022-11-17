@@ -8,7 +8,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "./firebase";
 
 function App() {
-  const { user, setUser, fetchEvents } = useContext(AuthContext);
+  const { user, setUser, fetchEvents, allEvents } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,7 +24,7 @@ function App() {
 
   useEffect(() => {
     fetchEvents();
-  }, []);
+  }, [allEvents.length]);
 
   if (user) {
     return (
