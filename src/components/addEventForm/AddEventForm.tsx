@@ -7,13 +7,14 @@ import styles from "./AddEventForm.module.css";
 /* A */
 
 const AddEventForm = () => {
-  const [name, setName] = useState("");
+  // const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [category, setCategory] = useState("");
   const [participants, setParticipants] = useState([]);
-  const { position, user, fetchEvents, allEvents, setPosition, setShowForm } = useContext(AuthContext);
+  const { position, user, fetchEvents, allEvents, setPosition, setShowForm, name } = useContext(AuthContext);
+
 
   //   interface addForm {
   //     name: string;
@@ -24,6 +25,10 @@ const AddEventForm = () => {
 
   const addEvent = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
+
+    await addDoc(collection(db, "events"), {
+      //   name: name,
+
     const eventRef = doc(collection(db, "events"));
     console.log(eventRef);
     const { id } = eventRef;
@@ -37,6 +42,10 @@ const AddEventForm = () => {
       time: time,
       category: category,
       participants: participants,
+
+    });
+    // setName("");
+
       id: id,
     }).then((r) => console.log(r));
     setName("");
@@ -45,6 +54,7 @@ const AddEventForm = () => {
     setDate("");
     setCategory("");
     setParticipants([]);
+
     setPosition([0, 0]);
     setShowForm(false);
     fetchEvents();
@@ -55,6 +65,7 @@ const AddEventForm = () => {
       {/* <input placeholder="latitude"></input>
         <input placeholder="longtitude"></input> */}
       <form onSubmit={addEvent} className={styles.form}>
+
         <input
           placeholder="imię"
           onChange={(e) => {
@@ -62,7 +73,8 @@ const AddEventForm = () => {
           }}
           value={name}
           required
-        />
+        /> */}
+        <p>{name}</p>
 
         <select
           name="category"
@@ -71,6 +83,7 @@ const AddEventForm = () => {
             setCategory(e.target.value);
           }}
           value={category}
+          required
         >
           <option value="">Wybierz kategorię</option>
           <option value="sport">Sport</option>
