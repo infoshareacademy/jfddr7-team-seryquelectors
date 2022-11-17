@@ -55,6 +55,7 @@ const AddEventForm = () => {
           value={name}
           required
         /> */}
+        <p>{name}</p>
 
         <select
           name="category"
