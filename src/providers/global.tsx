@@ -18,6 +18,10 @@ interface AuthContextState {
   showForm: boolean;
   setShowForm: (e: boolean) => void;
   fetchEvents: () => void;
+  name: string | null;
+  setName: (user: string | null) => void;
+  userDescription: string | null;
+  setUserDescription: (user: string | null) => void;
 }
 
 interface AuthProviderProps {
@@ -33,6 +37,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [position, setPosition] = useState<LatLngExpression>([0, 0]);
   const [allEvents, setAllEvents] = useState<object[]>([]);
   const [showForm, setShowForm] = useState(false);
+  const [name, setName] = useState<string | null>("");
+  const [userDescription, setUserDescription] = useState<string | null>("");
 
   const fetchEvents = (): void => {
     getDocs(collection(db, "events")).then((querySnapshot) => {
@@ -57,6 +63,10 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         showForm,
         setShowForm,
         fetchEvents,
+        name,
+        setName,
+        userDescription,
+        setUserDescription,
       }}
     >
       {children}

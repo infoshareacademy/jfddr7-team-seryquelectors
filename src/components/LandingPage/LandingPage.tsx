@@ -17,7 +17,7 @@ export const LandingPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<null | string>(null);
-  const { setUser } = useContext(AuthContext);
+  const { setUser, setName, setUserDescription } = useContext(AuthContext);
   const [showLogin, setShowLogin] = useState(true);
 
   const handleLogin: React.MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -115,10 +115,17 @@ export const LandingPage = () => {
             </>
           ) : (
             <>
-              <input placeholder="Wpisz imię" />
+              <input
+                placeholder="Wpisz imię"
+                type="text"
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
               <textarea
                 placeholder="Napiszesz coś o sobie?"
                 className={styles.textarea}
+                onChange={(e) => setUserDescription(e.target.value)}
+                required
               />
               <button type="submit" onClick={handleRegister}>
                 Zarejestruj
