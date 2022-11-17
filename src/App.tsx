@@ -6,6 +6,7 @@ import { useContext, useEffect } from "react";
 import { AuthContext } from "./providers/global";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "./firebase";
+import { PageNotFound } from "./components/PageNotFound/PageNotFound";
 
 import {
   collection,
@@ -44,6 +45,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 }

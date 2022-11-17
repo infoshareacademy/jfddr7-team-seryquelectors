@@ -1,9 +1,11 @@
 .eventCard {
   color: black;
   border: 1px solid white;
+  border-radius: 20px;
   padding: 5px 0;
   margin: 10px 5px;
   color: white;
+  background-color: #232c34;
 }
 
 .eventCard p {

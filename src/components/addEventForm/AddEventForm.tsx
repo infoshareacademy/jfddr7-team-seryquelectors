@@ -33,10 +33,7 @@ const AddEventForm = () => {
   const addEvent = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     const eventRef = doc(collection(db, "events"));
-    console.log(eventRef);
     const { id } = eventRef;
-    console.log(id);
-
     await setDoc(eventRef, {
       name: name,
       description: description,
@@ -47,14 +44,13 @@ const AddEventForm = () => {
       category: category,
       participants: participants,
       id: id,
-    }).then((r) => console.log(r));
+    });
 
     setDescription("");
     setTime("");
     setDate("");
     setCategory("");
     setParticipants([]);
-
     setPosition([0, 0]);
     setShowForm(false);
     fetchEvents();
@@ -65,8 +61,6 @@ const AddEventForm = () => {
       {/* <input placeholder="latitude"></input>
         <input placeholder="longtitude"></input> */}
       <form onSubmit={addEvent} className={styles.form}>
-        <p>{name}</p>
-
         <select
           name="category"
           id="category-select"

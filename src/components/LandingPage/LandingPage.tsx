@@ -3,8 +3,9 @@ import { useContext, useEffect, useState } from "react";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { AuthContext } from "../../providers/global";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 
 export const LandingPage = () => {
   const navigate = useNavigate();
@@ -17,7 +18,8 @@ export const LandingPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<null | string>(null);
-  const { setUser, setName, setUserDescription } = useContext(AuthContext);
+  const { setUser, setName, setUserDescription, name, userDescription } =
+    useContext(AuthContext);
   const [showLogin, setShowLogin] = useState(true);
 
   const handleLogin: React.MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -45,6 +47,15 @@ export const LandingPage = () => {
       });
   };
 
+  const addUser = async (): Promise<void> => {
+    await addDoc(collection(db, "users"), {
+      name: name,
+      avatar: null,
+      userDescription: userDescription,
+      email: email,
+    });
+  };
+
   const handleRegister: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
 
@@ -52,6 +63,7 @@ export const LandingPage = () => {
       .then(() => {
         navigate("home");
         setUser(email);
+        addUser();
       })
       .catch(() => {
         setError("Wystąpił błąd");
