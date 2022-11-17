@@ -105,21 +105,30 @@ export const LandingPage = () => {
             required
           />
           {showLogin ? (
-            <button type="submit" onClick={handleLogin}>
-              Zaloguj
-            </button>
+            <>
+              <button type="submit" onClick={handleLogin}>
+                Zaloguj
+              </button>
+              <a onClick={toogleLoginButton} className={styles.toogleButton}>
+                Nie masz konta? Zarejestruj się
+              </a>
+            </>
           ) : (
             <>
-              <input placeholder="imie" />
+              <input placeholder="Wpisz imię" />
+              <textarea
+                placeholder="Napiszesz coś o sobie?"
+                className={styles.textarea}
+              />
               <button type="submit" onClick={handleRegister}>
                 Zarejestruj
               </button>
+              <a onClick={toogleLoginButton} className={styles.toogleButton}>
+                Masz już konto? Zaloguj się
+              </a>
             </>
           )}
           {error ? <p className={styles.error}>{error}</p> : null}
-          <a onClick={toogleLoginButton} className={styles.toogleButton}>
-            Nie masz konta? Zarejestruj się
-          </a>
         </form>
       </div>
     </div>

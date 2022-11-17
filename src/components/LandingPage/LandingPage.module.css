@@ -146,3 +146,15 @@
   text-align: center;
   cursor: pointer;
 }
+
+.textarea {
+  position: relative;
+  margin-top: 20px;
+  box-sizing: border-box;
+  width: inherit;
+}
+
+.textarea:active {
+  border: none;
+  box-sizing: border-box;
+}
