@@ -93,7 +93,6 @@
 .SidebarWrapper form input {
   position: relative;
   background-color: transparent;
-  font-size: 20px;
   border: none;
   margin: 5px;
   box-sizing: border-box;
@@ -123,31 +122,44 @@
   font-weight: 300;
   width: 100%;
   position: relative;
-  background-color: #006994;
   color: white;
   border: none;
   box-sizing: border-box;
   padding: 6px;
   margin-top: 25px;
-  font-size: 20px;
   background-color: #4fa976;
   border-radius: 3px;
 }
 
 .SidebarWrapper form button:hover {
   cursor: pointer;
-  border-radius: 20px;
 }
 
 .SidebarWrapper form select {
-  border-radius: 5px;
+  position: relative;
+  background-color: transparent;
+  border: none;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 3px;
+  font-weight: 200;
+  border-radius: 3px;
   width: 100%;
   padding: 10px;
   margin: 3px;
 }
 
 .SidebarWrapper textarea {
-  border-radius: 10px;
-  padding: 10px;
+  position: relative;
+  background-color: transparent;
+  border: none;
   margin: 5px;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 3px;
+  width: 100%;
+  font-weight: 200;
+  border-radius: 3px;
+  padding: 10px;
+  resize: none;
 }
