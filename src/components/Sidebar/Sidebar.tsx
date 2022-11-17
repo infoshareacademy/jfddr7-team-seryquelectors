@@ -25,7 +25,7 @@ export const Sidebar = () => {
   useEffect(() => {
     fetchEvents();
     fetchUsers();
-  }, []);
+  }, [allEvents.length]);
 
   // const userName = userDoc[0].name;
 
@@ -80,7 +80,9 @@ export const Sidebar = () => {
       <div className={styles.events}>
         {sidebar === "myEvents" ? (
           <>
-            <p>Twoje wydarzenia ({userEvents.length}):</p>
+            <p style={{ color: "#232c34" }}>
+              Twoje wydarzenia ({userEvents.length}):
+            </p>
 
             {userEvents.map((e: DocumentData) => {
               return (
@@ -103,7 +105,9 @@ export const Sidebar = () => {
         ) : null}
         {sidebar === "upcommingEvents" ? (
           <>
-            <p>Nadchodzące wydarzenia ({otherEvents.length}):</p>
+            <p style={{ color: "#232c34" }}>
+              Nadchodzące wydarzenia ({otherEvents.length}):
+            </p>
             {otherEvents.map((e: DocumentData) => {
               return (
                 <EventCard
