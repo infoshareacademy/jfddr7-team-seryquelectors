@@ -7,6 +7,12 @@ import AddEventForm from "../addEventForm/AddEventForm";
 import EventCard from "../EventCard/EventCard";
 import styles from "./Sidebar.module.css";
 
+export const images = [
+  { src: "../../image1.png", name: "image.png" },
+  { src: "/image2.png", name: "image.png" },
+  { src: "/image3.png", name: "image.png" },
+];
+
 export const Sidebar = () => {
   const { showForm, user, allEvents, fetchEvents, fetchUsers, currentUser } =
     useContext(AuthContext);
@@ -34,7 +40,12 @@ export const Sidebar = () => {
         <div className={styles.user}>
           <p>{currentUser.name}</p>
 
-          <img src="#" />
+          <img
+            src={
+              images.find((image) => image.name === currentUser.avatar)?.src ??
+              ""
+            }
+          />
         </div>
         <button
           onClick={() => {

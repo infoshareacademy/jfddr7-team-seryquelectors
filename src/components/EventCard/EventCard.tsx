@@ -35,7 +35,7 @@ const EventCard = ({
   };
 
   const handleLeave = async (id: string): Promise<void> => {
-    const docReference = getDoc(doc(db, "events", `${id}`));
+    const docReference = await getDoc(doc(db, "events", `${id}`));
     console.log(docReference);
 
     // await setDoc(doc(db, "events", `${key}`), { participants: participants.filter((el) => el !== email) });
