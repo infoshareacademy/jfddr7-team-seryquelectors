@@ -1,7 +1,7 @@
 import { FC, ReactElement, useContext } from "react";
 import styles from "./EventCard.module.css";
 import { AuthContext } from "../../providers/global";
-import { deleteDoc, doc, setDoc, getDoc } from "firebase/firestore";
+import { deleteDoc, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 interface Props {
   name: string;
@@ -14,32 +14,29 @@ interface Props {
   id: string;
 }
 
-const EventCard = ({
-  name,
-  category,
-  description,
-  date,
-  time,
-  email,
-  participants,
-  id,
-}: Props): ReactElement => {
-  const { user } = useContext(AuthContext);
+const EventCard = ({ name, category, description, date, time, email, participants, id }: Props): ReactElement => {
+  const { user, fetchEvents } = useContext(AuthContext);
 
   const handleJoin = async (key: string) => {
-    return null;
+    const docRef = doc(db, "events", `${id}`);
+    await updateDoc(docRef, { participants: [user, ...participants] });
+    fetchEvents();
+    console.log("join!");
   };
 
   const handleDelete = async (id: string): Promise<void> => {
     await deleteDoc(doc(db, "events", `${id}`));
+    fetchEvents();
+    console.log("deleted!");
   };
 
   const handleLeave = async (id: string): Promise<void> => {
     const docRef = doc(db, "events", `${id}`);
-    const fetchDocument = await getDoc(docRef);
-    // await setDoc(docRef);
-
-    // await setDoc(doc(db, "events", `${key}`), { participants: participants.filter((el) => el !== email) });
+    const fetchDocument = (await getDoc(docRef)).data();
+    const currentParticipants = fetchDocument?.participants;
+    await updateDoc(docRef, { participants: currentParticipants.filter((el: string) => el !== user) });
+    fetchEvents();
+    console.log("leaved!");
   };
 
   return (
@@ -50,13 +47,9 @@ const EventCard = ({
       <div className={styles.detailsWrapper}>
         <p className={styles.date}>{date}</p>
         <p className={styles.time}>{time}</p>
-
-        {email !== user ? (
-          <button onClick={() => handleJoin(id)}>Dołącz</button>
-        ) : null}
-        {/* {participants.indexOf(email) > -1 && email !== user ? <button onClick={() => handleLeave(key)}>Opuść</button> : null} */}
-        {/* {email === user ? <button onClick={() => handleDelete(key)}>Usuń</button> : null} */}
-        <button onClick={() => handleLeave(id)}>Opuść</button>
+        {participants.indexOf(user as string) == -1 && email !== user ? <button onClick={() => handleJoin(id)}>Dołącz</button> : null}
+        {participants.indexOf(user as string) > -1 && email !== user ? <button onClick={() => handleLeave(id)}>Opuść</button> : null}
+        {email === user ? <button onClick={() => handleDelete(id)}>Usuń</button> : null}
       </div>
     </div>
   );

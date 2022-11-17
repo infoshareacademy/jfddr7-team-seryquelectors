@@ -13,15 +13,7 @@ const AddEventForm = () => {
   const [time, setTime] = useState("");
   const [category, setCategory] = useState("");
   const [participants, setParticipants] = useState([]);
-  const {
-    position,
-    user,
-    fetchEvents,
-    allEvents,
-    setPosition,
-    setShowForm,
-    name,
-  } = useContext(AuthContext);
+  const { position, user, fetchEvents, allEvents, setPosition, setShowForm, name, currentUser } = useContext(AuthContext);
 
   //   interface addForm {
   //     name: string;
@@ -35,7 +27,7 @@ const AddEventForm = () => {
     const eventRef = doc(collection(db, "events"));
     const { id } = eventRef;
     await setDoc(eventRef, {
-      name: name,
+      name: currentUser.name,
       description: description,
       position: position,
       email: user,
