@@ -3,8 +3,22 @@ import { FormEvent, useContext, useState } from "react";
 import { db } from "../../firebase";
 import { AuthContext } from "../../providers/global";
 import styles from "./AddEventForm.module.css";
+// import emailjs from "@emailjs/browser";
 
 /* A */
+
+// const sendEmail = (e) => {
+//   e.preventDefault();
+
+//   emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", form.current, "YOUR_PUBLIC_KEY").then(
+//     (result) => {
+//       console.log(result.text);
+//     },
+//     (error) => {
+//       console.log(error.text);
+//     }
+//   );
+// };
 
 const AddEventForm = () => {
   // const [name, setName] = useState("");
@@ -12,15 +26,7 @@ const AddEventForm = () => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [category, setCategory] = useState("");
-  const [participants, setParticipants] = useState([]);
-  const { position, user, fetchEvents, allEvents, setPosition, setShowForm, name, currentUser } = useContext(AuthContext);
-
-  //   interface addForm {
-  //     name: string;
-  //     setName: (name: string) => void;
-  //     description: string;
-  //     setDescription: (name: string) => void;
-  //   }
+  const { position, user, fetchEvents, allEvents, setPosition, setShowForm, currentUser } = useContext(AuthContext);
 
   const addEvent = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
@@ -34,7 +40,8 @@ const AddEventForm = () => {
       date: date,
       time: time,
       category: category,
-      participants: participants,
+      participants: [JSON.stringify({ user: user, participantName: currentUser.name })],
+      likes: [],
       id: id,
     });
 
@@ -42,7 +49,6 @@ const AddEventForm = () => {
     setTime("");
     setDate("");
     setCategory("");
-    setParticipants([]);
     setPosition([0, 0]);
     setShowForm(false);
     fetchEvents();
@@ -92,6 +98,7 @@ const AddEventForm = () => {
           }}
           value={description}
           required
+          maxLength={300}
         />
         <button>Dodaj wydarzenie</button>
       </form>

@@ -1,10 +1,10 @@
-import { FC, ReactElement, useContext } from "react";
+import { ReactElement, useContext, useEffect } from "react";
 import styles from "./EventCard.module.css";
 import { AuthContext } from "../../providers/global";
-import { deleteDoc, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, DocumentData, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 interface Props {
-  name: string;
+  creatorName: string;
   category: string;
   description: string;
   date: string;
@@ -12,44 +12,74 @@ interface Props {
   email: string;
   participants: string[];
   id: string;
+  likes: string[];
 }
 
-const EventCard = ({ name, category, description, date, time, email, participants, id }: Props): ReactElement => {
-  const { user, fetchEvents } = useContext(AuthContext);
+const EventCard = ({ creatorName, category, description, date, time, email, participants, id, likes }: Props): ReactElement => {
+  const { user, fetchEvents, currentUser } = useContext(AuthContext);
 
-  const handleJoin = async (key: string) => {
+  const handleLike = async () => {
     const docRef = doc(db, "events", `${id}`);
-    await updateDoc(docRef, { participants: [user, ...participants] });
+    if (likes.indexOf(user as string) === -1) {
+      await updateDoc(docRef, { likes: [user, ...likes] });
+    } else {
+      await updateDoc(docRef, { likes: likes.filter((e) => e !== user) });
+    }
     fetchEvents();
-    console.log("join!");
   };
 
-  const handleDelete = async (id: string): Promise<void> => {
+  const handleJoin = async () => {
+    const docRef = doc(db, "events", `${id}`);
+    await updateDoc(docRef, { participants: [...participants, JSON.stringify({ user: user, participantName: currentUser.name })] });
+    fetchEvents();
+  };
+
+  const handleDelete = async (): Promise<void> => {
     await deleteDoc(doc(db, "events", `${id}`));
     fetchEvents();
-    console.log("deleted!");
   };
 
-  const handleLeave = async (id: string): Promise<void> => {
+  const handleLeave = async (): Promise<void> => {
     const docRef = doc(db, "events", `${id}`);
     const fetchDocument = (await getDoc(docRef)).data();
     const currentParticipants = fetchDocument?.participants;
-    await updateDoc(docRef, { participants: currentParticipants.filter((el: string) => el !== user) });
+    await updateDoc(docRef, { participants: currentParticipants.filter((el: string) => el.indexOf(user as string) === -1) });
     fetchEvents();
-    console.log("leaved!");
   };
 
   return (
     <div className={styles.eventCard}>
-      <p className={styles.eventName}>{name}</p>
+      <p className={styles.eventName}>{creatorName}</p>
       <p className={styles.category}>{category}</p>
       <p className={styles.description}>{description}</p>
       <div className={styles.detailsWrapper}>
         <p className={styles.date}>{date}</p>
         <p className={styles.time}>{time}</p>
-        {participants.indexOf(user as string) == -1 && email !== user ? <button onClick={() => handleJoin(id)}>Dołącz</button> : null}
-        {participants.indexOf(user as string) > -1 && email !== user ? <button onClick={() => handleLeave(id)}>Opuść</button> : null}
-        {email === user ? <button onClick={() => handleDelete(id)}>Usuń</button> : null}
+        <p className={styles.participants} title="Liczba uczestników">
+          <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/314/people-holding-hands-light-skin-tone-medium-dark-skin-tone_1f9d1-1f3fb-200d-1f91d-200d-1f9d1-1f3fe.png" />
+          {participants.length}
+        </p>
+        <button onClick={handleLike} className={styles.buttonLike} title="Lubię to!">
+          <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/facebook/327/red-heart_2764-fe0f.png" />
+          {likes.length}
+        </button>
+        {participants.indexOf(user as string) === -1 && email !== user ? (
+          <button onClick={handleJoin} className={styles.joinButton}>
+            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/326/waving-hand_1f44b.png" />
+            Dołącz
+          </button>
+        ) : null}
+        {participants.indexOf(user as string) > -1 && email !== user ? (
+          <button onClick={handleLeave} className={styles.leaveButton}>
+            🚫 Opuść
+          </button>
+        ) : null}
+        {email === user ? (
+          <button onClick={handleDelete} className={styles.deleteButton}>
+            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/toss-face/342/wastebasket_1f5d1-fe0f.png" />
+            Usuń
+          </button>
+        ) : null}
       </div>
     </div>
   );

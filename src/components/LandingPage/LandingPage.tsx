@@ -31,7 +31,7 @@ export const LandingPage = () => {
         setUser(email);
       })
       .catch(({ message }) => {
-        if (message == "Firebase: Error (auth/wrong-password).") {
+        if (message == "Firebase: Error (auth/wrong-password)." || message == "Firebase: Error (auth/invalid-email)." || message == "Firebase: Error (auth/user-not-found)") {
           setError("Niepoprawny email lub hasło");
         }
         // } else {
