@@ -1,14 +1,14 @@
 import "./App.css";
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { LandingPage } from "./components/LandingPage/LandingPage";
 import { Home } from "./components/HomePage/Home";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "./providers/global";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "./firebase";
+import { auth } from "./firebase";
 import { PageNotFound } from "./components/PageNotFound/PageNotFound";
 
-import { collection, DocumentData, getDoc, getDocs, QuerySnapshot } from "firebase/firestore";
+
 
 function App() {
   const { user, setUser, fetchEvents, allEvents } = useContext(AuthContext);

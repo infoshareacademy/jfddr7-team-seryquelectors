@@ -1,11 +1,11 @@
 import styles from "./LandingPage.module.css";
-import { useContext, useEffect, useState } from "react";
-import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { useContext,  useState } from "react";
+import {  signInWithEmailAndPassword } from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../firebase";
 import { AuthContext } from "../../providers/global";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 
 export const LandingPage = () => {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ export const LandingPage = () => {
         setUser(email);
       })
       .catch(({ message }) => {
-        if (message == "Firebase: Error (auth/wrong-password).") {
+        if (message === "Firebase: Error (auth/wrong-password)." || message === "Firebase: Error (auth/invalid-email)." || message === "Firebase: Error (auth/user-not-found)") {
           setError("Niepoprawny email lub hasło");
         }
         // } else {
@@ -121,9 +121,9 @@ export const LandingPage = () => {
               <button type="submit" onClick={handleLogin}>
                 Zaloguj
               </button>
-              <a onClick={toogleLoginButton} className={styles.toogleButton}>
+              <span onClick={toogleLoginButton} className={styles.toogleButton}>
                 Nie masz konta? Zarejestruj się
-              </a>
+              </span>
             </>
           ) : (
             <>
@@ -142,9 +142,9 @@ export const LandingPage = () => {
               <button type="submit" onClick={handleRegister}>
                 Zarejestruj
               </button>
-              <a onClick={toogleLoginButton} className={styles.toogleButton}>
+              <span onClick={toogleLoginButton} className={styles.toogleButton}>
                 Masz już konto? Zaloguj się
-              </a>
+              </span>
             </>
           )}
           {error ? <p className={styles.error}>{error}</p> : null}

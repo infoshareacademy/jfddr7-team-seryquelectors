@@ -1,9 +1,9 @@
 {
   "name": "jfddr7-team-seryquelectors",
   "version": "0.1.0",
-  "homepage": "https://infoshareacademy.github.io/jfddr7-team-seryquelectors",
   "private": true,
   "dependencies": {
+    "@emailjs/browser": "^3.9.1",
     "@googlemaps/react-wrapper": "^1.1.35",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

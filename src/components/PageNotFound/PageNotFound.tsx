@@ -1,11 +1,9 @@
 import styles from "./PageNotFound.module.css";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../providers/global";
-import { useContext } from "react";
 
 export const PageNotFound = () => {
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+
 
   const backToLandingPage = () => {
     navigate("/");
