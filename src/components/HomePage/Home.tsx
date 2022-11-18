@@ -4,7 +4,6 @@ import styles from "./Home.module.css";
 // import { useMapEvents } from "react-leaflet/lib/hooks";
 
 import LocationMarker from "./LocationMarker";
-import { Sidebar } from "../Sidebar/Sidebar";
 import { Navbar } from "../Navbar/Navbar";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/global";

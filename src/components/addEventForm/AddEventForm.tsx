@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { collection, doc, setDoc } from "firebase/firestore";
 import { FormEvent, useContext, useState } from "react";
 import { db } from "../../firebase";
 import { AuthContext } from "../../providers/global";
@@ -26,7 +26,7 @@ const AddEventForm = () => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [category, setCategory] = useState("");
-  const { position, user, fetchEvents, allEvents, setPosition, setShowForm, currentUser } = useContext(AuthContext);
+  const { position, user, fetchEvents, setPosition, setShowForm, currentUser } = useContext(AuthContext);
 
   const addEvent = async (e: FormEvent): Promise<void> => {
     e.preventDefault();

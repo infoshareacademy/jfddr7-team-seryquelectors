@@ -1,7 +1,7 @@
-import { ReactElement, useContext, useEffect } from "react";
+import { ReactElement, useContext } from "react";
 import styles from "./EventCard.module.css";
 import { AuthContext } from "../../providers/global";
-import { deleteDoc, doc, DocumentData, getDoc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 interface Props {
   creatorName: string;
@@ -56,16 +56,16 @@ const EventCard = ({ creatorName, category, description, date, time, email, part
         <p className={styles.date}>{date}</p>
         <p className={styles.time}>{time}</p>
         <p className={styles.participants} title="Liczba uczestników">
-          <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/314/people-holding-hands-light-skin-tone-medium-dark-skin-tone_1f9d1-1f3fb-200d-1f91d-200d-1f9d1-1f3fe.png" />
+          <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/314/people-holding-hands-light-skin-tone-medium-dark-skin-tone_1f9d1-1f3fb-200d-1f91d-200d-1f9d1-1f3fe.png" alt="people holding hands" />
           {participants.length}
         </p>
         <button onClick={handleLike} className={styles.buttonLike} title="Lubię to!">
-          <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/facebook/327/red-heart_2764-fe0f.png" />
+          <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/facebook/327/red-heart_2764-fe0f.png" alt="red heart" />
           {likes.length}
         </button>
         {participants.indexOf(user as string) === -1 && email !== user ? (
           <button onClick={handleJoin} className={styles.joinButton}>
-            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/326/waving-hand_1f44b.png" />
+            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/326/waving-hand_1f44b.png" alt="waving hand" />
             Dołącz
           </button>
         ) : null}
@@ -76,7 +76,7 @@ const EventCard = ({ creatorName, category, description, date, time, email, part
         ) : null}
         {email === user ? (
           <button onClick={handleDelete} className={styles.deleteButton}>
-            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/toss-face/342/wastebasket_1f5d1-fe0f.png" />
+            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/toss-face/342/wastebasket_1f5d1-fe0f.png" alt="bin" />
             Usuń
           </button>
         ) : null}

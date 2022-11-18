@@ -1,7 +1,5 @@
-import { addDoc, collection, DocumentData } from "firebase/firestore";
-import { emit } from "process";
+import { DocumentData } from "firebase/firestore";
 import { useContext, useState, useEffect } from "react";
-import { db } from "../../firebase";
 import { AuthContext } from "../../providers/global";
 import AddEventForm from "../addEventForm/AddEventForm";
 import EventCard from "../EventCard/EventCard";
@@ -23,7 +21,7 @@ export const Sidebar = () => {
       return b.likes.length - a.likes.length;
     });
 
-  const [sidebar, setSidebar] = useState<any>("upcommingEvents");
+  const [sidebar, setSidebar] = useState<string>("upcommingEvents");
   useEffect(() => {
     fetchEvents();
   }, [allEvents.length, participateEvents.length, otherEvents.length]);
