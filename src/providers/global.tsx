@@ -27,6 +27,7 @@ interface UserData {
   email: string;
   name: string;
   userDescription: string;
+  userJson: string;
 }
 
 interface AuthProviderProps {

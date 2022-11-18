@@ -11,10 +11,13 @@ import styles from "./Sidebar.module.css";
 //   { src: "/image3.png", name: "image.png" },
 // ];
 
+
+
 export const Sidebar = () => {
   const { showForm, user, allEvents, fetchEvents } = useContext(AuthContext);
   const userEvents = allEvents.filter((e: DocumentData) => e.email === user);
   const participateEvents = allEvents.filter((e: DocumentData) => e.participants.filter((el: string) => el.indexOf(user as string) > -1));
+  console.log(participateEvents)
   const otherEvents = allEvents
     .filter((e: DocumentData) => e.participants.filter((el: string) => el.indexOf(user as string) === -1))
     .sort((a: DocumentData, b: DocumentData) => {
@@ -66,14 +69,14 @@ export const Sidebar = () => {
             <p>Twoje wydarzenia ({userEvents.length}):</p>
 
             {userEvents.map((e: DocumentData) => {
-              return <EventCard creatorName={e.creatorName} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} />;
+              return <EventCard creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} />;
             })}
           </>
         ) : null || sidebar === "eventsIParticipateIn" ? (
           <>
             <p>Biorę udział w ({participateEvents.length}):</p>
             {participateEvents.map((e: DocumentData) => {
-              return <EventCard creatorName={e.creatorName} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} />;
+              return <EventCard creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} />;
             })}
           </>
         ) : null}
@@ -81,7 +84,7 @@ export const Sidebar = () => {
           <>
             <p>Nadchodzące wydarzenia ({otherEvents.length}):</p>
             {otherEvents.map((e: DocumentData) => {
-              return <EventCard creatorName={e.creatorName} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} />;
+              return <EventCard creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} />;
             })}
           </>
         ) : null || sidebar === "addEvent" ? (
