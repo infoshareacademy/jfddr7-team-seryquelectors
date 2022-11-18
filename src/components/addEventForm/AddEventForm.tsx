@@ -40,7 +40,7 @@ const AddEventForm = () => {
       date: date,
       time: time,
       category: category,
-      participants: [JSON.stringify({ user: user, participantName: currentUser.name })],
+      participants: [currentUser.userJson],
       likes: [],
       id: id,
     });
@@ -69,9 +69,9 @@ const AddEventForm = () => {
           required
         >
           <option value="">Wybierz kategorię</option>
-          <option value="sport">Sport</option>
-          <option value="nauka">Nauka</option>
-          <option value="kultura">Kultura</option>
+          <option value="sport">🟢 Sport</option>
+          <option value="nauka">🟡 Nauka</option>
+          <option value="kultura">🟣 Kultura</option>
         </select>
         <input
           placeholder="data"

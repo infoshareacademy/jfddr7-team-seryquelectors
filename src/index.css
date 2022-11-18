@@ -24,8 +24,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 /* NIE WYRZUCAĆ :)
@@ -34,14 +33,16 @@ code {
   width: 35px;
 } */
 
-.leaflet-bar a {
+.leaflet-bar a,
+.leaflet-bar a.leaflet-disabled {
   background-color: #232c34;
   color: white;
   box-shadow: none;
   border-radius: 0px;
 }
 
-.leaflet-bar a:hover {
+.leaflet-bar a:hover,
+.leaflet-bar a.leaflet-disabled:hover {
   background-color: #232c34;
   color: white;
   border-radius: 0px;
