@@ -1,4 +1,4 @@
-import { ReactElement, useContext } from "react";
+import { HTMLAttributes, ReactElement, ReactPropTypes, useContext } from "react";
 import styles from "./EventCard.module.css";
 import { AuthContext } from "../../providers/global";
 import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
@@ -13,9 +13,11 @@ interface Props {
   participants: string[];
   id: string;
   likes: string[];
+  other?: boolean;
+  handleRefresh: () => void;
 }
 
-const EventCard = ({ creatorName, category, description, date, time, email, participants, id, likes }: Props): ReactElement => {
+const EventCard = ({ creatorName, category, description, date, time, email, participants, id, likes, other, handleRefresh }: Props): ReactElement => {
   const { user, fetchEvents, currentUser } = useContext(AuthContext);
 
   const handleLike = async () => {
@@ -30,7 +32,7 @@ const EventCard = ({ creatorName, category, description, date, time, email, part
 
   const handleJoin = async () => {
     const docRef = doc(db, "events", `${id}`);
-    await updateDoc(docRef, { participants: [...participants, JSON.stringify({ user: user, participantName: currentUser.name })] });
+    await updateDoc(docRef, { participants: [...participants, currentUser.userJson] });
     fetchEvents();
   };
 
@@ -43,13 +45,15 @@ const EventCard = ({ creatorName, category, description, date, time, email, part
     const docRef = doc(db, "events", `${id}`);
     const fetchDocument = (await getDoc(docRef)).data();
     const currentParticipants = fetchDocument?.participants;
-    await updateDoc(docRef, { participants: currentParticipants.filter((el: string) => el.indexOf(user as string) === -1) });
+    await updateDoc(docRef, { participants: currentParticipants.filter((e: string) => e !== currentUser.userJson) });
     fetchEvents();
   };
 
   return (
-    <div className={styles.eventCard}>
-      <p className={styles.eventName}>{creatorName}</p>
+    <div className={styles.eventCard} onClick={handleRefresh}>
+      <p className={styles.eventName}>
+        {creatorName} {email === user && other ? <span>(Ty)</span> : null}
+      </p>
       <p className={styles.category}>{category}</p>
       <p className={styles.description}>{description}</p>
       <div className={styles.detailsWrapper}>
@@ -63,13 +67,13 @@ const EventCard = ({ creatorName, category, description, date, time, email, part
           <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/facebook/327/red-heart_2764-fe0f.png" alt="red heart" />
           {likes.length}
         </button>
-        {participants.indexOf(user as string) === -1 && email !== user ? (
+        {!participants.includes(currentUser.userJson) && email !== user ? (
           <button onClick={handleJoin} className={styles.joinButton}>
             <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/326/waving-hand_1f44b.png" alt="waving hand" />
             Dołącz
           </button>
         ) : null}
-        {participants.indexOf(user as string) > -1 && email !== user ? (
+        {participants.includes(currentUser.userJson) && email !== user ? (
           <button onClick={handleLeave} className={styles.leaveButton}>
             🚫 Opuść
           </button>

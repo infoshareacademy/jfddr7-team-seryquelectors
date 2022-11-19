@@ -9,7 +9,6 @@ import { addDoc, collection } from "firebase/firestore";
 
 export const LandingPage = () => {
   const navigate = useNavigate();
-  
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,6 +17,7 @@ export const LandingPage = () => {
   const [showLogin, setShowLogin] = useState(true);
 
   const handleLogin: React.FormEventHandler<HTMLFormElement> = (e) => {
+    setError(null);
     e.preventDefault();
 
     signInWithEmailAndPassword(auth, email, password)
@@ -25,10 +25,8 @@ export const LandingPage = () => {
         navigate("home");
         setUser(email);
       })
-      .catch(({ message }) => {
-        if (message === "Firebase: Error (auth/wrong-password)." || message === "Firebase: Error (auth/invalid-email)." || message === "Firebase: Error (auth/user-not-found)") {
-          setError("Niepoprawny email lub hasło");
-        }
+      .catch(() => {
+        setError("Niepoprawny email lub hasło");
       });
   };
 
@@ -76,7 +74,7 @@ export const LandingPage = () => {
         </p>
       </div>
       <div className={styles.formWrapper}>
-        <h1>{showLogin ? "Proszę zaloguj się" : "Proszę zarejestruj się" }</h1>
+        <h1>{showLogin ? "Proszę zaloguj się" : "Proszę zarejestruj się"}</h1>
 
         {showLogin ? (
           <form onSubmit={handleLogin}>
@@ -99,7 +97,7 @@ export const LandingPage = () => {
             </span>
           </form>
         )}
-        
+
         {error ? <p className={styles.error}>{error}</p> : null}
       </div>
     </div>
