@@ -1,0 +1,60 @@
+.mainContainer {
+  display: flex;
+  background: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.window {
+  width: 700px;
+  height: 500px;
+  background: white;
+  border: 10px solid rgb(130, 130, 130);
+  display: grid;
+  grid-template-areas:
+    "author author cat"
+    "desc desc parti"
+    "date time likes";
+  padding: 20px;
+}
+
+.author {
+  grid-area: author;
+  height: 70px;
+}
+
+.category {
+  grid-area: cat;
+}
+
+.description {
+  grid-area: desc;
+  height: 400px;
+}
+
+.participants {
+  grid-area: parti;
+}
+
+.participantsList {
+  border: 1px solid black;
+  height: 80%;
+  overflow: scroll;
+}
+
+.date {
+  grid-area: date;
+}
+
+.time {
+  grid-area: time;
+}
+
+.likes {
+  grid-area: likes;
+}

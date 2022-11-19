@@ -33,9 +33,9 @@ export const Sidebar = () => {
   const handleRefresh = (): void => {
     setRefresh(!refresh);
   };
-  useEffect(() => {
-    fetchEvents();
-  }, [allEvents.length, participateEvents.length, otherEvents.length]);
+  // useEffect(() => {
+  //   fetchEvents();
+  // }, [allEvents.length, participateEvents.length, otherEvents.length]);
 
   return (
     <div className={styles.SidebarWrapper}>
@@ -79,9 +79,9 @@ export const Sidebar = () => {
         {sidebar === "upcommingEvents" ? (
           <>
             <p>Nadchodzące wydarzenia ({otherEvents.length}):</p>
+            <p>Sortuj wg:</p>
             <select
-              name="category"
-              id="category-select"
+              name="activitySort"
               onChange={(e) => {
                 setFilter(e.target.value);
               }}
@@ -92,6 +92,7 @@ export const Sidebar = () => {
               <option value="nauka">🟣 Nauka</option>
               <option value="kultura">🟡 Kultura</option>
             </select>
+
             {otherEvents.map((e: DocumentData) => {
               return <EventCard other creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} handleRefresh={handleRefresh} />;
             })}
