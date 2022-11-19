@@ -11,20 +11,20 @@ import styles from "./Sidebar.module.css";
 //   { src: "/image3.png", name: "image.png" },
 // ];
 
-
-
 export const Sidebar = () => {
-  const { showForm, user, allEvents, fetchEvents } = useContext(AuthContext);
+  const { showForm, user, allEvents, fetchEvents, currentUser } = useContext(AuthContext);
+  const [sidebar, setSidebar] = useState<string>("upcommingEvents");
+  const [refresh, setRefresh] = useState(false);
   const userEvents = allEvents.filter((e: DocumentData) => e.email === user);
-  const participateEvents = allEvents.filter((e: DocumentData) => e.participants.filter((el: string) => el.indexOf(user as string) > -1));
-  console.log(participateEvents)
+  const participateEvents = allEvents.filter((e: DocumentData) => e.participants.includes(currentUser.userJson) && e.email !== user);
   const otherEvents = allEvents
-    .filter((e: DocumentData) => e.participants.filter((el: string) => el.indexOf(user as string) === -1))
+    .filter((e: DocumentData) => !e.participants.includes(currentUser.userJson) || e.email === user)
     .sort((a: DocumentData, b: DocumentData) => {
       return b.likes.length - a.likes.length;
     });
-
-  const [sidebar, setSidebar] = useState<string>("upcommingEvents");
+const handleRefresh = () : void => {
+  setRefresh(!refresh)
+}
   useEffect(() => {
     fetchEvents();
   }, [allEvents.length, participateEvents.length, otherEvents.length]);
@@ -40,20 +40,8 @@ export const Sidebar = () => {
         >
           Moje wydarzenia
         </button>
-        <button
-          onClick={() => {
-            setSidebar("eventsIParticipateIn");
-          }}
-        >
-          Biorę udział w...
-        </button>
-        <button
-          onClick={() => {
-            setSidebar("upcommingEvents");
-          }}
-        >
-          Nadchodzące wydarzenia
-        </button>
+        <button onClick={() => setSidebar("eventsIParticipateIn")}>Biorę udział w...</button>
+        <button onClick={() => setSidebar("upcommingEvents")}>Nadchodzące wydarzenia</button>
         <button
           onClick={() => {
             setSidebar("addEvent");
@@ -69,14 +57,14 @@ export const Sidebar = () => {
             <p>Twoje wydarzenia ({userEvents.length}):</p>
 
             {userEvents.map((e: DocumentData) => {
-              return <EventCard creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} />;
+              return <EventCard creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} handleRefresh={handleRefresh}/>;
             })}
           </>
         ) : null || sidebar === "eventsIParticipateIn" ? (
           <>
             <p>Biorę udział w ({participateEvents.length}):</p>
             {participateEvents.map((e: DocumentData) => {
-              return <EventCard creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} />;
+              return <EventCard creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} handleRefresh={handleRefresh}/>;
             })}
           </>
         ) : null}
@@ -84,7 +72,7 @@ export const Sidebar = () => {
           <>
             <p>Nadchodzące wydarzenia ({otherEvents.length}):</p>
             {otherEvents.map((e: DocumentData) => {
-              return <EventCard creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} />;
+              return <EventCard other creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} handleRefresh={handleRefresh}/>;
             })}
           </>
         ) : null || sidebar === "addEvent" ? (

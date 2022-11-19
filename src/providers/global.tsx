@@ -1,6 +1,6 @@
 import React, { createContext, useState, FC, ReactNode } from "react";
 import { LatLngExpression } from "leaflet";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 
 interface AuthContextState {
@@ -49,12 +49,20 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
   const fetchEvents = (): void => {
     console.log("fetch events");
-    getDocs(collection(db, "events")).then((querySnapshot) => {
+    // getDocs(collection(db, "events")).then((querySnapshot) => {
+    //   const events: object[] = [];
+    //   querySnapshot.forEach((doc) => {
+    //     events.push(doc.data());
+    //   });
+    //   setAllEvents(events);
+    // });
+    onSnapshot(collection(db, "events"), (qS) => {
       const events: object[] = [];
-      querySnapshot.forEach((doc) => {
+      qS.forEach((doc) => {
         events.push(doc.data());
       });
       setAllEvents(events);
+      console.log("set all events!");
     });
   };
 

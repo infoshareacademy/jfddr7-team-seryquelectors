@@ -70,8 +70,8 @@ const AddEventForm = () => {
         >
           <option value="">Wybierz kategorię</option>
           <option value="sport">🟢 Sport</option>
-          <option value="nauka">🟡 Nauka</option>
-          <option value="kultura">🟣 Kultura</option>
+          <option value="nauka">🟣 Nauka</option>
+          <option value="kultura">🟡 Kultura</option>
         </select>
         <input
           placeholder="data"
