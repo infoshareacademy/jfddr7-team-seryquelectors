@@ -22,9 +22,10 @@ import styles from "./AddEventForm.module.css";
 
 const AddEventForm = () => {
   // const [name, setName] = useState("");
-  const currentDate = `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`;
-  let initTime : number | string = new Date().getTime();
-  initTime = new Date(initTime + 3600000).toLocaleTimeString()
+  const currentDate = `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`;
+  let initTime: number | string = new Date().getTime();
+  initTime = new Date(initTime + 3600000).toLocaleTimeString();
+  initTime = initTime.slice(0, initTime.length - 3);
 
   const [description, setDescription] = useState("");
   const [date, setDate] = useState(currentDate);
@@ -36,6 +37,7 @@ const AddEventForm = () => {
     e.preventDefault();
     const eventRef = doc(collection(db, "events"));
     const { id } = eventRef;
+    setShowForm(false);
     await setDoc(eventRef, {
       name: currentUser.name,
       description: description,
@@ -54,7 +56,6 @@ const AddEventForm = () => {
     setDate("");
     setCategory("");
     setPosition([0, 0]);
-    setShowForm(false);
   };
 
   return (

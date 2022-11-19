@@ -62,7 +62,7 @@ const EventCard = ({ creatorName, category, description, date, time, email, part
         <p className={styles.description}>{description}</p>
         <div className={styles.detailsWrapper}>
           <p className={styles.date}>{date}</p>
-          <p className={styles.time}>{time}</p>
+          <p className={styles.time}>{new Date().getTime() < new Date(date + " " + time).getTime() ? time : "Trwa!"}</p>
           <button className={styles.cardButton} title="Liczba uczestników i szczegóły" onClick={() => setShowMore(true)}>
             <img src={peopleIcon} alt="people holding hands" />
             {participants.length}
