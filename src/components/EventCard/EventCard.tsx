@@ -19,7 +19,7 @@ interface Props {
 }
 
 const EventCard = ({ creatorName, category, description, date, time, email, participants, id, likes, other, handleRefresh }: Props): ReactElement => {
-  const { user, fetchEvents, currentUser } = useContext(AuthContext);
+  const { user, currentUser } = useContext(AuthContext);
 
   const [showMore, setShowMore] = useState<boolean>(false);
 
@@ -34,18 +34,15 @@ const EventCard = ({ creatorName, category, description, date, time, email, part
     } else {
       await updateDoc(docRef, { likes: likes.filter((e) => e !== user) });
     }
-    fetchEvents();
   };
 
   const handleJoin = async () => {
     const docRef = doc(db, "events", `${id}`);
     await updateDoc(docRef, { participants: [...participants, currentUser.userJson] });
-    fetchEvents();
   };
 
   const handleDelete = async (): Promise<void> => {
     await deleteDoc(doc(db, "events", `${id}`));
-    fetchEvents();
   };
 
   const handleLeave = async (): Promise<void> => {
@@ -53,7 +50,6 @@ const EventCard = ({ creatorName, category, description, date, time, email, part
     const fetchDocument = (await getDoc(docRef)).data();
     const currentParticipants = fetchDocument?.participants;
     await updateDoc(docRef, { participants: currentParticipants.filter((e: string) => e !== currentUser.userJson) });
-    fetchEvents();
   };
 
   return (

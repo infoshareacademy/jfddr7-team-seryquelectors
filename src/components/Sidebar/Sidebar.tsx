@@ -12,7 +12,7 @@ import styles from "./Sidebar.module.css";
 // ];
 
 export const Sidebar = () => {
-  const { showForm, user, allEvents, fetchEvents, currentUser } = useContext(AuthContext);
+  const { showForm, user, allEvents, currentUser } = useContext(AuthContext);
   const [sidebar, setSidebar] = useState<string>("upcommingEvents");
   const [refresh, setRefresh] = useState<boolean>(false);
   const [filter, setFilter] = useState<string | undefined>(undefined);

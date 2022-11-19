@@ -12,7 +12,6 @@ interface AuthContextState {
   setAllEvents: (event: object[]) => void;
   showForm: boolean;
   setShowForm: (e: boolean) => void;
-  fetchEvents: () => void;
   name: string | null;
   setName: (user: string | null) => void;
   userDescription: string | null;
@@ -47,24 +46,13 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [userDescription, setUserDescription] = useState<string | null>("");
   const [currentUser, setCurrentUser] = useState<UserData>({} as UserData);
 
-  const fetchEvents = (): void => {
-    console.log("fetch events");
-    // getDocs(collection(db, "events")).then((querySnapshot) => {
-    //   const events: object[] = [];
-    //   querySnapshot.forEach((doc) => {
-    //     events.push(doc.data());
-    //   });
-    //   setAllEvents(events);
-    // });
-    onSnapshot(collection(db, "events"), (qS) => {
-      const events: object[] = [];
-      qS.forEach((doc) => {
-        events.push(doc.data());
-      });
-      setAllEvents(events.filter((el: DocumentData) => new Date().valueOf() < new Date(el.date + " " + el.time).valueOf()));
-      console.log("fetched all events!");
+  const unsub = onSnapshot(collection(db, "events"), (qS) => {
+    const events: object[] = [];
+    qS.forEach((doc) => {
+      events.push(doc.data());
     });
-  };
+    setAllEvents(events.filter((el: DocumentData) => new Date().valueOf() < new Date(el.date + " " + el.time).valueOf()));
+  });
 
   const fetchUsers = (): void => {
     console.log("fetch users");
@@ -88,7 +76,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         setAllEvents,
         showForm,
         setShowForm,
-        fetchEvents,
         name,
         setName,
         userDescription,
