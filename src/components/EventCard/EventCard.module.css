@@ -36,15 +36,7 @@
   font-size: 12px;
 }
 
-.buttonLike > img {
-  height: 16px;
-  padding-right: 3px;
-}
-
-.buttonLike,
-.joinButton,
-.leaveButton,
-.deleteButton {
+.cardButton {
   border-radius: 8px;
   background-color: transparent;
   border: none;
@@ -52,17 +44,7 @@
   padding: 5px 10px;
 }
 
-.participants > img {
-  height: 16px;
-  padding-right: 3px;
-}
-
-.deleteButton > img {
-  height: 16px;
-  padding-right: 3px;
-}
-
-.joinButton > img {
+.cardButton > img {
   height: 16px;
   padding-right: 3px;
 }
