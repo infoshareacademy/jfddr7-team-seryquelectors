@@ -1,5 +1,5 @@
 import { DocumentData } from "firebase/firestore";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, SelectHTMLAttributes } from "react";
 import { AuthContext } from "../../providers/global";
 import AddEventForm from "../addEventForm/AddEventForm";
 import EventCard from "../EventCard/EventCard";
@@ -14,17 +14,25 @@ import styles from "./Sidebar.module.css";
 export const Sidebar = () => {
   const { showForm, user, allEvents, fetchEvents, currentUser } = useContext(AuthContext);
   const [sidebar, setSidebar] = useState<string>("upcommingEvents");
-  const [refresh, setRefresh] = useState(false);
+  const [refresh, setRefresh] = useState<boolean>(false);
+  const [filter, setFilter] = useState<string | undefined>(undefined);
   const userEvents = allEvents.filter((e: DocumentData) => e.email === user);
   const participateEvents = allEvents.filter((e: DocumentData) => e.participants.includes(currentUser.userJson) && e.email !== user);
-  const otherEvents = allEvents
-    .filter((e: DocumentData) => !e.participants.includes(currentUser.userJson) || e.email === user)
-    .sort((a: DocumentData, b: DocumentData) => {
-      return b.likes.length - a.likes.length;
-    });
-const handleRefresh = () : void => {
-  setRefresh(!refresh)
-}
+  const otherEvents =
+    filter == undefined
+      ? allEvents
+          .filter((e: DocumentData) => !e.participants.includes(currentUser.userJson) || e.email === user)
+          .sort((a: DocumentData, b: DocumentData) => {
+            return b.likes.length - a.likes.length;
+          })
+      : allEvents
+          .filter((e: DocumentData) => (!e.participants.includes(currentUser.userJson) || e.email === user) && e.category.indexOf(filter) > -1)
+          .sort((a: DocumentData, b: DocumentData) => {
+            return b.likes.length - a.likes.length;
+          });
+  const handleRefresh = (): void => {
+    setRefresh(!refresh);
+  };
   useEffect(() => {
     fetchEvents();
   }, [allEvents.length, participateEvents.length, otherEvents.length]);
@@ -57,22 +65,35 @@ const handleRefresh = () : void => {
             <p>Twoje wydarzenia ({userEvents.length}):</p>
 
             {userEvents.map((e: DocumentData) => {
-              return <EventCard creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} handleRefresh={handleRefresh}/>;
+              return <EventCard creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} handleRefresh={handleRefresh} />;
             })}
           </>
         ) : null || sidebar === "eventsIParticipateIn" ? (
           <>
             <p>Biorę udział w ({participateEvents.length}):</p>
             {participateEvents.map((e: DocumentData) => {
-              return <EventCard creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} handleRefresh={handleRefresh}/>;
+              return <EventCard creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} handleRefresh={handleRefresh} />;
             })}
           </>
         ) : null}
         {sidebar === "upcommingEvents" ? (
           <>
             <p>Nadchodzące wydarzenia ({otherEvents.length}):</p>
+            <select
+              name="category"
+              id="category-select"
+              onChange={(e) => {
+                setFilter(e.target.value);
+              }}
+              value={filter}
+            >
+              <option value={undefined}>Pokaż wszystkie</option>
+              <option value="sport">🟢 Sport</option>
+              <option value="nauka">🟣 Nauka</option>
+              <option value="kultura">🟡 Kultura</option>
+            </select>
             {otherEvents.map((e: DocumentData) => {
-              return <EventCard other creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} handleRefresh={handleRefresh}/>;
+              return <EventCard other creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} handleRefresh={handleRefresh} />;
             })}
           </>
         ) : null || sidebar === "addEvent" ? (

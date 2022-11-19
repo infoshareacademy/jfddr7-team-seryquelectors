@@ -1,5 +1,5 @@
 const EventDetailsProvider = () => {
-    return (  );
-}
- 
+  return <></>;
+};
+
 export default EventDetailsProvider;

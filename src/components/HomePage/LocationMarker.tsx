@@ -5,7 +5,7 @@ import { DocumentData } from "firebase/firestore";
 import { greenIcon, goldIcon, violetIcon } from "../../images/Icon";
 
 const LocationMarker = () => {
-  const { position, setPosition, allEvents, setShowForm } = useContext(AuthContext);
+  const { position, setPosition, allEvents, setShowForm, user } = useContext(AuthContext);
   const [toggleMarker, setToggleMarker] = useState(false);
   // const map = useMapEvents({
   //   click() {},
@@ -25,16 +25,20 @@ const LocationMarker = () => {
     <>
       {allEvents.map((e: DocumentData, i) => {
         let eventIcon = greenIcon;
-        if (e.category === "nauka") {
+        if (e.category.indexOf("nauka") > -1) {
           eventIcon = violetIcon;
-        } else if (e.category === "kultura") {
+        } else if (e.category.indexOf("kultura") > -1) {
           eventIcon = goldIcon;
         }
         return (
           <Marker key={i} position={e.position} icon={eventIcon}>
             <Tooltip>
               <>
-                {e.description} <br /> {e.category}
+                <b>
+                  {e.name} {e.email === user ? <span>(Ty)</span> : null} - {e.category}
+                </b>
+                <br />
+                {e.description}
               </>
             </Tooltip>
           </Marker>
