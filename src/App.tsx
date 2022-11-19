@@ -11,7 +11,7 @@ import { PageNotFound } from "./components/PageNotFound/PageNotFound";
 
 
 function App() {
-  const { user, setUser, fetchEvents, allEvents } = useContext(AuthContext);
+  const { user, setUser} = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,10 +24,6 @@ function App() {
       }
     });
   }, []);
-
-  useEffect(() => {
-    fetchEvents();
-  }, [allEvents.length]);
 
   if (user) {
     return (

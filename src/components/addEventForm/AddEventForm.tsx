@@ -22,11 +22,15 @@ import styles from "./AddEventForm.module.css";
 
 const AddEventForm = () => {
   // const [name, setName] = useState("");
+  const currentDate = `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`;
+  let initTime : number | string = new Date().getTime();
+  initTime = new Date(initTime + 3600000).toLocaleTimeString()
+
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
+  const [date, setDate] = useState(currentDate);
+  const [time, setTime] = useState(initTime);
   const [category, setCategory] = useState("");
-  const { position, user, fetchEvents, setPosition, setShowForm, currentUser } = useContext(AuthContext);
+  const { position, user, setPosition, setShowForm, currentUser } = useContext(AuthContext);
 
   const addEvent = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
@@ -51,7 +55,6 @@ const AddEventForm = () => {
     setCategory("");
     setPosition([0, 0]);
     setShowForm(false);
-    fetchEvents();
   };
 
   return (
