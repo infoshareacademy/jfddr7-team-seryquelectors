@@ -47,11 +47,14 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<UserData>({} as UserData);
 
   const unsub = onSnapshot(collection(db, "events"), (qS) => {
-    const events: object[] = [];
+    let events: object[] = [];
     qS.forEach((doc) => {
       events.push(doc.data());
     });
-    setAllEvents(events.filter((el: DocumentData) => new Date().valueOf() < new Date(el.date + " " + el.time).valueOf()));
+    events = events.filter((e: DocumentData) => new Date().getTime() < new Date(e.date + " " + e.time).getTime() + 3600000);
+    if (events.length !== allEvents.length) {
+      setAllEvents(events);
+    }
   });
 
   const fetchUsers = (): void => {

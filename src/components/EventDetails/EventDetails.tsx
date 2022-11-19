@@ -58,7 +58,7 @@ const EventDetails = ({ creatorName, category, description, date, time, email, p
         </div>
         <div className={styles.time}>
           <p>Godzina startu:</p>
-          {time}
+          {new Date().getTime() < new Date(date + " " + time).getTime() ? time : "Trwa!"}
         </div>
         <div className={styles.likes}>
           <p>Polubienia:</p>
