@@ -29,7 +29,7 @@ interface AuthContextState {
 }
 
 interface UserData {
-  avatar: null;
+  avatar: undefined | string;
   email: string;
   name: string;
   userDescription: string;

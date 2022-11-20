@@ -54,12 +54,7 @@ export const Navbar = () => {
       </h1>
 
       <div>
-        <img
-          alt="user avatar"
-          src={
-            images.find((image) => image.name === currentUser.avatar)?.src ?? ""
-          }
-        />
+        <img alt="user avatar" src={currentUser.avatar} />
         <p>{currentUser.name}</p>
       </div>
 
