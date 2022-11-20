@@ -21,7 +21,18 @@ interface UserJSON {
   user: string;
 }
 
-const EventDetails = ({ creatorName, category, description, date, time, email, participants, id, likes, setShowMore }: Props) => {
+const EventDetails = ({
+  creatorName,
+  category,
+  description,
+  date,
+  time,
+  email,
+  participants,
+  id,
+  likes,
+  setShowMore,
+}: Props) => {
   const { currentUser } = useContext(AuthContext);
 
   return (
@@ -58,7 +69,9 @@ const EventDetails = ({ creatorName, category, description, date, time, email, p
         </div>
         <div className={styles.time}>
           <p>Godzina startu:</p>
-          {new Date().getTime() < new Date(date + " " + time).getTime() ? time : "Trwa!"}
+          {new Date().getTime() < new Date(date + " " + time).getTime()
+            ? time
+            : "Trwa!"}
         </div>
         <div className={styles.likes}>
           <p>Polubienia:</p>

@@ -7,6 +7,7 @@ import LocationMarker from "./LocationMarker";
 import { Navbar } from "../Navbar/Navbar";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/global";
+import Footer from "../Footer/Footer";
 
 export const Home: React.FC = () => {
   const { position } = useContext(AuthContext);
@@ -17,11 +18,21 @@ export const Home: React.FC = () => {
       <div className={styles.navFilling}></div>
       <div className={styles.wrapper}>
         {/* <Sidebar /> */}
-        <MapContainer center={position} zoom={14} scrollWheelZoom={true} zoomControl={false} className={styles.mapWrapper}>
-          <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <MapContainer
+          center={position}
+          zoom={14}
+          scrollWheelZoom={true}
+          zoomControl={false}
+          className={styles.mapWrapper}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
           <ZoomControl position="topright" />
           <LocationMarker />
         </MapContainer>
+        {/* <Footer /> */}
       </div>
     </div>
   );
