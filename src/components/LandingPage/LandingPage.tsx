@@ -1,14 +1,22 @@
 import styles from "./LandingPage.module.css";
-import { useContext, useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { useContext, useEffect, useState } from "react";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../firebase";
 import { AuthContext } from "../../providers/global";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { storage } from "../../firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { setDefaultResultOrder } from "dns";
 
 export const LandingPage = () => {
   const navigate = useNavigate();
+  // const [login, setLogin] = useState('')
+  // const [password, setPassword] = useState('')
+
+  // const onLogin = () => {
+  //     const user = { login, password };
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,8 +25,7 @@ export const LandingPage = () => {
     useContext(AuthContext);
   const [showLogin, setShowLogin] = useState(true);
 
-  const handleLogin: React.FormEventHandler<HTMLFormElement> = (e) => {
-    setError(null);
+  const handleLogin: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
 
     signInWithEmailAndPassword(auth, email, password)
@@ -26,22 +33,33 @@ export const LandingPage = () => {
         navigate("home");
         setUser(email);
       })
-      .catch(() => {
-        setError("Niepoprawny email lub hasło");
+      .catch(({ message }) => {
+        if (message == "Firebase: Error (auth/wrong-password).") {
+          setError("Niepoprawny email lub hasło");
+        }
+        // } else {
+        //   createUserWithEmailAndPassword(auth, email, password)
+        //     .then(() => {
+        //       navigate("home");
+        //       setUser(email);
+        //     })
+        //     .catch(() => {
+        //       setError("Wystąpił błąd");
+        //     });
+        // }
       });
   };
 
   const addUser = async (): Promise<void> => {
     await addDoc(collection(db, "users"), {
       name: name,
-      avatar: null,
+      avatar: url,
       userDescription: userDescription,
       email: email,
-      userJson: JSON.stringify({ user: email, participantName: name }),
     });
   };
 
-  const handleRegister: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const handleRegister: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
 
     createUserWithEmailAndPassword(auth, email, password)
@@ -58,6 +76,32 @@ export const LandingPage = () => {
   const toogleLoginButton = () => {
     setShowLogin(!showLogin);
   };
+
+  //Profile image
+
+  const [imageUpload, setImageUpload] = useState<any>(null);
+  const [url, setUrl] = useState<any>(null);
+
+  const uploadImage = () => {
+    if (imageUpload == null) return;
+    const imageRef = ref(storage, `images/${imageUpload.name + Math.random()}`);
+    uploadBytes(imageRef, imageUpload)
+      .then(() => {
+        getDownloadURL(imageRef)
+          .then((url) => {
+            setUrl(url);
+          })
+          .catch((error) => {
+            console.log(error.message, "error in the image url");
+          });
+        imageUpload(null);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  //
 
   return (
     <div className={styles.wrapper}>
@@ -85,65 +129,80 @@ export const LandingPage = () => {
         </p>
       </div>
       <div className={styles.formWrapper}>
-        <h1>{showLogin ? "Proszę zaloguj się" : "Proszę zarejestruj się"}</h1>
+        <h1>Proszę zaloguj się</h1>
+        <form>
+          <input
+            type="email"
+            placeholder="Wpisz email"
+            name="email"
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Wpisz hasło"
+            name="password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          {showLogin ? (
+            <>
+              <button type="submit" onClick={handleLogin}>
+                Zaloguj
+              </button>
+              <a onClick={toogleLoginButton} className={styles.toogleButton}>
+                Nie masz konta? Zarejestruj się
+              </a>
+            </>
+          ) : (
+            <>
+              <input
+                placeholder="Wpisz imię"
+                type="text"
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+              <textarea
+                placeholder="Napiszesz coś o sobie?"
+                className={styles.textarea}
+                onChange={(e) => setUserDescription(e.target.value)}
+                required
+              />
+              <label>Dodaj zdjęcie profilowe</label>
 
-        {showLogin ? (
-          <form onSubmit={handleLogin}>
-            <input
-              type="email"
-              placeholder="Wpisz email"
-              name="email"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <input
-              type="password"
-              placeholder="Wpisz hasło"
-              name="password"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <button>Zaloguj</button>
-            <span onClick={toogleLoginButton} className={styles.toogleButton}>
-              Nie masz konta? Zarejestruj się
-            </span>
-          </form>
-        ) : (
-          <form onSubmit={handleRegister}>
-            <input
-              type="email"
-              placeholder="Wpisz email"
-              name="email"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <input
-              type="password"
-              placeholder="Wpisz hasło"
-              name="password"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <input
-              placeholder="Wpisz imię"
-              type="text"
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-            <textarea
-              placeholder="Dodaj opis"
-              className={styles.textarea}
-              onChange={(e) => setUserDescription(e.target.value)}
-              required
-            />
-            <button type="submit">Zarejestruj</button>
-            <span onClick={toogleLoginButton} className={styles.toogleButton}>
-              Masz już konto? Zaloguj się
-            </span>
-          </form>
-        )}
-
-        {error ? <p className={styles.error}>{error}</p> : null}
+              {/* Profile image */}
+              <div className={styles.addImage}>
+                <div className="avatarInputAndButton">
+                  <input
+                    type="file"
+                    name="avatar"
+                    onChange={(event: any) => {
+                      event.preventDefault();
+                      setImageUpload(event.target.files[0]);
+                    }}
+                  />
+                  <h1 onClick={uploadImage}>Dodaj</h1>
+                </div>
+                {url ? (
+                  <img className={styles.avatar} alt="Avatar" src={url} />
+                ) : (
+                  <img
+                    className={styles.avatar}
+                    alt="Avatar"
+                    src="https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png"
+                  />
+                )}
+              </div>
+              <button type="submit" onClick={handleRegister}>
+                Zarejestruj
+              </button>
+              <a onClick={toogleLoginButton} className={styles.toogleButton}>
+                Masz już konto? Zaloguj się
+              </a>
+            </>
+          )}
+          {error ? <p className={styles.error}>{error}</p> : null}
+        </form>
       </div>
     </div>
   );
