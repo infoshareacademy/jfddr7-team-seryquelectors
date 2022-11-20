@@ -62,15 +62,19 @@ export const LandingPage = () => {
   const handleRegister: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        navigate("home");
-        setUser(email);
-        addUser();
-      })
-      .catch(() => {
-        setError("Wystąpił błąd");
-      });
+    if (url) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          navigate("home");
+          setUser(email);
+          addUser();
+        })
+        .catch(() => {
+          setError("Wystąpił błąd");
+        });
+    } else {
+      setError("Proszę dodaj zdjęcie");
+    }
   };
 
   const toogleLoginButton = () => {
