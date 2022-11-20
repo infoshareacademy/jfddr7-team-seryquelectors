@@ -7,11 +7,10 @@ import { AuthContext } from "./providers/global";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { PageNotFound } from "./components/PageNotFound/PageNotFound";
-
-
+import Footer from "./components/Footer/Footer";
 
 function App() {
-  const { user, setUser} = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,16 +26,22 @@ function App() {
 
   if (user) {
     return (
-      <Routes>
-        <Route path="home" element={<Home />} />
-      </Routes>
+      <>
+        <Routes>
+          <Route path="home" element={<Home />} />
+        </Routes>
+        <Footer />
+      </>
     );
   }
   return (
-    <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="*" element={<PageNotFound />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+      <Footer />
+    </>
   );
 }
 

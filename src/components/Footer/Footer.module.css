@@ -1,0 +1,27 @@
+.footer {
+  display: flex;
+  position: relative;
+  height: 5vh;
+  background-color: #232c34;
+  color: white;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 12px;
+}
+
+img {
+  height: 25px;
+  margin-right: 10px;
+}
+
+.footer a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  transform: translateY(1px);
+}
