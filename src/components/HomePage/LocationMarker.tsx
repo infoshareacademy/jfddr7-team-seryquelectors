@@ -3,12 +3,13 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/global";
 import { DocumentData } from "firebase/firestore";
 import { greenIcon, goldIcon, violetIcon } from "../../images/Icon";
+import EventDetails from "../EventDetails/EventDetails";
 
 const LocationMarker = () => {
   const { position, setPosition, allEvents, setShowForm, user, filter } =
     useContext(AuthContext);
   const [toggleMarker, setToggleMarker] = useState(false);
-
+  const [visible, setVisible] = useState(false);
   const map = useMapEvents({
     click(e) {
       console.log(e);
@@ -36,7 +37,12 @@ const LocationMarker = () => {
           eventIcon = goldIcon;
         }
         return (
-          <Marker key={i} position={e.position} icon={eventIcon}>
+          <Marker
+            key={i}
+            position={e.position}
+            icon={eventIcon}
+            eventHandlers={{ click: () => setVisible(true) }}
+          >
             <Tooltip>
               <>
                 <b>
