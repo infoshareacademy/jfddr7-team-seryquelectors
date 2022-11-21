@@ -1,12 +1,15 @@
 .footer {
   display: flex;
-  position: relative;
+  position: fixed;
   height: 5vh;
+  width: 100vw;
   background-color: #232c34;
+  z-index: 10000;
   color: white;
   justify-content: space-around;
   align-items: center;
   font-size: 12px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.9), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
 }
 
 img {
