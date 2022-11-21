@@ -11,8 +11,10 @@
 }
 
 .window {
+  position: relative;
+  bottom: 50px;
   width: 700px;
-  height: 500px;
+  height: 400px;
   background: white;
   border: 10px solid rgb(130, 130, 130);
   display: grid;
@@ -34,7 +36,7 @@
 
 .description {
   grid-area: desc;
-  height: 400px;
+  height: 200px;
 }
 
 .participants {

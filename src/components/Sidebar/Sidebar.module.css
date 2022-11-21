@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
 }
+
 .options {
   background-color: #232c34;
   border-radius: 10px;
@@ -38,6 +39,15 @@
   background-color: #232c34;
   color: white;
   border: white 1px solid;
+  border-bottom: 0px;
+  padding: 3px;
+}
+
+.options button:hover {
+  font-weight: 200;
+  background-color: rgb(197, 189, 237);
+  color: black;
+  border: #232c34 1px solid;
   border-bottom: 0px;
   padding: 3px;
 }
@@ -74,4 +84,16 @@
 .events::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
+}
+
+.filter {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px 5px;
+  color: white;
+  background-color: #232c34;
 }

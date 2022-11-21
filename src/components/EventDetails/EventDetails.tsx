@@ -1,5 +1,8 @@
-import { useContext } from "react";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { useContext, useState } from "react";
+import { useEffect } from "react";
 import { Dispatch, SetStateAction } from "react";
+import { db } from "../../firebase";
 import { AuthContext } from "../../providers/global";
 import styles from "./EventDetails.module.css";
 
@@ -14,6 +17,14 @@ interface Props {
   id: string;
   likes: string[];
   setShowMore: Dispatch<SetStateAction<boolean>>;
+}
+
+interface UserData {
+  avatar: undefined | string;
+  email: string;
+  name: string;
+  userDescription: string;
+  userJson: string;
 }
 
 interface UserJSON {
@@ -33,7 +44,22 @@ const EventDetails = ({
   likes,
   setShowMore,
 }: Props) => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, setCurrentUser, user } = useContext(AuthContext);
+  const [authorDescription, setAuthorDescription] = useState<null | string>(
+    null
+  );
+
+  useEffect(() => {
+    getDocs(query(collection(db, "users"), where("email", "==", email))).then(
+      (querySnapshot) => {
+        const userData: UserData[] = [];
+        querySnapshot.forEach((doc) => {
+          userData.push(doc.data() as UserData);
+        });
+        setAuthorDescription(userData[0].userDescription);
+      }
+    );
+  }, []);
 
   return (
     <div className={styles.mainContainer} onClick={() => setShowMore(false)}>
@@ -41,6 +67,7 @@ const EventDetails = ({
         <div className={styles.author}>
           <p>Autor:</p>
           {creatorName}
+          <p>{authorDescription}</p>
         </div>
         <div className={styles.category}>
           <p>Kategoria</p>
@@ -71,7 +98,7 @@ const EventDetails = ({
           <p>Godzina startu:</p>
           {new Date().getTime() < new Date(date + " " + time).getTime()
             ? time
-            : "Trwa!"}
+            : "Wydarzenie jest w trakcie!"}
         </div>
         <div className={styles.likes}>
           <p>Polubienia:</p>

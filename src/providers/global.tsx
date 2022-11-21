@@ -72,6 +72,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
   const fetchUsers = (): void => {
     console.log("fetch users");
+
     getDocs(query(collection(db, "users"), where("email", "==", user))).then(
       (querySnapshot) => {
         const user: UserData[] = [];
@@ -81,6 +82,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         setCurrentUser(user[0]);
       }
     );
+    console.log(currentUser);
   };
 
   return (

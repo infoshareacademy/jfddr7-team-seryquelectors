@@ -57,3 +57,31 @@
   background-color: #badfafd0;
   transform: translateY(-2px);
 }
+
+.NavbarWrapper .logoutAvatarWrapper {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.NavbarWrapper .avatarWrapper {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin-right: 20px;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.NavbarWrapper .avatarWrapper img {
+  margin: 0;
+  margin-right: 5px;
+  border-radius: 50%;
+  padding: 4px;
+  background-color: #1d242c;
+  border: 1px solid gray;
+}

@@ -41,9 +41,7 @@ export const Sidebar = () => {
           .sort((a: DocumentData, b: DocumentData) => {
             return b.likes.length - a.likes.length;
           });
-  const handleRefresh = (): void => {
-    setRefresh(!refresh);
-  };
+
   // useEffect(() => {
   //   fetchEvents();
   // }, [allEvents.length, participateEvents.length, otherEvents.length]);
@@ -79,7 +77,9 @@ export const Sidebar = () => {
       <div className={styles.events}>
         {sidebar === "myEvents" ? (
           <>
-            <p>Twoje wydarzenia ({userEvents.length}):</p>
+            <div className={styles.filter}>
+              Twoje wydarzenia ({userEvents.length}):
+            </div>
 
             {userEvents.map((e: DocumentData) => {
               return (
@@ -94,14 +94,16 @@ export const Sidebar = () => {
                   id={e.id}
                   participants={e.participants}
                   likes={e.likes}
-                  handleRefresh={handleRefresh}
                 />
               );
             })}
           </>
         ) : null || sidebar === "eventsIParticipateIn" ? (
           <>
-            <p>Biorę udział w ({participateEvents.length}):</p>
+            <div className={styles.filter}>
+              Biorę udział w ({participateEvents.length}):
+            </div>
+
             {participateEvents.map((e: DocumentData) => {
               return (
                 <EventCard
@@ -115,7 +117,6 @@ export const Sidebar = () => {
                   id={e.id}
                   participants={e.participants}
                   likes={e.likes}
-                  handleRefresh={handleRefresh}
                 />
               );
             })}
@@ -123,20 +124,24 @@ export const Sidebar = () => {
         ) : null}
         {sidebar === "upcommingEvents" ? (
           <>
-            <p>Nadchodzące wydarzenia ({otherEvents.length}):</p>
-            <p>Sortuj wg:</p>
-            <select
-              name="activitySort"
-              onChange={(e) => {
-                setFilter(e.target.value);
-              }}
-              value={filter}
-            >
-              <option value="none">Pokaż wszystkie</option>
-              <option value="sport">🟢 Sport</option>
-              <option value="nauka">🟣 Nauka</option>
-              <option value="kultura">🟡 Kultura</option>
-            </select>
+            <div className={styles.filter}>
+              <span>Nadchodzące wydarzenia ({otherEvents.length}):</span>
+              <br />
+
+              <span>Sortuj wg:</span>
+              <select
+                name="activitySort"
+                onChange={(e) => {
+                  setFilter(e.target.value);
+                }}
+                value={filter}
+              >
+                <option value="none">Pokaż wszystkie</option>
+                <option value="sport">🟢 Sport</option>
+                <option value="nauka">🟣 Nauka</option>
+                <option value="kultura">🟡 Kultura</option>
+              </select>
+            </div>
 
             {otherEvents.map((e: DocumentData) => {
               return (
@@ -152,7 +157,6 @@ export const Sidebar = () => {
                   id={e.id}
                   participants={e.participants}
                   likes={e.likes}
-                  handleRefresh={handleRefresh}
                 />
               );
             })}
@@ -162,7 +166,9 @@ export const Sidebar = () => {
             {showForm ? (
               <AddEventForm />
             ) : (
-              <p>Proszę wybierz miejsce spotkania</p>
+              <div className={styles.filter}>
+                Proszę kliknij na mapę i wybierz miejsce spotkania
+              </div>
             )}
           </>
         ) : null}

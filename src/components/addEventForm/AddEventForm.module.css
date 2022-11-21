@@ -49,6 +49,7 @@
 }
 
 .FormWrapper form input::placeholder {
+  color: black;
   font-weight: 200;
   background: #fff;
   border-radius: 3px;

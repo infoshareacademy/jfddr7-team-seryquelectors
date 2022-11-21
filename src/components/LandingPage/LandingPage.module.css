@@ -1,6 +1,6 @@
 .wrapper {
   background-color: #394653;
-  min-height: 100vh;
+  min-height: 95vh;
   display: flex;
   padding: 0;
   margin: 0;
@@ -177,6 +177,7 @@ form .addImage input:active {
 }
 
 form .addImage img {
+  margin-top: 5px;
   position: relative;
   width: 35px;
   height: 35px;
@@ -187,13 +188,20 @@ form .addImage img {
 form .uploadAvatar {
   border: none;
   position: relative;
-  font-weight: 400;
-  min-width: 100%;
+  font-weight: 200;
+  width: 50%;
   font-size: 20px;
-  background-color: white;
-  color: black;
+  background-color: #7f859e;
+  color: white;
   margin: 0;
   padding: 2px;
   border-radius: 2px;
   padding: 3px;
+  margin-top: 10px;
+}
+
+form .uploadAvatar:hover {
+  background-color: #616b93;
+  color: white;
+  cursor: pointer;
 }

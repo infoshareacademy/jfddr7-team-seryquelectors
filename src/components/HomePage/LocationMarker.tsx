@@ -5,15 +5,13 @@ import { DocumentData } from "firebase/firestore";
 import { greenIcon, goldIcon, violetIcon } from "../../images/Icon";
 
 const LocationMarker = () => {
-  const { position, setPosition, allEvents, setShowForm, user } = useContext(AuthContext);
+  const { position, setPosition, allEvents, setShowForm, user } =
+    useContext(AuthContext);
   const [toggleMarker, setToggleMarker] = useState(false);
-  // const map = useMapEvents({
-  //   click() {},
-  // });
-  //   const map = useMap();
 
   const map = useMapEvents({
     click(e) {
+      console.log(e);
       setPosition([e.latlng.lat, e.latlng.lng]);
       setToggleMarker(true);
       setShowForm(true);
@@ -35,7 +33,8 @@ const LocationMarker = () => {
             <Tooltip>
               <>
                 <b>
-                  {e.name} {e.email === user ? <span>(Ty)</span> : null} - {e.category}
+                  {e.name} {e.email === user ? <span>(Ty)</span> : null} -{" "}
+                  {e.category}
                 </b>
                 <br />
                 {e.description}
