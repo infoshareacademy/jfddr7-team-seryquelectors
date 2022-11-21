@@ -12,11 +12,6 @@ import { setDefaultResultOrder } from "dns";
 
 export const LandingPage = () => {
   const navigate = useNavigate();
-  // const [login, setLogin] = useState('')
-  // const [password, setPassword] = useState('')
-
-  // const onLogin = () => {
-  //     const user = { login, password };
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,16 +32,6 @@ export const LandingPage = () => {
         if (message == "Firebase: Error (auth/wrong-password).") {
           setError("Niepoprawny email lub hasło");
         }
-        // } else {
-        //   createUserWithEmailAndPassword(auth, email, password)
-        //     .then(() => {
-        //       navigate("home");
-        //       setUser(email);
-        //     })
-        //     .catch(() => {
-        //       setError("Wystąpił błąd");
-        //     });
-        // }
       });
   };
 
@@ -56,13 +41,13 @@ export const LandingPage = () => {
       avatar: url,
       userDescription: userDescription,
       email: email,
+      userJson: JSON.stringify({ user: email, participantName: name }),
     });
   };
 
   const handleRegister: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    // if (url) {
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
         navigate("home");
@@ -72,16 +57,11 @@ export const LandingPage = () => {
       .catch(() => {
         setError("Wystąpił błąd");
       });
-    // } else {
-    // 	setError("Proszę dodaj zdjęcie");
-    // }
   };
 
   const toogleLoginButton = () => {
     setShowLogin(!showLogin);
   };
-
-  //Profile image
 
   const [imageUpload, setImageUpload] = useState<any>(null);
   const [url, setUrl] = useState<any>(null);
@@ -104,8 +84,6 @@ export const LandingPage = () => {
         console.log(error.message);
       });
   };
-
-  //
 
   return (
     <div className={styles.wrapper}>

@@ -26,6 +26,8 @@ interface AuthContextState {
   fetchUsers: () => void;
   currentUser: UserData;
   setCurrentUser: (event: UserData) => void;
+  filter: string;
+  setFilter: (a: string) => void;
 }
 
 interface UserData {
@@ -54,6 +56,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [name, setName] = useState<string | null>("");
   const [userDescription, setUserDescription] = useState<string | null>("");
   const [currentUser, setCurrentUser] = useState<UserData>({} as UserData);
+  const [filter, setFilter] = useState<string>("none");
 
   const unsub = onSnapshot(collection(db, "events"), (qS) => {
     let events: object[] = [];
@@ -71,7 +74,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   });
 
   const fetchUsers = (): void => {
-    console.log("fetch users");
     getDocs(query(collection(db, "users"), where("email", "==", user))).then(
       (querySnapshot) => {
         const user: UserData[] = [];
@@ -101,6 +103,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         fetchUsers,
         currentUser,
         setCurrentUser,
+        filter,
+        setFilter,
       }}
     >
       {children}

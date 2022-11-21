@@ -12,10 +12,9 @@ import styles from "./Sidebar.module.css";
 // ];
 
 export const Sidebar = () => {
-  const { showForm, user, allEvents, currentUser } = useContext(AuthContext);
+  const { showForm, user, allEvents, currentUser, filter, setFilter } =
+    useContext(AuthContext);
   const [sidebar, setSidebar] = useState<string>("upcommingEvents");
-  const [refresh, setRefresh] = useState<boolean>(false);
-  const [filter, setFilter] = useState<string>("none");
   const userEvents = allEvents.filter((e: DocumentData) => e.email === user);
   const participateEvents = allEvents.filter(
     (e: DocumentData) =>
@@ -41,19 +40,10 @@ export const Sidebar = () => {
           .sort((a: DocumentData, b: DocumentData) => {
             return b.likes.length - a.likes.length;
           });
-  const handleRefresh = (): void => {
-    setRefresh(!refresh);
-  };
-  // useEffect(() => {
-  //   fetchEvents();
-  // }, [allEvents.length, participateEvents.length, otherEvents.length]);
 
   return (
     <div className={styles.SidebarWrapper}>
       <div className={styles.options}>
-        <div className={styles.user}>
-          {/* <img src={images.find((image) => image.name === currentUser.avatar)?.src ?? ""} /> */}
-        </div>
         <button
           onClick={() => {
             setSidebar("myEvents");
@@ -79,7 +69,9 @@ export const Sidebar = () => {
       <div className={styles.events}>
         {sidebar === "myEvents" ? (
           <>
-            <p>Twoje wydarzenia ({userEvents.length}):</p>
+            <div className={styles.filter}>
+              Twoje wydarzenia ({userEvents.length}):
+            </div>
 
             {userEvents.map((e: DocumentData) => {
               return (
@@ -94,14 +86,16 @@ export const Sidebar = () => {
                   id={e.id}
                   participants={e.participants}
                   likes={e.likes}
-                  handleRefresh={handleRefresh}
                 />
               );
             })}
           </>
         ) : null || sidebar === "eventsIParticipateIn" ? (
           <>
-            <p>Biorę udział w ({participateEvents.length}):</p>
+            <div className={styles.filter}>
+              Biorę udział w ({participateEvents.length}):
+            </div>
+
             {participateEvents.map((e: DocumentData) => {
               return (
                 <EventCard
@@ -115,7 +109,6 @@ export const Sidebar = () => {
                   id={e.id}
                   participants={e.participants}
                   likes={e.likes}
-                  handleRefresh={handleRefresh}
                 />
               );
             })}
@@ -123,20 +116,24 @@ export const Sidebar = () => {
         ) : null}
         {sidebar === "upcommingEvents" ? (
           <>
-            <p>Nadchodzące wydarzenia ({otherEvents.length}):</p>
-            <p>Sortuj wg:</p>
-            <select
-              name="activitySort"
-              onChange={(e) => {
-                setFilter(e.target.value);
-              }}
-              value={filter}
-            >
-              <option value="none">Pokaż wszystkie</option>
-              <option value="sport">🟢 Sport</option>
-              <option value="nauka">🟣 Nauka</option>
-              <option value="kultura">🟡 Kultura</option>
-            </select>
+            <div className={styles.filter}>
+              <span>Nadchodzące wydarzenia ({otherEvents.length}):</span>
+              <br />
+              <div className={styles.spanSelect}>
+                <select
+                  name="activitySort"
+                  onChange={(e) => {
+                    setFilter(e.target.value);
+                  }}
+                  value={filter}
+                >
+                  <option value="none">Pokaż wszystkie</option>
+                  <option value="sport">🟢 Sport</option>
+                  <option value="nauka">🟣 Nauka</option>
+                  <option value="kultura">🟡 Kultura</option>
+                </select>
+              </div>
+            </div>
 
             {otherEvents.map((e: DocumentData) => {
               return (
@@ -152,7 +149,6 @@ export const Sidebar = () => {
                   id={e.id}
                   participants={e.participants}
                   likes={e.likes}
-                  handleRefresh={handleRefresh}
                 />
               );
             })}
@@ -162,7 +158,9 @@ export const Sidebar = () => {
             {showForm ? (
               <AddEventForm />
             ) : (
-              <p>Proszę wybierz miejsce spotkania</p>
+              <div className={styles.filter}>
+                Proszę kliknij na mapę i wybierz miejsce spotkania
+              </div>
             )}
           </>
         ) : null}

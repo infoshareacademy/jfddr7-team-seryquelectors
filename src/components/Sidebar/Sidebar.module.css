@@ -4,14 +4,14 @@
   background-color: transparent;
   color: black;
   box-sizing: border-box;
-  height: 90vh;
-  margin-left: 5px;
+  height: 86vh;
   /*SCROLL*/
   /*overflow-y: scroll;*/
   margin-top: 10vh;
   display: flex;
   flex-direction: column;
 }
+
 .options {
   background-color: #232c34;
   border-radius: 10px;
@@ -38,6 +38,15 @@
   background-color: #232c34;
   color: white;
   border: white 1px solid;
+  border-bottom: 0px;
+  padding: 3px;
+}
+
+.options button:hover {
+  font-weight: 200;
+  background-color: rgb(197, 189, 237);
+  color: black;
+  border: #232c34 1px solid;
   border-bottom: 0px;
   padding: 3px;
 }
@@ -74,4 +83,38 @@
 .events::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
+}
+
+.filter {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px 5px;
+  color: white;
+  background-color: #232c34;
+  text-align: center;
+  font-weight: 300;
+}
+
+.spanSelect select,
+.spanSelect select:active,
+.spanSelect select:focus,
+.spanSelect select:hover,
+.spanSelect select:active,
+.spanSelect select:visited {
+  outline: none;
+  font-size: 14px;
+  font-weight: 300;
+  color: white;
+  background-color: transparent;
+  border: none;
+  margin-left: 5px;
+}
+
+.spanSelect select option {
+  color: white;
+  background-color: #232c34;
 }
