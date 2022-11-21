@@ -1,4 +1,10 @@
-import React, { createContext, useState, FC, ReactNode } from "react";
+import React, {
+  createContext,
+  useState,
+  FC,
+  ReactNode,
+  SetStateAction,
+} from "react";
 import { LatLngExpression } from "leaflet";
 import {
   collection,
@@ -28,6 +34,8 @@ interface AuthContextState {
   setCurrentUser: (event: UserData) => void;
   filter: string;
   setFilter: (a: string) => void;
+  showMore: boolean;
+  setShowMore: (a: SetStateAction<boolean>) => void;
 }
 
 interface UserData {
@@ -57,6 +65,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [userDescription, setUserDescription] = useState<string | null>("");
   const [currentUser, setCurrentUser] = useState<UserData>({} as UserData);
   const [filter, setFilter] = useState<string>("none");
+  const [showMore, setShowMore] = useState<boolean>(false);
 
   const unsub = onSnapshot(collection(db, "events"), (qS) => {
     let events: object[] = [];
@@ -105,6 +114,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         setCurrentUser,
         filter,
         setFilter,
+        showMore,
+        setShowMore,
       }}
     >
       {children}

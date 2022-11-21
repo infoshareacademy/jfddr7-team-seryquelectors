@@ -35,9 +35,7 @@ const EventCard = ({
   likes,
   other,
 }: Props): ReactElement => {
-  const { user, currentUser } = useContext(AuthContext);
-
-  const [showMore, setShowMore] = useState<boolean>(false);
+  const { user, currentUser, showMore, setShowMore } = useContext(AuthContext);
 
   const peopleIcon =
     "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/314/people-holding-hands-light-skin-tone-medium-dark-skin-tone_1f9d1-1f3fb-200d-1f91d-200d-1f9d1-1f3fe.png";
@@ -81,7 +79,9 @@ const EventCard = ({
     <>
       <div className={styles.eventCard}>
         <p className={styles.eventName}>
-          {creatorName} {email === user && other ? <span>(Ty)</span> : null}
+          <span>
+            {creatorName} {email === user && other ? <span>(Ty)</span> : null}
+          </span>
           <span className={styles.category}>{category}</span>
         </p>
 
