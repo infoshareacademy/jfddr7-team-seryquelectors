@@ -12,10 +12,9 @@ import styles from "./Sidebar.module.css";
 // ];
 
 export const Sidebar = () => {
-  const { showForm, user, allEvents, currentUser } = useContext(AuthContext);
+  const { showForm, user, allEvents, currentUser, filter, setFilter } =
+    useContext(AuthContext);
   const [sidebar, setSidebar] = useState<string>("upcommingEvents");
-  const [refresh, setRefresh] = useState<boolean>(false);
-  const [filter, setFilter] = useState<string>("none");
   const userEvents = allEvents.filter((e: DocumentData) => e.email === user);
   const participateEvents = allEvents.filter(
     (e: DocumentData) =>
@@ -42,16 +41,9 @@ export const Sidebar = () => {
             return b.likes.length - a.likes.length;
           });
 
-  // useEffect(() => {
-  //   fetchEvents();
-  // }, [allEvents.length, participateEvents.length, otherEvents.length]);
-
   return (
     <div className={styles.SidebarWrapper}>
       <div className={styles.options}>
-        <div className={styles.user}>
-          {/* <img src={images.find((image) => image.name === currentUser.avatar)?.src ?? ""} /> */}
-        </div>
         <button
           onClick={() => {
             setSidebar("myEvents");

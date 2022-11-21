@@ -5,7 +5,7 @@ import { DocumentData } from "firebase/firestore";
 import { greenIcon, goldIcon, violetIcon } from "../../images/Icon";
 
 const LocationMarker = () => {
-  const { position, setPosition, allEvents, setShowForm, user } =
+  const { position, setPosition, allEvents, setShowForm, user, filter } =
     useContext(AuthContext);
   const [toggleMarker, setToggleMarker] = useState(false);
 
@@ -18,10 +18,17 @@ const LocationMarker = () => {
       map.flyTo(e.latlng, map.getZoom());
     },
   });
-
+  const sortedEvents =
+    filter == "none"
+      ? allEvents
+      : allEvents
+          .filter((e: DocumentData) => e.category.indexOf(filter) > -1)
+          .sort((a: DocumentData, b: DocumentData) => {
+            return b.likes.length - a.likes.length;
+          });
   return (
     <>
-      {allEvents.map((e: DocumentData, i) => {
+      {sortedEvents.map((e: DocumentData, i) => {
         let eventIcon = greenIcon;
         if (e.category.indexOf("nauka") > -1) {
           eventIcon = violetIcon;

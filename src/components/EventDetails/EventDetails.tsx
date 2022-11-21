@@ -61,13 +61,16 @@ const EventDetails = ({
     );
   }, []);
 
+  const likeIcon =
+    "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/facebook/327/red-heart_2764-fe0f.png";
+
   return (
     <div className={styles.mainContainer} onClick={() => setShowMore(false)}>
       <div className={styles.window}>
         <div className={styles.author}>
           <p>Autor:</p>
           {creatorName}
-          <p>{authorDescription}</p>
+          <p className={styles.aboutMe}>O mnie: {authorDescription}</p>
         </div>
         <div className={styles.category}>
           <p>Kategoria</p>
@@ -101,7 +104,10 @@ const EventDetails = ({
             : "Wydarzenie jest w trakcie!"}
         </div>
         <div className={styles.likes}>
-          <p>Polubienia:</p>
+          <p>
+            <img src={likeIcon} alt="bin" />
+            Polubienia:
+          </p>
           {likes.length}
         </div>
       </div>
