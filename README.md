@@ -18,4 +18,4 @@ Autorzy:
 [Anna Wiśniowska](https://github.com/annavvis)
 [Magdalena Zalewska](https://github.com/magdalena-zalewska)
 [Szymon Wisłocki](https://github.com/szymonwislocki)
-[Wojciech Lamperski(https://github.com/WojciechLamperski)
+[Wojciech Lamperski](https://github.com/WojciechLamperski)
