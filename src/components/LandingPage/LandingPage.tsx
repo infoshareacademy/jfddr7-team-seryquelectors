@@ -41,6 +41,7 @@ export const LandingPage = () => {
       avatar: url,
       userDescription: userDescription,
       email: email,
+      userJson: JSON.stringify({ user: email, participantName: name }),
     });
   };
 

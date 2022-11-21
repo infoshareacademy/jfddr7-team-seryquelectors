@@ -96,4 +96,26 @@
   margin: 10px 5px;
   color: white;
   background-color: #232c34;
+  text-align: center;
+  font-weight: 300;
+}
+
+.spanSelect select,
+.spanSelect select:active,
+.spanSelect select:focus,
+.spanSelect select:hover,
+.spanSelect select:active,
+.spanSelect select:visited {
+  outline: none;
+  font-size: 14px;
+  font-weight: 300;
+  color: white;
+  background-color: transparent;
+  border: none;
+  margin-left: 5px;
+}
+
+.spanSelect select option {
+  color: white;
+  background-color: #232c34;
 }

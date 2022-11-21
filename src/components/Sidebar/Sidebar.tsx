@@ -127,20 +127,21 @@ export const Sidebar = () => {
             <div className={styles.filter}>
               <span>Nadchodzące wydarzenia ({otherEvents.length}):</span>
               <br />
-
-              <span>Sortuj wg:</span>
-              <select
-                name="activitySort"
-                onChange={(e) => {
-                  setFilter(e.target.value);
-                }}
-                value={filter}
-              >
-                <option value="none">Pokaż wszystkie</option>
-                <option value="sport">🟢 Sport</option>
-                <option value="nauka">🟣 Nauka</option>
-                <option value="kultura">🟡 Kultura</option>
-              </select>
+              <div className={styles.spanSelect}>
+                <span>Sortuj wg:</span>
+                <select
+                  name="activitySort"
+                  onChange={(e) => {
+                    setFilter(e.target.value);
+                  }}
+                  value={filter}
+                >
+                  <option value="none">Pokaż wszystkie</option>
+                  <option value="sport">🟢 Sport</option>
+                  <option value="nauka">🟣 Nauka</option>
+                  <option value="kultura">🟡 Kultura</option>
+                </select>
+              </div>
             </div>
 
             {otherEvents.map((e: DocumentData) => {
