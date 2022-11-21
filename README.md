@@ -1,8 +1,8 @@
 ## GoGather
 
-GoGather to projekt, która ma pomóc w organizacji szybkich, krótkich, spontanicznych wydarzeń na terenie Miasta Gdańska.
+GoGather to projekt, który ma pomóc w organizacji szybkich, krótkich, spontanicznych wydarzeń na terenie Miasta Gdańska.
 Duże serwisy społecznościowe udostępniają możliwość organizacji wydarzeń, jednak żeby je znaleźć, musimy z reguły przynależeć do jakiejś grupy, lub nawet do kilku grup, bo rzadko kiedy da się skupić wszystko w jednym miejscu.
-Rozwijając to, co powiedziałem – nawet gdy przystąpimy do grupy, dajmy na to, „wydarzenia trójmiasto”,
+Rozwijając – nawet gdy przystąpimy do grupy, dajmy na to, „wydarzenia trójmiasto”,
  to nie mamy gwarancji, że wszyscy, którzy mieliby nam coś do zaoferowania, tam są.
 Na dystansie, musielibyśmy uczestniczyć w nastu takich grupach i skazywać się na masę niepotrzebnych informacji i wydarzeń na main feedzie np. Facebooka.
 
