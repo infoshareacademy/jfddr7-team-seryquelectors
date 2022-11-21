@@ -4,7 +4,10 @@
   background-color: transparent;
   color: black;
   box-sizing: border-box;
-  height: 86vh;
+  height: 90vh;
+  margin-left: 5px;
+  /*SCROLL*/
+  /*overflow-y: scroll;*/
   margin-top: 10vh;
   display: flex;
   flex-direction: column;

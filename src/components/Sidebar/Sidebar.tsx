@@ -120,6 +120,7 @@ export const Sidebar = () => {
               <span>Nadchodzące wydarzenia ({otherEvents.length}):</span>
               <br />
               <div className={styles.spanSelect}>
+                <span>Sortuj wg:</span>
                 <select
                   name="activitySort"
                   onChange={(e) => {

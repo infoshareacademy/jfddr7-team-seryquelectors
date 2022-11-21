@@ -48,8 +48,3 @@
   height: 16px;
   padding-right: 3px;
 }
-
-.eventName {
-  display: flex;
-  justify-content: space-between;
-}

@@ -3,19 +3,10 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/global";
 import { DocumentData } from "firebase/firestore";
 import { greenIcon, goldIcon, violetIcon } from "../../images/Icon";
-import EventDetails from "../EventDetails/EventDetails";
 
 const LocationMarker = () => {
-  const {
-    position,
-    setPosition,
-    allEvents,
-    setShowForm,
-    user,
-    filter,
-    showMore,
-    setShowMore,
-  } = useContext(AuthContext);
+  const { position, setPosition, allEvents, setShowForm, user, filter } =
+    useContext(AuthContext);
   const [toggleMarker, setToggleMarker] = useState(false);
 
   const map = useMapEvents({
@@ -45,16 +36,7 @@ const LocationMarker = () => {
           eventIcon = goldIcon;
         }
         return (
-          <Marker
-            key={i}
-            position={e.position}
-            icon={eventIcon}
-            eventHandlers={{
-              click: () => {
-                setShowMore(true);
-              },
-            }}
-          >
+          <Marker key={i} position={e.position} icon={eventIcon}>
             <Tooltip>
               <>
                 <b>
@@ -65,24 +47,9 @@ const LocationMarker = () => {
                 {e.description}
               </>
             </Tooltip>
-            {showMore ? (
-              <EventDetails
-                creatorName={e.creatorName}
-                category={e.category}
-                description={e.description}
-                date={e.date}
-                time={e.time}
-                email={e.email}
-                id={e.id}
-                participants={e.participants}
-                likes={e.likes}
-                setShowMore={e.setShowMore}
-              />
-            ) : null}
           </Marker>
         );
       })}
-
       {toggleMarker ? <Marker position={position}></Marker> : null}
     </>
   );

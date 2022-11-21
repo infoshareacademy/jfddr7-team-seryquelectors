@@ -26,31 +26,33 @@
   border: none;
 }
 
-.FormWrapper form input,
-.FormWrapper form input:focus,
-.FormWrapper form select,
-.FormWrapper form select:visited,
-.FormWrapper form select:active {
+.FormWrapper form input {
   position: relative;
   background-color: transparent;
   border: none;
   margin: 5px;
   box-sizing: border-box;
   padding: 6px;
-  background: #303c46;
-  color: white;
+  background: #fff;
   border-radius: 3px;
   width: 100%;
   font-weight: 200;
+}
+
+.FormWrapper form input:focus {
+  font-weight: 200;
   outline: none;
+  border: none;
+  background: #fff;
+  border-radius: 3px;
+  border-bottom: 2px solid white;
 }
 
 .FormWrapper form input::placeholder {
-  color: white;
-}
-
-.FormWrapper form input::-webkit-calendar-picker-indicator {
-  filter: invert(1);
+  color: black;
+  font-weight: 200;
+  background: #fff;
+  border-radius: 3px;
 }
 
 .FormWrapper form button {
@@ -62,13 +64,27 @@
   border: none;
   box-sizing: border-box;
   padding: 6px;
-  margin-top: 10px;
-  background-color: #495a68;
+  margin-top: 25px;
+  background-color: #566294;
   border-radius: 3px;
 }
 
 .FormWrapper form button:hover {
   cursor: pointer;
+}
+
+.FormWrapper form select {
+  position: relative;
+  background-color: transparent;
+  border: none;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 3px;
+  font-weight: 200;
+  border-radius: 3px;
+  width: 100%;
+  padding: 3px;
+  margin: 5px;
 }
 
 .FormWrapper textarea {
@@ -84,16 +100,4 @@
   border-radius: 3px;
   padding: 3px;
   resize: none;
-  position: relative;
-  background-color: transparent;
-  border: none;
-  margin: 5px;
-  box-sizing: border-box;
-  padding: 6px;
-  background: #303c46;
-  color: white;
-  border-radius: 3px;
-  width: 100%;
-  font-weight: 200;
-  outline: none;
 }
