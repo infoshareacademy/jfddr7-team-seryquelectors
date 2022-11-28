@@ -15,7 +15,7 @@ Z pomocą GoGather utworzysz łatwo spontaniczne wydarzenie – wypad do kina, n
 Zobacz, jak to działa na: [gogather.netlify.app](https://gogather.netlify.app)
 
 Autorzy:
-[Anna Wiśniowska](https://github.com/annavvis)
-[Magdalena Zalewska](https://github.com/magdalena-zalewska)
-[Szymon Wisłocki](https://github.com/szymonwislocki)
+[Anna Wiśniowska](https://github.com/annavvis) •
+[Magdalena Zalewska](https://github.com/magdalena-zalewska) •
+[Szymon Wisłocki](https://github.com/szymonwislocki) •
 [Wojciech Lamperski](https://github.com/WojciechLamperski)
