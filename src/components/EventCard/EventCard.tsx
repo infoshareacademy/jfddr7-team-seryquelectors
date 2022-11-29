@@ -1,15 +1,10 @@
-import {
-  HTMLAttributes,
-  ReactElement,
-  ReactPropTypes,
-  useContext,
-  useState,
-} from "react";
+import { ReactElement, useContext, useState } from "react";
 import styles from "./EventCard.module.css";
-import { AuthContext } from "../../providers/global";
-import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
+import { GlobalDataContext } from "../../providers/global";
+import { deleteDoc, doc, DocumentReference, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
-import EventDetails from "../EventDetails/EventDetails";
+import { icons } from "../icons";
+
 interface Props {
   creatorName: string;
   category: string;
@@ -23,31 +18,13 @@ interface Props {
   other?: boolean;
 }
 
-const EventCard = ({
-  creatorName,
-  category,
-  description,
-  date,
-  time,
-  email,
-  participants,
-  id,
-  likes,
-  other,
-}: Props): ReactElement => {
-  const { user, currentUser } = useContext(AuthContext);
+const EventCard = ({ creatorName, category, description, date, time, email, participants, id, likes, other }: Props): ReactElement => {
+  const { user, currentUser, setShowDetails } = useContext(GlobalDataContext);
+  const compareTime: boolean = new Date().getTime() < new Date(date + " " + time).getTime();
+  const docRef: DocumentReference = doc(db, "events", `${id}`);
 
-  const [showMore, setShowMore] = useState<boolean>(false);
-
-  const peopleIcon =
-    "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/314/people-holding-hands-light-skin-tone-medium-dark-skin-tone_1f9d1-1f3fb-200d-1f91d-200d-1f9d1-1f3fe.png";
-  const likeIcon =
-    "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/facebook/327/red-heart_2764-fe0f.png";
-  const joinIcon =
-    "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/326/waving-hand_1f44b.png";
-
-  const handleLike = async () => {
-    const docRef = doc(db, "events", `${id}`);
+  // binary handle of like button
+  const handleLike = async (): Promise<void> => {
     if (likes.indexOf(user as string) === -1) {
       await updateDoc(docRef, { likes: [user, ...likes] });
     } else {
@@ -55,25 +32,26 @@ const EventCard = ({
     }
   };
 
-  const handleJoin = async () => {
-    const docRef = doc(db, "events", `${id}`);
+  //modify Array of participants
+  const handleJoin = async (): Promise<void> => {
     await updateDoc(docRef, {
       participants: [...participants, currentUser.userJson],
     });
   };
 
+  //delete  from Firestore whole doc from reference
   const handleDelete = async (): Promise<void> => {
-    await deleteDoc(doc(db, "events", `${id}`));
+    if (window.confirm("Potwierdź usunięcie wybranego wydarzenia.")) {
+      await deleteDoc(docRef);
+    }
   };
 
+  //remove userData from proper document
   const handleLeave = async (): Promise<void> => {
-    const docRef = doc(db, "events", `${id}`);
     const fetchDocument = (await getDoc(docRef)).data();
     const currentParticipants = fetchDocument?.participants;
     await updateDoc(docRef, {
-      participants: currentParticipants.filter(
-        (e: string) => e !== currentUser.userJson
-      ),
+      participants: currentParticipants.filter((e: string) => e !== currentUser.userJson),
     });
   };
 
@@ -81,37 +59,25 @@ const EventCard = ({
     <>
       <div className={styles.eventCard}>
         <p className={styles.eventName}>
-          {creatorName} {email === user && other ? <span>(Ty)</span> : null}
+          {creatorName} {email === user && other ? "(Ty)" : null}
           <span className={styles.category}>{category}</span>
         </p>
 
         <p className={styles.description}>{description}</p>
         <div className={styles.detailsWrapper}>
           <p className={styles.date}>{date}</p>
-          <p className={styles.time}>
-            {new Date().getTime() < new Date(date + " " + time).getTime()
-              ? time
-              : "Trwa!"}
-          </p>
-          <button
-            className={styles.cardButton}
-            title="Liczba uczestników i szczegóły"
-            onClick={() => setShowMore(true)}
-          >
-            <img src={peopleIcon} alt="people holding hands" />
+          <p className={styles.time}>{compareTime ? time : "Trwa!"}</p>
+          <button className={styles.cardButton} title="Liczba uczestników i szczegóły" onClick={() => setShowDetails(id)}>
+            <img src={icons[0]} alt="people holding hands" />
             {participants.length}
           </button>
-          <button
-            onClick={handleLike}
-            className={styles.cardButton}
-            title="Lubię to!"
-          >
-            <img src={likeIcon} alt="red heart" />
+          <button onClick={handleLike} className={styles.cardButton} title="Lubię to!">
+            <img src={icons[1]} alt="red heart" />
             {likes.length}
           </button>
           {!participants.includes(currentUser.userJson) && email !== user ? (
             <button onClick={handleJoin} className={styles.cardButton}>
-              <img src={joinIcon} alt="waving hand" />
+              <img src={icons[2]} alt="waving hand" />
               Dołącz
             </button>
           ) : null}
@@ -122,30 +88,12 @@ const EventCard = ({
           ) : null}
           {email === user ? (
             <button onClick={handleDelete} className={styles.cardButton}>
-              <img
-                src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/toss-face/342/wastebasket_1f5d1-fe0f.png"
-                alt="bin"
-              />
+              <img src={icons[3]} alt="bin" />
               Usuń
             </button>
           ) : null}
         </div>
       </div>
-
-      {showMore ? (
-        <EventDetails
-          creatorName={creatorName}
-          category={category}
-          description={description}
-          date={date}
-          time={time}
-          email={email}
-          id={id}
-          participants={participants}
-          likes={likes}
-          setShowMore={setShowMore}
-        />
-      ) : null}
     </>
   );
 };

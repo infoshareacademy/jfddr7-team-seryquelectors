@@ -1,109 +1,68 @@
-import { collection, doc, setDoc } from "firebase/firestore";
-import { FormEvent, useContext, useState } from "react";
+import { collection, doc, DocumentReference, setDoc } from "firebase/firestore";
+import { LatLngExpression } from "leaflet";
+import { FormEvent, SetStateAction, useContext, useState } from "react";
 import { db } from "../../firebase";
-import { AuthContext } from "../../providers/global";
+import { GlobalDataContext } from "../../providers/global";
 import styles from "./AddEventForm.module.css";
-// import emailjs from "@emailjs/browser";
 
-/* A */
+interface NewEvent {
+  name: string;
+  description: string;
+  position: LatLngExpression;
+  email: string | null;
+  date: string;
+  time: string;
+  category: string;
+  participants: string[];
+  likes: string[];
+  id: string;
+}
+interface Props {
+  setSidebar: (arg: SetStateAction<string>) => void;
+}
+const AddEventForm = ({ setSidebar }: Props) => {
+  const { position, user, setShowForm, currentUser } = useContext(GlobalDataContext);
 
-// const sendEmail = (e) => {
-//   e.preventDefault();
-
-//   emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", form.current, "YOUR_PUBLIC_KEY").then(
-//     (result) => {
-//       console.log(result.text);
-//     },
-//     (error) => {
-//       console.log(error.text);
-//     }
-//   );
-// };
-
-const AddEventForm = () => {
-  // const [name, setName] = useState("");
+  //suggest to add event which starts in one hour
   const currentDate = `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`;
   let initTime: number | string = new Date().getTime();
-  initTime = new Date(initTime + 3600000).toLocaleTimeString();
-  initTime = initTime.slice(0, initTime.length - 3);
+  // slice stands for throw out seconds from time string
+  initTime = new Date(initTime + 3600000).toLocaleTimeString().slice(0, -3);
 
-  const [description, setDescription] = useState("");
-  const [date, setDate] = useState(currentDate);
-  const [time, setTime] = useState(initTime);
-  const [category, setCategory] = useState("");
-  const { position, user, setPosition, setShowForm, currentUser } = useContext(AuthContext);
+  const eventRef: DocumentReference = doc(collection(db, "events"));
+  const { id } = eventRef;
+  const [formData, setFormData] = useState<NewEvent>({
+    name: currentUser.name,
+    description: "",
+    position: position,
+    email: user,
+    date: currentDate,
+    time: initTime,
+    category: "",
+    participants: [currentUser.userJson],
+    likes: [],
+    id: id,
+  });
 
   const addEvent = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
-    const eventRef = doc(collection(db, "events"));
-    const { id } = eventRef;
     setShowForm(false);
-    await setDoc(eventRef, {
-      name: currentUser.name,
-      description: description,
-      position: position,
-      email: user,
-      date: date,
-      time: time,
-      category: category,
-      participants: [currentUser.userJson],
-      likes: [],
-      id: id,
-    });
-
-    setDescription("");
-    setTime("");
-    setDate("");
-    setCategory("");
-    setPosition([0, 0]);
+    setSidebar("myEvents");
+    await setDoc(doc(db, "events", formData.id), formData);
   };
 
   return (
     <div className={styles.FormWrapper}>
-      {/* <input placeholder="latitude"></input>
-        <input placeholder="longtitude"></input> */}
       <form onSubmit={addEvent} className={styles.form}>
-        <select
-          name="category"
-          id="category-select"
-          onChange={(e) => {
-            setCategory(e.target.value);
-          }}
-          value={category}
-          required
-        >
+        <select name="category" id="category-select" onChange={(e) => setFormData((prev: NewEvent) => ({ ...prev, category: e.target.value }))} value={formData.category} required>
           <option value="">Wybierz kategorię</option>
           <option value="🟢 sport">🟢 Sport</option>
           <option value="🟣 nauka">🟣 Nauka</option>
           <option value="🟡 kultura">🟡 Kultura</option>
         </select>
-        <input
-          placeholder="data"
-          onChange={(e) => {
-            setDate(e.target.value);
-          }}
-          value={date}
-          type="date"
-          required
-        />
-        <input
-          placeholder="godzina"
-          onChange={(e) => {
-            setTime(e.target.value);
-          }}
-          value={time}
-          type="time"
-          required
-        />
-        <textarea
-          placeholder="opis"
-          onChange={(e) => {
-            setDescription(e.target.value);
-          }}
-          value={description}
-          required
-          maxLength={300}
-        />
+        <input onChange={(e) => setFormData((prev: NewEvent) => ({ ...prev, date: e.target.value }))} value={formData.date} type="date" required />
+        <input onChange={(e) => setFormData((prev: NewEvent) => ({ ...prev, time: e.target.value }))} value={formData.time} type="time" required />
+        <textarea onChange={(e) => setFormData((prev: NewEvent) => ({ ...prev, description: e.target.value }))} value={formData.description} required maxLength={300} placeholder="Krótko opisz wydarzenie" />
         <button>Dodaj wydarzenie</button>
       </form>
     </div>

@@ -4,19 +4,18 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import { AuthProvider } from "./providers/global";
+import { GlobalDataProvider } from "./providers/global";
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
 root.render(
   <React.StrictMode>
-    <AuthProvider>
+    <GlobalDataProvider>
       <BrowserRouter>
         <App />
+        
       </BrowserRouter>
-    </AuthProvider>
+    </GlobalDataProvider>
   </React.StrictMode>
 );
 

@@ -1,7 +1,6 @@
 import styles from "./Footer.module.css";
 
-const githubIcon =
-  "https://www.nicepng.com/png/full/178-1787413_outsystems-now-on-github-github-logo-black-background.png";
+const githubIcon = "https://www.nicepng.com/png/full/178-1787413_outsystems-now-on-github-github-logo-black-background.png";
 
 const Footer = () => {
   return (
@@ -9,7 +8,6 @@ const Footer = () => {
       <a href="https://github.com/WojciechLamperski">
         <img src={githubIcon} /> <p>Wojciech Lamperski</p>
       </a>
-
       <a href="https://github.com/szymonwislocki">
         <img src={githubIcon} /> <p>Szymon Wisłocki</p>
       </a>
