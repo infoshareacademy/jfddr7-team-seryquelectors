@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { LandingPage } from "./components/LandingPage/LandingPage";
 import { Home } from "./components/HomePage/Home";

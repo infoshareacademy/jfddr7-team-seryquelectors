@@ -3,7 +3,7 @@ import { LatLngExpression } from "leaflet";
 import { FormEvent, SetStateAction, useContext, useState } from "react";
 import { db } from "../../firebase";
 import { GlobalDataContext } from "../../providers/global";
-import styles from "./AddEventForm.module.css";
+import styles from "./AddEventForm.module.scss";
 
 interface NewEvent {
   name: string;
@@ -52,20 +52,18 @@ const AddEventForm = ({ setSidebar }: Props) => {
   };
 
   return (
-    <div className={styles.FormWrapper}>
-      <form onSubmit={addEvent} className={styles.form}>
-        <select name="category" id="category-select" onChange={(e) => setFormData((prev: NewEvent) => ({ ...prev, category: e.target.value }))} value={formData.category} required>
-          <option value="">Wybierz kategorię</option>
-          <option value="🟢 sport">🟢 Sport</option>
-          <option value="🟣 nauka">🟣 Nauka</option>
-          <option value="🟡 kultura">🟡 Kultura</option>
-        </select>
-        <input onChange={(e) => setFormData((prev: NewEvent) => ({ ...prev, date: e.target.value }))} value={formData.date} type="date" required />
-        <input onChange={(e) => setFormData((prev: NewEvent) => ({ ...prev, time: e.target.value }))} value={formData.time} type="time" required />
-        <textarea onChange={(e) => setFormData((prev: NewEvent) => ({ ...prev, description: e.target.value }))} value={formData.description} required maxLength={300} placeholder="Krótko opisz wydarzenie" />
-        <button>Dodaj wydarzenie</button>
-      </form>
-    </div>
+    <form onSubmit={addEvent} className={styles.addform}>
+      <select className={styles.addform__element} name="category" id="category-select" onChange={(e) => setFormData((prev: NewEvent) => ({ ...prev, category: e.target.value }))} value={formData.category} required>
+        <option value="">Wybierz kategorię</option>
+        <option value="🟢 sport">🟢 Sport</option>
+        <option value="🟣 nauka">🟣 Nauka</option>
+        <option value="🟡 kultura">🟡 Kultura</option>
+      </select>
+      <input className={styles.addform__element} onChange={(e) => setFormData((prev: NewEvent) => ({ ...prev, date: e.target.value }))} value={formData.date} type="date" required />
+      <input className={styles.addform__element} onChange={(e) => setFormData((prev: NewEvent) => ({ ...prev, time: e.target.value }))} value={formData.time} type="time" required />
+      <textarea className={styles.addform__textarea} onChange={(e) => setFormData((prev: NewEvent) => ({ ...prev, description: e.target.value }))} value={formData.description} required maxLength={300} placeholder="Krótko opisz wydarzenie" />
+      <button className={styles.addform__button}>Dodaj wydarzenie</button>
+    </form>
   );
 };
 
