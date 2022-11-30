@@ -4,7 +4,7 @@
   height: 5vh;
   width: 100vw;
   background-color: #232c34;
-  z-index: 10000;
+  z-index: 1;
   color: white;
   justify-content: space-around;
   align-items: center;

@@ -9,12 +9,9 @@
 }
 
 .addform {
-  border: 1px solid white;
-  border-radius: 15px;
-  background-color: App.$primary;
+  @include App.basic-container-styles;
   display: flex;
   flex-direction: column;
-  padding: 15px;
   margin: 2px;
   & * {
     @include basic-elements-styles;

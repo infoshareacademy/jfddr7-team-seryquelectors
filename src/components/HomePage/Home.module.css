@@ -4,6 +4,8 @@
   display: flex;
 }
 .mapWrapper {
+  z-index: 0;
+
   height: 85vh;
   width: 100%;
   filter: rotate(90deg);

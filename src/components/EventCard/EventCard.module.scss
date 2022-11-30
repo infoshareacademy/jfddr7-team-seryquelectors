@@ -1,0 +1,47 @@
+@use "../../App.scss";
+
+.eventcard {
+  @include App.basic-container-styles;
+  margin: 10px 5px;
+  font-size: 16px;
+  &__author {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__description {
+    font-size: 12px;
+  }
+  &__details {
+    font-size: 13px;
+  }
+  &__dateinfo {
+    display: flex;
+    justify-content: space-around;
+    font-size: 14px;
+    width: 100%;
+    background: App.$input-background;
+    border-radius: 8px;
+    margin: 3px;
+  }
+  &__controls {
+    display: flex;
+  }
+  &__button {
+    border-radius: 8px;
+    background-color: transparent;
+    border: 0.5px solid white;
+    padding: 1px;
+    margin: 1px !important;
+    width: 50%;
+    &--join {
+      background: App.$button-over;
+    }
+    &:hover {
+      transition: background 0.5s;
+    }
+  }
+  &__img {
+    height: 16px;
+    padding-right: 3px;
+  }
+}

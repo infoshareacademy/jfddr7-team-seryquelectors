@@ -1,5 +1,5 @@
 import { ReactElement, useContext, useState } from "react";
-import styles from "./EventCard.module.css";
+import styles from "./EventCard.module.scss";
 import { GlobalDataContext } from "../../providers/global";
 import { deleteDoc, doc, DocumentReference, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
@@ -65,33 +65,36 @@ const EventCard = ({ creatorName, category, description, date, time, email, part
 
         <p className={styles.eventcard__description}>{description}</p>
         <div className={styles.eventcard__details}>
-          <p className={styles.eventcard__dateinfo}>{date}</p>
-          <p className={styles.eventcard__dateinfo}>{compareTime ? time : "Trwa!"}</p>
-          <button className={styles.eventcard__button} title="Liczba uczestników i szczegóły" onClick={() => setShowDetails(id)}>
-            <img src={icons[0]} alt="people holding hands" />
-            {participants.length}
-          </button>
-          <button onClick={handleLike} className={styles.eventcard__button} title="Lubię to!">
-            <img src={icons[1]} alt="red heart" />
-            {likes.length}
-          </button>
+          <p className={styles.eventcard__dateinfo}>
+            {date} <span>{compareTime ? time : "Trwa!"}</span>
+          </p>
           {!participants.includes(currentUser.userJson) && email !== user ? (
-            <button onClick={handleJoin} className={styles.eventcard__button}>
-              <img src={icons[2]} alt="waving hand" />
+            <button onClick={handleJoin} className={styles["eventcard__button--join"]}>
+              <img className={styles.eventcard__img} src={icons[2]} alt="waving hand" />
               Dołącz
             </button>
           ) : null}
-          {participants.includes(currentUser.userJson) && email !== user ? (
-            <button onClick={handleLeave} className={styles.eventcard__button}>
-              🚫 Opuść
+          <div className={styles.eventcard__controls}>
+            <button className={styles.eventcard__button} title="Liczba uczestników i szczegóły" onClick={() => setShowDetails(id)}>
+              <img className={styles.eventcard__img} src={icons[0]} alt="people holding hands" />
+              {participants.length}
             </button>
-          ) : null}
-          {email === user ? (
-            <button onClick={handleDelete} className={styles.eventcard__button}>
-              <img src={icons[3]} alt="bin" />
-              Usuń
+            <button onClick={handleLike} className={styles.eventcard__button} title="Lubię to!">
+              <img className={styles.eventcard__img} src={icons[1]} alt="red heart" />
+              {likes.length}
             </button>
-          ) : null}
+            {participants.includes(currentUser.userJson) && email !== user ? (
+              <button onClick={handleLeave} className={styles.eventcard__button}>
+                🚫 Opuść
+              </button>
+            ) : null}
+            {email === user ? (
+              <button onClick={handleDelete} className={styles.eventcard__button}>
+                <img className={styles.eventcard__img} src={icons[3]} alt="bin" />
+                Usuń
+              </button>
+            ) : null}
+          </div>
         </div>
       </div>
     </>

@@ -2,16 +2,10 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { LatLngExpression } from "leaflet";
 import { useContext, useState } from "react";
 import { useEffect } from "react";
-import { Dispatch, SetStateAction } from "react";
 import { db } from "../../firebase";
 import { GlobalDataContext } from "../../providers/global";
 import { icons } from "../icons";
-import styles from "./EventDetails.module.css";
-
-interface Props {
-  id: string;
-  setShowMore: Dispatch<SetStateAction<boolean>>;
-}
+import styles from "./EventDetails.module.scss";
 
 interface UserData {
   avatar: undefined | string;
@@ -63,24 +57,22 @@ const EventDetails = () => {
     });
   }, []);
   return (
-    <div className={styles.mainContainer} onClick={() => setShowDetails(null)}>
+    <div className={styles.background} onClick={() => setShowDetails(null)}>
       <div className={styles.window}>
-        <div className={styles.author}>
+        <div className={styles.window__author}>
           <p>Autor:</p>
           {details.name}
-          <p className={styles.aboutMe}>O mnie: {authorDescription}</p>
+          <p className={styles.window__aboutme}>O mnie: {authorDescription}</p>
         </div>
-        <div className={styles.category}>
-          <p>Kategoria</p>
-          {details.category}
-        </div>
-        <div className={styles.description}>
+        <div className={styles.window__description}>
+          <div className={styles.window__category}>Kategoria: {details.category}</div>
+
           <p>Opis wydarzenia:</p>
           {details.description}
         </div>
-        <div className={styles.participants}>
+        <div className={styles.window__participants}>
           Uczestnicy:
-          <div className={styles.participantsList}>
+          <div className={styles.window__list}>
             {/* get stringified participants data, parse it and return as name + email */}
             {details.participants?.map((el, i) => {
               const parsedUserJSON = JSON.parse(el) as UserJSON;
@@ -92,17 +84,17 @@ const EventDetails = () => {
             })}
           </div>{" "}
         </div>
-        <div className={styles.date}>
+        <div className={styles.window__date}>
           <p>Data startu:</p>
           {details.date}
         </div>
-        <div className={styles.time}>
+        <div className={styles.window__time}>
           <p>Godzina startu:</p>
           {new Date().getTime() < new Date(details.date + " " + details.time).getTime() ? details.time : "Wydarzenie jest w trakcie!"}
         </div>
-        <div className={styles.likes}>
+        <div className={styles.window__likes}>
           <p>
-            <img src={icons[1]} alt="heart icon" />
+            <img className={styles.window__img} src={icons[1]} alt="heart icon" />
             Polubienia:
           </p>
           {details.likes?.length}
