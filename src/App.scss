@@ -1,0 +1,17 @@
+$primary: #232c34;
+$input-background: #303c46;
+$button-over: #5ca85c;
+$button-dead: #495a68;
+
+@mixin basic-container-styles {
+  background-color: $primary;
+  border: 1px solid white;
+  border-radius: 15px;
+  padding: 12px;
+}
+
+@mixin center-childs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

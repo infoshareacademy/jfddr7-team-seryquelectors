@@ -1,0 +1,45 @@
+@use "../HomePage/Home.module.scss";
+@use "../../App.scss";
+
+.navbar {
+  background-color: App.$primary;
+  height: Home.$navbar-height;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 6px 2px App.$primary;
+  width: 100vw;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  &__logo {
+    font-weight: 500;
+    letter-spacing: 3px;
+    @include App.center-childs;
+  }
+  &__avatar {
+    border-radius: 50%;
+    padding: 4px;
+    background-color: App.$input-background;
+    border: 0.5px solid white;
+    width: 15%;
+  }
+  &__logout {
+    align-self: center;
+    margin-right: 10px;
+    z-index: 1;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__user {
+    position: absolute;
+    top: calc(Home.$navbar-height / 5);
+    right: 0;
+    gap: 5px;
+    @include App.center-childs;
+  }
+}

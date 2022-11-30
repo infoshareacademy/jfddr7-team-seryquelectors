@@ -1,26 +1,23 @@
 import { Marker, useMapEvents, Tooltip } from "react-leaflet";
 import { useContext, useState } from "react";
-import { AuthContext } from "../../providers/global";
+
 import { DocumentData } from "firebase/firestore";
 import { greenIcon, goldIcon, violetIcon } from "../../images/Icon";
-import EventDetails from "../EventDetails/EventDetails";
+import { GlobalDataContext } from "../../providers/global";
 
 const LocationMarker = () => {
-  const { position, setPosition, allEvents, setShowForm, user, filter } =
-    useContext(AuthContext);
-  const [toggleMarker, setToggleMarker] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const { setIsClosed, position, setSidebar, setPosition, allEvents, showForm, setShowForm, user, filter, setShowDetails } = useContext(GlobalDataContext);
   const map = useMapEvents({
     click(e) {
-      console.log(e);
       setPosition([e.latlng.lat, e.latlng.lng]);
-      setToggleMarker(true);
       setShowForm(true);
+      setSidebar("addEvent");
+      setIsClosed(true);
       map.flyTo(e.latlng, map.getZoom());
     },
   });
   const sortedEvents =
-    filter == "none"
+    filter === "none"
       ? allEvents
       : allEvents
           .filter((e: DocumentData) => e.category.indexOf(filter) > -1)
@@ -37,26 +34,22 @@ const LocationMarker = () => {
           eventIcon = goldIcon;
         }
         return (
-          <Marker
-            key={i}
-            position={e.position}
-            icon={eventIcon}
-            eventHandlers={{ click: () => setVisible(true) }}
-          >
+          <Marker key={i} position={e.position} icon={eventIcon} eventHandlers={{ click: () => setShowDetails(e.id) }}>
             <Tooltip>
-              <>
-                <b>
-                  {e.name} {e.email === user ? <span>(Ty)</span> : null} -{" "}
-                  {e.category}
-                </b>
-                <br />
-                {e.description}
-              </>
+              {e.name}
+              <br />
+              {e.category}
+              <br />
+              {e.date}
+              <br />
+              {e.time}
+              <br />
+              Kliknij po szczegóły
             </Tooltip>
           </Marker>
         );
       })}
-      {toggleMarker ? <Marker position={position}></Marker> : null}
+      {showForm ? <Marker position={position}></Marker> : null}
     </>
   );
 };

@@ -1,0 +1,8 @@
+$footer-height: 35px;
+$navbar-height: 80px;
+
+.map {
+  z-index: 0;
+  height: calc(100vh - $footer-height - $navbar-height);
+  width: 100%;
+}
