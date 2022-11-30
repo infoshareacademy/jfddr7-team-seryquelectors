@@ -62,3 +62,7 @@ Autorzy:
 [Magdalena Zalewska](https://github.com/magdalena-zalewska) •
 [Szymon Wisłocki](https://github.com/szymonwislocki) •
 [Wojciech Lamperski](https://github.com/WojciechLamperski)
+
+Użyte technologie:
+
+![logosy](https://user-images.githubusercontent.com/111438136/204921233-688f5a0b-0517-4e4c-bf69-5c375c95738a.png)
