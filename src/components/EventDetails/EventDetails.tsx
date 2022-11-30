@@ -67,7 +67,7 @@ const EventDetails = () => {
         <div className={styles.window__description}>
           <div className={styles.window__category}>Kategoria: {details.category}</div>
 
-          <p>Opis wydarzenia:</p>
+          <p className={styles.window__categoryheader}>Opis wydarzenia:</p>
           {details.description}
         </div>
         <div className={styles.window__participants}>

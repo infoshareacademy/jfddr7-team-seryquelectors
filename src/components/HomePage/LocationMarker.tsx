@@ -6,13 +6,13 @@ import { greenIcon, goldIcon, violetIcon } from "../../images/Icon";
 import { GlobalDataContext } from "../../providers/global";
 
 const LocationMarker = () => {
-  const { position, setPosition, allEvents, setShowForm, user, filter, setShowDetails } = useContext(GlobalDataContext);
-  const [toggleMarker, setToggleMarker] = useState(false);
+  const { setIsClosed, position, setSidebar, setPosition, allEvents, showForm, setShowForm, user, filter, setShowDetails } = useContext(GlobalDataContext);
   const map = useMapEvents({
     click(e) {
       setPosition([e.latlng.lat, e.latlng.lng]);
-      setToggleMarker(true);
       setShowForm(true);
+      setSidebar("addEvent");
+      setIsClosed(true);
       map.flyTo(e.latlng, map.getZoom());
     },
   });
@@ -36,18 +36,20 @@ const LocationMarker = () => {
         return (
           <Marker key={i} position={e.position} icon={eventIcon} eventHandlers={{ click: () => setShowDetails(e.id) }}>
             <Tooltip>
-              <>
-                <b>
-                  {e.name} {e.email === user ? <span>(Ty)</span> : null} - {e.category}
-                </b>
-                <br />
-                {e.description}
-              </>
+              {e.name}
+              <br />
+              {e.category}
+              <br />
+              {e.date}
+              <br />
+              {e.time}
+              <br />
+              Kliknij po szczegóły
             </Tooltip>
           </Marker>
         );
       })}
-      {toggleMarker ? <Marker position={position}></Marker> : null}
+      {showForm ? <Marker position={position}></Marker> : null}
     </>
   );
 };

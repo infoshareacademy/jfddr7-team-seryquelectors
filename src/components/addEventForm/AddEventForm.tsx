@@ -1,6 +1,6 @@
 import { collection, doc, DocumentReference, setDoc } from "firebase/firestore";
-import { LatLngExpression } from "leaflet";
-import { FormEvent, SetStateAction, useContext, useState } from "react";
+import { LatLngExpression, setOptions } from "leaflet";
+import { FormEvent, SetStateAction, useContext, useEffect, useState } from "react";
 import { db } from "../../firebase";
 import { GlobalDataContext } from "../../providers/global";
 import styles from "./AddEventForm.module.scss";
@@ -17,11 +17,9 @@ interface NewEvent {
   likes: string[];
   id: string;
 }
-interface Props {
-  setSidebar: (arg: SetStateAction<string>) => void;
-}
-const AddEventForm = ({ setSidebar }: Props) => {
-  const { position, user, setShowForm, currentUser } = useContext(GlobalDataContext);
+
+const AddEventForm = () => {
+  const { position, setSidebar, user, setShowForm, currentUser } = useContext(GlobalDataContext);
 
   //suggest to add event which starts in one hour
   const currentDate = `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`;
@@ -43,6 +41,10 @@ const AddEventForm = ({ setSidebar }: Props) => {
     likes: [],
     id: id,
   });
+
+  useEffect(() => {
+    setFormData((prev) => ({ ...prev, position: position }));
+  }, [position]);
 
   const addEvent = async (e: FormEvent): Promise<void> => {
     e.preventDefault();

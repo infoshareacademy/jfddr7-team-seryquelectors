@@ -23,6 +23,10 @@ interface AuthContextState {
   setFilter: (a: string) => void;
   showDetails: string | null;
   setShowDetails: (a: string | null) => void;
+  sidebar: string;
+  setSidebar: (a: string) => void;
+  isClosed: boolean;
+  setIsClosed: (arg: boolean) => void;
 }
 
 interface UserData {
@@ -40,7 +44,6 @@ interface AuthProviderProps {
 export const GlobalDataContext = createContext({} as AuthContextState);
 
 export const GlobalDataProvider: FC<AuthProviderProps> = ({ children }) => {
-  
   const [user, setUser] = useState<string | null>("");
   const [position, setPosition] = useState<LatLngExpression>([54.352024, 18.646639]);
   const [allEvents, setAllEvents] = useState<object[]>([]);
@@ -50,6 +53,8 @@ export const GlobalDataProvider: FC<AuthProviderProps> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<UserData>({} as UserData);
   const [filter, setFilter] = useState<string>("none");
   const [showDetails, setShowDetails] = useState<string | null>(null);
+  const [sidebar, setSidebar] = useState<string>("upcommingEvents");
+  const [isClosed, setIsClosed] = useState<boolean>(false);
 
   onSnapshot(collection(db, "events"), (qS) => {
     let events: object[] = [];
@@ -94,6 +99,10 @@ export const GlobalDataProvider: FC<AuthProviderProps> = ({ children }) => {
         setFilter,
         setShowDetails,
         showDetails,
+        sidebar,
+        setSidebar,
+        isClosed,
+        setIsClosed,
       }}
     >
       {children}

@@ -11,6 +11,7 @@
 .addform {
   @include App.basic-container-styles;
   display: flex;
+  height: 250px;
   flex-direction: column;
   margin: 2px;
   & * {
@@ -36,6 +37,7 @@
   &__textarea {
     box-sizing: border-box;
     width: 100%;
+    height: 33%;
     resize: none;
     background: App.$input-background;
     &::placeholder {

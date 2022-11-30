@@ -1,12 +1,22 @@
 @use "../../App.scss";
 
+@mixin event-card-button {
+  border-radius: 8px;
+  background-color: transparent;
+  border: 0.5px solid white;
+  padding: 1px;
+  margin: 1px;
+  width: 50%;
+}
+
 .eventcard {
   @include App.basic-container-styles;
-  margin: 10px 5px;
+  margin: 10px 0;
   font-size: 16px;
   &__author {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
   }
   &__description {
     font-size: 12px;
@@ -16,28 +26,36 @@
   }
   &__dateinfo {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 3px 20px;
     font-size: 14px;
     width: 100%;
     background: App.$input-background;
     border-radius: 8px;
-    margin: 3px;
+    margin: 5px 0;
   }
   &__controls {
     display: flex;
+    width: 101%;
   }
   &__button {
-    border-radius: 8px;
-    background-color: transparent;
-    border: 0.5px solid white;
-    padding: 1px;
-    margin: 1px !important;
-    width: 50%;
+    @include event-card-button;
     &--join {
+      @include event-card-button;
+      width: 100%;
       background: App.$button-over;
+      &:hover {
+        transition: background 0.5s;
+        background: App.$input-background;
+      }
+    }
+    &--liked {
+      @include event-card-button;
+      background: palevioletred;
     }
     &:hover {
       transition: background 0.5s;
+      background: App.$button-over;
     }
   }
   &__img {

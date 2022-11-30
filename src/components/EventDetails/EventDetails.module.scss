@@ -43,6 +43,9 @@
     margin-top: 5px;
     overflow: scroll;
   }
+  &__categoryheader {
+    margin-bottom: 15px;
+  }
   &__category {
     @include field-styles;
     position: absolute;

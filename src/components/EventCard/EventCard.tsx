@@ -79,7 +79,7 @@ const EventCard = ({ creatorName, category, description, date, time, email, part
               <img className={styles.eventcard__img} src={icons[0]} alt="people holding hands" />
               {participants.length}
             </button>
-            <button onClick={handleLike} className={styles.eventcard__button} title="Lubię to!">
+            <button onClick={handleLike} className={likes.includes(user as string) ? styles["eventcard__button--liked"] : styles["eventcard__button"]} title="Lubię to!">
               <img className={styles.eventcard__img} src={icons[1]} alt="red heart" />
               {likes.length}
             </button>

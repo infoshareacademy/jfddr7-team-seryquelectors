@@ -1,12 +1,9 @@
-import { ReactElement, SetStateAction } from "react";
+import { ReactElement, SetStateAction, useContext } from "react";
 import { BurgerClose as Icon } from "react-icons-animated";
+import { GlobalDataContext } from "../../providers/global";
 
-interface Props {
-  isClosed: boolean;
-  setIsClosed: (arg: SetStateAction<boolean>) => void;
-}
-
-const Hamburger = ({ isClosed, setIsClosed }: Props): ReactElement => {
+const Hamburger = (): ReactElement => {
+  const { isClosed, setIsClosed } = useContext(GlobalDataContext);
   return (
     <button
       onClick={() => setIsClosed(!isClosed)}
