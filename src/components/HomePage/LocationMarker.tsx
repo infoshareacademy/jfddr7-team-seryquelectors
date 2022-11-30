@@ -17,7 +17,7 @@ const LocationMarker = () => {
     },
   });
   const sortedEvents =
-    filter == "none"
+    filter === "none"
       ? allEvents
       : allEvents
           .filter((e: DocumentData) => e.category.indexOf(filter) > -1)

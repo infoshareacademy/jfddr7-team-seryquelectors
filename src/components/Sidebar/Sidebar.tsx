@@ -15,7 +15,7 @@ export const Sidebar = () => {
   const userEvents = allEvents.filter((e: DD) => e.email === user);
   const participateEvents = allEvents.filter((e: DD) => e.participants.includes(currentUser.userJson) && e.email !== user);
   const otherEvents =
-    filter == "none"
+    filter === "none"
       ? allEvents
           .filter((e: DD) => !e.participants.includes(currentUser.userJson) || e.email === user)
           .sort((a: DD, b: DD) => {

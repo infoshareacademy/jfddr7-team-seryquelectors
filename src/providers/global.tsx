@@ -40,6 +40,7 @@ interface AuthProviderProps {
 export const GlobalDataContext = createContext({} as AuthContextState);
 
 export const GlobalDataProvider: FC<AuthProviderProps> = ({ children }) => {
+  
   const [user, setUser] = useState<string | null>("");
   const [position, setPosition] = useState<LatLngExpression>([54.352024, 18.646639]);
   const [allEvents, setAllEvents] = useState<object[]>([]);

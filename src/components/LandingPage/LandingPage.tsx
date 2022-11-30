@@ -1,5 +1,5 @@
 import styles from "./LandingPage.module.css";
-import React, { ChangeEvent, FormEvent, FormEventHandler, useContext, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -42,7 +42,7 @@ export const LandingPage = () => {
         setUser(email);
       })
       .catch(({ code }) => {
-        if (code == "auth/wrong-password") {
+        if (code === "auth/wrong-password") {
           setError(ERRORS.INVALID_INPUTS);
         }
       });
@@ -58,7 +58,7 @@ export const LandingPage = () => {
           addUser();
         })
         .catch(({ code }) => {
-          if (code == "auth/email-already-in-use") {
+          if (code === "auth/email-already-in-use") {
             setError(ERRORS.EMAIL_IN_USE);
           } else {
             setError(ERRORS.IN_PROMISE_ERROR);
@@ -153,11 +153,10 @@ export const LandingPage = () => {
               ) : null}
             </>
           ) : null}
-
           <button>{showLogin ? "Zaloguj" : "Zarejestruj"}</button>
-          <a onClick={() => setShowLogin(!showLogin)} className={styles.toogleButton}>
+          <p onClick={() => setShowLogin(!showLogin)} className={styles.toggleButton}>
             {showLogin ? "Nie masz konta? Zarejestruj się" : "Masz już konto? Zaloguj się"}
-          </a>
+          </p>
         </form>
         {error ? <p className={styles.error}>{error}</p> : null}
       </div>

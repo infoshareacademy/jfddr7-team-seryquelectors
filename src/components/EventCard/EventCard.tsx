@@ -57,37 +57,37 @@ const EventCard = ({ creatorName, category, description, date, time, email, part
 
   return (
     <>
-      <div className={styles.eventCard}>
-        <p className={styles.eventName}>
+      <div className={styles.eventcard}>
+        <p className={styles.eventcard__author}>
           {creatorName} {email === user && other ? "(Ty)" : null}
           <span className={styles.category}>{category}</span>
         </p>
 
-        <p className={styles.description}>{description}</p>
-        <div className={styles.detailsWrapper}>
-          <p className={styles.date}>{date}</p>
-          <p className={styles.time}>{compareTime ? time : "Trwa!"}</p>
-          <button className={styles.cardButton} title="Liczba uczestników i szczegóły" onClick={() => setShowDetails(id)}>
+        <p className={styles.eventcard__description}>{description}</p>
+        <div className={styles.eventcard__details}>
+          <p className={styles.eventcard__dateinfo}>{date}</p>
+          <p className={styles.eventcard__dateinfo}>{compareTime ? time : "Trwa!"}</p>
+          <button className={styles.eventcard__button} title="Liczba uczestników i szczegóły" onClick={() => setShowDetails(id)}>
             <img src={icons[0]} alt="people holding hands" />
             {participants.length}
           </button>
-          <button onClick={handleLike} className={styles.cardButton} title="Lubię to!">
+          <button onClick={handleLike} className={styles.eventcard__button} title="Lubię to!">
             <img src={icons[1]} alt="red heart" />
             {likes.length}
           </button>
           {!participants.includes(currentUser.userJson) && email !== user ? (
-            <button onClick={handleJoin} className={styles.cardButton}>
+            <button onClick={handleJoin} className={styles.eventcard__button}>
               <img src={icons[2]} alt="waving hand" />
               Dołącz
             </button>
           ) : null}
           {participants.includes(currentUser.userJson) && email !== user ? (
-            <button onClick={handleLeave} className={styles.cardButton}>
+            <button onClick={handleLeave} className={styles.eventcard__button}>
               🚫 Opuść
             </button>
           ) : null}
           {email === user ? (
-            <button onClick={handleDelete} className={styles.cardButton}>
+            <button onClick={handleDelete} className={styles.eventcard__button}>
               <img src={icons[3]} alt="bin" />
               Usuń
             </button>
