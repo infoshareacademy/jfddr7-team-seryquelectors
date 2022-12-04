@@ -2,7 +2,7 @@
 .missing {
   background-color: #394653;
   height: 100vh;
-  @include App.center-childs;
+  @extend %center-childs;
   flex-direction: column;
   &__button {
     background-color: App.$button-dead;
@@ -23,7 +23,7 @@
     letter-spacing: 4px;
     font-size: 35px;
     text-align: center;
-    @include App.center-childs;
+    @extend %center-childs;
   }
   &__icon {
     margin-right: 10px;

@@ -22,7 +22,7 @@ const AddEventForm = () => {
   const { position, setSidebar, user, setShowForm, currentUser } = useContext(GlobalDataContext);
 
   //suggest to add event which starts in one hour
-  const currentDate = `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`;
+  const currentDate = `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate() < 10 && "0"}${new Date().getDate()}`;
   let initTime: number | string = new Date().getTime();
   // slice stands for throw out seconds from time string
   initTime = new Date(initTime + 3600000).toLocaleTimeString().slice(0, -3);

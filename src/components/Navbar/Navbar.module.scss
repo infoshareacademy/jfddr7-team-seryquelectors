@@ -18,7 +18,8 @@
   &__logo {
     font-weight: 500;
     letter-spacing: 3px;
-    @include App.center-childs;
+    @extend %center-childs;
+
   }
   &__avatar {
     border-radius: 50%;
@@ -40,6 +41,6 @@
     top: calc(Home.$navbar-height / 5);
     right: 0;
     gap: 5px;
-    @include App.center-childs;
+    @extend %center-childs;
   }
 }

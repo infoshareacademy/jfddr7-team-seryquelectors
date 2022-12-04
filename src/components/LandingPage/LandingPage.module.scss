@@ -1,16 +1,18 @@
 @use "../HomePage/Home.module.scss";
 @use "../../App.scss";
 
-@mixin button-behav {
+$button: #566294;
+
+%button-behav {
   &:hover {
     cursor: pointer;
   }
 }
 
-@mixin basic-input-styles {
+@mixin basic-input-styles($col, $bgcol) {
   border-radius: 15px;
-  color: black;
-  background: rgb(249, 249, 255);
+  color: $col;
+  background: $bgcol;
   border: none;
   padding: 6px;
   margin-top: 10px;
@@ -26,7 +28,7 @@
   background-size: cover;
   overflow: scroll;
   .infos {
-    @include App.center-childs;
+    @extend %center-childs;
     width: 60%;
     padding-top: 5px;
     box-sizing: border-box;
@@ -49,15 +51,14 @@
   &__account {
     min-width: 40%;
     box-sizing: border-box;
-    @include App.center-childs;
+    @extend %center-childs;
     flex-direction: column;
   }
 }
 
 .formsection {
-  @include App.center-childs;
+  @extend %center-childs;
   flex-direction: column;
-
   width: 50%;
   &__header {
     text-align: center;
@@ -70,31 +71,27 @@
   }
   &__input {
     width: 30vw;
-    @include basic-input-styles;
+    @include basic-input-styles(black, rgb(249, 249, 255));
     &--textarea {
-      @include basic-input-styles;
+      @include basic-input-styles(black, rgb(249, 249, 255));
       width: 30vw;
       resize: none;
       font-size: 12px;
     }
   }
   &__button {
-    @include basic-input-styles;
+    @include basic-input-styles(white, $button);
     width: 30vw;
-    background-color: #566294;
-    color: white;
     margin-top: 25px;
     &--avatar {
-      @include basic-input-styles;
-      background: #566294;
-      color: white;
+      @include basic-input-styles(white, $button);
       width: 50%;
       font-size: 13px;
       border: none;
       text-align: center;
-      @include button-behav;
+      @extend %button-behav;
     }
-    @include button-behav;
+    @extend %button-behav;
   }
   &__errormessage {
     background: tomato;
@@ -107,7 +104,7 @@
     font-weight: 700;
     font-size: 16px;
     text-align: center;
-    @include button-behav;
+    @extend %button-behav;
   }
   &__registerfields {
     display: flex;

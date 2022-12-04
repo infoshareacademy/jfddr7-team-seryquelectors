@@ -1,6 +1,6 @@
 @use "../../App.scss";
 
-@mixin event-card-button {
+%event-card-button {
   border-radius: 8px;
   background-color: transparent;
   border: 0.5px solid white;
@@ -10,7 +10,7 @@
 }
 
 .eventcard {
-  @include App.basic-container-styles;
+  @extend %basic-container-styles;
   margin: 10px 0;
   font-size: 16px;
   &__author {
@@ -39,9 +39,9 @@
     width: 101%;
   }
   &__button {
-    @include event-card-button;
+    @extend %event-card-button;
     &--join {
-      @include event-card-button;
+      @extend %event-card-button;
       width: 100%;
       background: App.$button-over;
       &:hover {
@@ -50,7 +50,7 @@
       }
     }
     &--liked {
-      @include event-card-button;
+      @extend %event-card-button;
       background: palevioletred;
     }
     &:hover {

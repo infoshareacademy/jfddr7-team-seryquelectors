@@ -1,7 +1,7 @@
 @use "../../App.scss";
 @use "../HomePage/Home.module.scss";
 
-@mixin sidebar-elements-styles {
+%sidebar-elements-styles {
   border-radius: 10px;
   padding: 5px;
   border: 0.5px solid white;
@@ -20,30 +20,30 @@
   display: flex;
   flex-direction: column;
   .options {
-    @include sidebar-elements-styles;
+    @extend %sidebar-elements-styles;
     display: flex;
     flex-direction: column;
     margin: 20px 0;
     &__button {
-      @include sidebar-elements-styles;
+      @extend %sidebar-elements-styles;
       background: App.$input-background;
       &:hover {
         background: App.$primary;
       }
       &--add {
-        @include sidebar-elements-styles;
+        @extend %sidebar-elements-styles;
         font-weight: 800;
         background-color: #1f6d2d;
       }
       &--active {
-        @include sidebar-elements-styles;
+        @extend %sidebar-elements-styles;
         background: App.$button-over;
       }
     }
   }
   .events {
     &__view {
-      @include sidebar-elements-styles;
+      @extend %sidebar-elements-styles;
       display: flex;
       flex-direction: column;
       background-color: App.$primary;
@@ -53,7 +53,7 @@
       padding-top: 5px;
     }
     &__select {
-      @include sidebar-elements-styles;
+      @extend %sidebar-elements-styles;
       outline: none;
       font-size: 14px;
       background-color: transparent;

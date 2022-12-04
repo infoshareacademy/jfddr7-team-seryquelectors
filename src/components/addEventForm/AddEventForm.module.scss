@@ -1,6 +1,6 @@
 @use "../../App.scss";
 
-@mixin basic-elements-styles {
+%basic-elements-styles {
   margin: 5px;
   padding: 5px;
   border-radius: 3px;
@@ -9,13 +9,13 @@
 }
 
 .addform {
-  @include App.basic-container-styles;
+  @extend %basic-container-styles;
   display: flex;
   height: 250px;
   flex-direction: column;
   margin: 2px;
   & * {
-    @include basic-elements-styles;
+    @extend %basic-elements-styles;
   }
   &__button {
     font-weight: 300;

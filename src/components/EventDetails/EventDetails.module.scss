@@ -13,7 +13,7 @@
   z-index: 2;
 }
 
-@mixin field-styles {
+%field-styles {
   background: App.$input-background;
   margin: 10px 15px;
   border-radius: 8px;
@@ -21,7 +21,7 @@
 }
 
 .window {
-  @include App.basic-container-styles;
+  @extend %basic-container-styles;
   border: none;
   position: relative;
   bottom: 50px;
@@ -35,7 +35,7 @@
     "desc desc parti"
     "date time likes";
   &__author {
-    @include field-styles;
+    @extend %field-styles;
     grid-area: author;
     height: 100px;
   }
@@ -47,7 +47,7 @@
     margin-bottom: 15px;
   }
   &__category {
-    @include field-styles;
+    @extend %field-styles;
     position: absolute;
     top: -5px;
     right: -10px;
@@ -57,14 +57,14 @@
     width: 160px;
   }
   &__description {
-    @include field-styles;
+    @extend %field-styles;
     position: relative;
     grid-area: desc;
     height: 200px;
     overflow: scroll;
   }
   &__participants {
-    @include field-styles;
+    @extend %field-styles;
     grid-area: parti;
     height: 200px;
     overflow: scroll;
@@ -84,15 +84,15 @@
     }
   }
   &__date {
-    @include field-styles;
+    @extend %field-styles;
     grid-area: date;
   }
   &__time {
-    @include field-styles;
+    @extend %field-styles;
     grid-area: time;
   }
   &__likes {
-    @include field-styles;
+    @extend %field-styles;
     grid-area: likes;
   }
   &__img {
