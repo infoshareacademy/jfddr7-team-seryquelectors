@@ -14,7 +14,7 @@ GoGather nie zostało stworozne z myślą o wielkich eventach tworzonych przed d
 
 Z pomocą GoGather utworzysz łatwo spontaniczne wydarzenie – wypad do kina, na plażę, a może ćwiczenia speakingu z angielskiego? Służymy pomocą.
 
-Zobacz, jak to działa na: [gogather.netlify.app](https://gogather.netlify.app)
+Zobacz, jak to działa na: [https://gogather-app.netlify.app](https://gogather-app.netlify.app)
 lub rzuć okiem na poniższą prezentację...
 
 ---
