@@ -166,6 +166,19 @@
   margin-top: var(--font-size-medium);
   resize: none;
   outline: transparent;
+
+  color: white;
+  background-color: transparent;
+  font-size: var(--font-size-medium);
+  border: 1px solid white;
+  box-sizing: border-box;
+  padding: 6px;
+  margin-top: 20px;
+  font-weight: 300;
+}
+
+.textarea::placeholder {
+  color: white;
 }
 
 .textarea:focus {
@@ -175,6 +188,14 @@
 form .addImage {
   display: flex;
   width: 100%;
+  position: relative;
+  color: white;
+  background-color: transparent;
+  font-size: var(--font-size-medium);
+  border: none;
+  box-sizing: border-box;
+  font-weight: 300;
+  justify-content: space-between;
 }
 
 form .addImage input,
@@ -188,16 +209,17 @@ form .addImage input:active {
   font-weight: 300;
   min-width: none;
   font-size: var(--font-size-medium);
+  position: relative;
+  box-sizing: border-box;
 }
 
 form .addImage img {
   margin-top: 5px;
   position: relative;
-  width: var(--font-size-large);
-  height: var(--font-size-large);
+  width: calc(var(--font-size-large) + 10px);
+  height: calc(var(--font-size-large) + 10px);
   border: 2px solid #394653;
   border-radius: 50%;
-  padding: 5px;
 }
 
 form .uploadAvatar {
