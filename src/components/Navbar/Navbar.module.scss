@@ -10,23 +10,34 @@
   z-index: 1;
   box-shadow: 0 0 6px 2px App.$primary;
   width: 100vw;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  &::-webkit-scrollbar {
-    display: none;
+  @extend %hidden-scrollbar;
+  &__switch {
+    width: 30%;
+    padding: 25px;
   }
   &__logo {
     font-weight: 500;
     letter-spacing: 3px;
+    font-size: max(12px, 2vw);
+    width: 30%;
     @extend %center-childs;
-
+  }
+  &__user {
+    top: calc(Home.$navbar-height / 5);
+    right: max(12vw);
+    gap: 1vw;
+    display: flex;
+    justify-content: flex-end;
+    width: 30%;
+    font-size: clamp(12px, 3vw, 20px);
+    @extend %center-childs;
   }
   &__avatar {
     border-radius: 50%;
     padding: 4px;
     background-color: App.$input-background;
     border: 0.5px solid white;
-    width: 15%;
+    width: clamp(20px, 15%, Home.$navbar-height - 15px);
   }
   &__logout {
     align-self: center;
@@ -35,12 +46,5 @@
     &:hover {
       cursor: pointer;
     }
-  }
-  &__user {
-    position: absolute;
-    top: calc(Home.$navbar-height / 5);
-    right: 0;
-    gap: 5px;
-    @extend %center-childs;
   }
 }

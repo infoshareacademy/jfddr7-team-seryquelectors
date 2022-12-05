@@ -94,12 +94,12 @@ const EventDetails = () => {
         </div>
         <div className={styles.window__likes}>
           <p>
-            <img className={styles.window__img} src={icons[1]} alt="heart icon" />
-            Polubienia:
+            <img className={styles.window__img} src={icons[1]} alt="heart icon" /> Polubienia:
           </p>
           {details.likes?.length}
         </div>
       </div>
+      <p className={styles.exit}>Naciśnij gdziekolwiek poza kartą, aby wyjść.</p>
     </div>
   );
 };

@@ -8,9 +8,12 @@ const Hamburger = (): ReactElement => {
     <button
       onClick={() => setIsClosed(!isClosed)}
       style={{
-        margin: " 0px  0px  0px 20px ",
+        width: "60%",
+        height: "100%",
+        padding: "10px",
         background: "transparent",
         border: "none",
+        cursor: "pointer",
       }}
     >
       <Icon isClosed={isClosed} />

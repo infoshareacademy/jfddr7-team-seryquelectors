@@ -42,6 +42,7 @@
   &__aboutme {
     margin-top: 5px;
     overflow: scroll;
+    @extend %hidden-scrollbar;
   }
   &__categoryheader {
     margin-bottom: 15px;
@@ -62,12 +63,14 @@
     grid-area: desc;
     height: 200px;
     overflow: scroll;
+    @extend %hidden-scrollbar;
   }
   &__participants {
     @extend %field-styles;
     grid-area: parti;
     height: 200px;
     overflow: scroll;
+    @extend %hidden-scrollbar;
   }
   &__list {
     margin-top: 8px;
@@ -97,5 +100,23 @@
   }
   &__img {
     height: 13px;
+  }
+}
+
+.exit {
+  position: absolute;
+  bottom: 3vw;
+  background: rgb(65, 65, 65);
+  border-radius: 10px;
+  padding: 5px;
+}
+
+@media screen and (max-width: 375px) {
+  .window {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    margin: 0 5px;
+    font-size: 14px;
   }
 }

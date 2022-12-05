@@ -12,13 +12,14 @@
 .sidebar {
   position: absolute;
   margin-left: 5px;
-  width: 350px;
+  width: 365px;
   background-color: transparent;
   margin-top: Home.$navbar-height;
   max-height: calc(100vh - Home.$navbar-height - 20px);
-  overflow: scroll;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  @extend %hidden-scrollbar;
   .options {
     @extend %sidebar-elements-styles;
     display: flex;
