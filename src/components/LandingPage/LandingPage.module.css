@@ -196,12 +196,15 @@ form .addImage {
   box-sizing: border-box;
   font-weight: 300;
   justify-content: space-between;
+  align-items: center;
+  align-content: center;
 }
 
 form .addImage input,
 form .addImage input:focus,
 form .addImage input:hover,
 form .addImage input:active {
+  max-width: 280px;
   margin: 0;
   padding: 0;
   margin-top: 10px;
@@ -223,12 +226,14 @@ form .addImage img {
 }
 
 form .uploadAvatar {
+  align-self: center;
   border: none;
   position: relative;
+  text-align: center;
   font-weight: 100;
-  width: 50%;
+  width: 100%;
   font-size: var(--font-size-medium);
-  background-color: #7f859e;
+  background-color: rgba(127, 133, 158, 0.9);
   color: white;
   margin: 0;
   padding: 2px;
@@ -259,15 +264,10 @@ form .uploadAvatar:hover {
   }
 }
 
-/* 640px and below, the flex changes from row to column */
+/* 960px and below,
+  the flex changes from row to column */
 
-@media (max-width: 640px) {
-  :root {
-    --font-size-large: 22px;
-    --font-size-medium: 14.5px;
-    --font-size-small: 12.5px;
-  }
-
+@media (max-width: 960px) {
   .about {
     margin-top: 20px;
   }
@@ -314,6 +314,14 @@ form .uploadAvatar:hover {
 
   .formWrapper h2 {
     max-width: 90%;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --font-size-large: 22px;
+    --font-size-medium: 14.5px;
+    --font-size-small: 12.5px;
   }
 }
 

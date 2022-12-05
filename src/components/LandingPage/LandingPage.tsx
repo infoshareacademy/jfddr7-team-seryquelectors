@@ -136,7 +136,7 @@ export const LandingPage = () => {
           </>
         ) : (
           <>
-            <h2>Proszę zarejestruj się</h2>
+            {/* <h2>Proszę zarejestruj się</h2> */}
             <form onSubmit={handleRegister}>
               <input
                 type="email"
