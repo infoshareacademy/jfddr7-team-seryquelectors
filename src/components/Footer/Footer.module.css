@@ -1,6 +1,6 @@
 .footer {
   display: flex;
-  position: relative;
+  position: fixed;
   height: 5vh;
   width: 100vw;
   background-color: #232c34;
