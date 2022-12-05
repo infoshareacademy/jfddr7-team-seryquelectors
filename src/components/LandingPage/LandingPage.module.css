@@ -4,6 +4,10 @@
   --font-size-small: 16px;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .wrapper {
   background-color: #394653;
   min-height: 95vh;
@@ -217,6 +221,7 @@ form .addImage input:active {
 }
 
 form .addImage img {
+  box-sizing: border-box;
   margin-top: 5px;
   position: relative;
   width: calc(var(--font-size-large) + 10px);
