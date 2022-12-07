@@ -1,8 +1,9 @@
+import { ReactElement } from "react";
 import styles from "./Footer.module.scss";
 
 const githubIcon = "https://www.nicepng.com/png/full/178-1787413_outsystems-now-on-github-github-logo-black-background.png";
 
-const Footer = () => {
+const Footer = () : ReactElement => {
   return (
     <div className={styles.footer}>
       <a className={styles.footer__button} href="https://github.com/WojciechLamperski">

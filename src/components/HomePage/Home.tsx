@@ -1,14 +1,12 @@
 import { MapContainer, TileLayer, ZoomControl } from "react-leaflet";
 import styles from "./Home.module.scss";
-
-// import { useMapEvents } from "react-leaflet/lib/hooks";
-
 import LocationMarker from "./LocationMarker";
 import { Navbar } from "../Navbar/Navbar";
 import { useContext } from "react";
 import { GlobalDataContext } from "../../providers/global";
+import { ReactElement } from "react";
 
-export const Home: React.FC = () => {
+export const Home = () : ReactElement => {
   const { position } = useContext(GlobalDataContext);
 
   return (

@@ -3,18 +3,12 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
-import { useState } from "react";
 import { Sidebar } from "../Sidebar/Sidebar";
 import Hamburger from "../Hamburger/Hamburger";
 import { GlobalDataContext } from "../../providers/global";
+import { ReactElement } from "react";
 
-export const images = [
-  { src: "../../image1.png", name: "image.png" },
-  { src: "/image2.png", name: "image.png" },
-  { src: "/image3.png", name: "image.png" },
-];
-
-export const Navbar = () => {
+export const Navbar = () : ReactElement => {
   const navigate = useNavigate();
   const { setUser, currentUser, fetchUsers, isClosed } = useContext(GlobalDataContext);
 

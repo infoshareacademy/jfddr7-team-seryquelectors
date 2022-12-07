@@ -7,8 +7,9 @@ import { auth, db, storage } from "../../firebase";
 import { GlobalDataContext } from "../../providers/global";
 import { addDoc, collection } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ReactElement } from "react";
 
-export const LandingPage = () => {
+export const LandingPage = (): ReactElement => {
   const navigate = useNavigate();
   const { setUser, setName, setUserDescription, name, userDescription } = useContext(GlobalDataContext);
 

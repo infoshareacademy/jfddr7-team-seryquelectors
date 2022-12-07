@@ -1,38 +1,14 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { LatLngExpression } from "leaflet";
+import { ReactElement } from "react";
 import { useContext, useState } from "react";
 import { useEffect } from "react";
 import { db } from "../../firebase";
 import { GlobalDataContext } from "../../providers/global";
+import { EventData, UserData, UserJSON } from "../../react-app-env";
 import { icons } from "../icons";
 import styles from "./EventDetails.module.scss";
 
-interface UserData {
-  avatar: undefined | string;
-  email: string;
-  name: string;
-  userDescription: string;
-  userJson: string;
-}
-
-interface UserJSON {
-  participantName: string;
-  user: string;
-}
-
-interface EventData {
-  category: string;
-  date: string;
-  description: string;
-  email: string;
-  id: string;
-  likes: string[];
-  name: string;
-  participants: string[];
-  position: LatLngExpression;
-  time: string;
-}
-const EventDetails = () => {
+const EventDetails = (): ReactElement => {
   const { showDetails, setShowDetails } = useContext(GlobalDataContext);
 
   const [authorDescription, setAuthorDescription] = useState<null | string>(null);
@@ -59,17 +35,20 @@ const EventDetails = () => {
   return (
     <div className={styles.background} onClick={() => setShowDetails(null)}>
       <div className={styles.window}>
+        
         <div className={styles.window__author}>
           <p>Autor:</p>
           {details.name}
           <p className={styles.window__aboutme}>O mnie: {authorDescription}</p>
         </div>
+
         <div className={styles.window__description}>
           <div className={styles.window__category}>Kategoria: {details.category}</div>
 
           <p className={styles.window__categoryheader}>Opis wydarzenia:</p>
           {details.description}
         </div>
+
         <div className={styles.window__participants}>
           Uczestnicy:
           <div className={styles.window__list}>
@@ -84,14 +63,17 @@ const EventDetails = () => {
             })}
           </div>{" "}
         </div>
+
         <div className={styles.window__date}>
           <p>Data startu:</p>
           {details.date}
         </div>
+
         <div className={styles.window__time}>
           <p>Godzina startu:</p>
           {new Date().getTime() < new Date(details.date + " " + details.time).getTime() ? details.time : "Wydarzenie jest w trakcie!"}
         </div>
+
         <div className={styles.window__likes}>
           <p>
             <img className={styles.window__img} src={icons[1]} alt="heart icon" /> Polubienia:

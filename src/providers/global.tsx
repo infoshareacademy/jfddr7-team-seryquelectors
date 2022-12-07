@@ -2,40 +2,7 @@ import React, { createContext, useState, FC, ReactNode } from "react";
 import { LatLngExpression } from "leaflet";
 import { collection, DocumentData, getDocs, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../firebase";
-
-interface AuthContextState {
-  user: string | null;
-  setUser: (user: string | null) => void;
-  position: LatLngExpression;
-  setPosition: (position: LatLngExpression) => void;
-  allEvents: object[];
-  setAllEvents: (event: object[]) => void;
-  showForm: boolean;
-  setShowForm: (e: boolean) => void;
-  name: string | null;
-  setName: (user: string | null) => void;
-  userDescription: string | null;
-  setUserDescription: (user: string | null) => void;
-  fetchUsers: () => void;
-  currentUser: UserData;
-  setCurrentUser: (event: UserData) => void;
-  filter: string;
-  setFilter: (a: string) => void;
-  showDetails: string | null;
-  setShowDetails: (a: string | null) => void;
-  sidebar: string;
-  setSidebar: (a: string) => void;
-  isClosed: boolean;
-  setIsClosed: (arg: boolean) => void;
-}
-
-interface UserData {
-  avatar: undefined | string;
-  email: string;
-  name: string;
-  userDescription: string;
-  userJson: string;
-}
+import { AuthContextState, UserData } from "../react-app-env";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -56,11 +23,13 @@ export const GlobalDataProvider: FC<AuthProviderProps> = ({ children }) => {
   const [sidebar, setSidebar] = useState<string>("upcommingEvents");
   const [isClosed, setIsClosed] = useState<boolean>(false);
 
+  //real time refresh
   onSnapshot(collection(db, "events"), (qS) => {
     let events: object[] = [];
     qS.forEach((doc) => {
       events.push(doc.data());
     });
+    // do not fetch events older than hour
     events = events.filter((e: DocumentData) => new Date().getTime() < new Date(e.date + " " + e.time).getTime() + 3600000);
     if (events.length !== allEvents.length) {
       setAllEvents(events);
@@ -77,35 +46,5 @@ export const GlobalDataProvider: FC<AuthProviderProps> = ({ children }) => {
     });
   };
 
-  return (
-    <GlobalDataContext.Provider
-      value={{
-        user,
-        setUser,
-        position,
-        setPosition,
-        allEvents,
-        setAllEvents,
-        showForm,
-        setShowForm,
-        name,
-        setName,
-        userDescription,
-        setUserDescription,
-        fetchUsers,
-        currentUser,
-        setCurrentUser,
-        filter,
-        setFilter,
-        setShowDetails,
-        showDetails,
-        sidebar,
-        setSidebar,
-        isClosed,
-        setIsClosed,
-      }}
-    >
-      {children}
-    </GlobalDataContext.Provider>
-  );
+  return <GlobalDataContext.Provider value={{ user, setUser, position, setPosition, allEvents, setAllEvents, showForm, setShowForm, name, setName, userDescription, setUserDescription, fetchUsers, currentUser, setCurrentUser, filter, setFilter, setShowDetails, showDetails, sidebar, setSidebar, isClosed, setIsClosed }}>{children}</GlobalDataContext.Provider>;
 };

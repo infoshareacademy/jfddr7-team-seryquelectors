@@ -20,7 +20,7 @@ $button: #566294;
 }
 
 .landingpage {
-  min-height: calc(100vh - Home.$footer-height);
+  height: calc(100vh - Home.$footer-height);
   width: 100vw;
   display: flex;
   justify-content: space-evenly;

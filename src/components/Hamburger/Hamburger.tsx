@@ -1,4 +1,4 @@
-import { ReactElement, SetStateAction, useContext } from "react";
+import { ReactElement, useContext } from "react";
 import { BurgerClose as Icon } from "react-icons-animated";
 import { GlobalDataContext } from "../../providers/global";
 
