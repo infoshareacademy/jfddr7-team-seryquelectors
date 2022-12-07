@@ -9,12 +9,15 @@ body {
 }
 
 .wrapper {
+  position: relative;
   background-color: #394653;
-  min-height: 95vh;
+  width: 100%;
+  flex-grow: 1;
   display: flex;
   padding: 0;
   margin: 0;
   color: white;
+  overscroll-behavior: contain;
 }
 
 .wrapper::before {
@@ -27,6 +30,7 @@ body {
   bottom: 0px;
   left: 0px;
   opacity: 0.25;
+  flex-grow: 1;
 }
 
 .wrapper h2 {
@@ -284,7 +288,9 @@ form .uploadAvatar:hover {
 
   .wrapper {
     flex-direction: column;
+    flex-grow: 1;
   }
+
   .wrapper h2 {
     display: flex;
     justify-content: center;
