@@ -19,7 +19,7 @@
 }
 
 .footer a {
-  padding: 2px 0;
+  padding-top: 2px 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,10 +31,6 @@
 .footer p {
   text-align: center;
   margin-left: 5px;
-}
-
-a:hover {
-  transform: translateY(1px);
 }
 
 @media (max-width: 1024px) {

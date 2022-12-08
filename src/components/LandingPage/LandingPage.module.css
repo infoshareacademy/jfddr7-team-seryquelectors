@@ -153,6 +153,14 @@ body {
   cursor: pointer;
 }
 
+::-webkit-file-upload-button {
+  border: solid 1px white;
+  color: white;
+  font-size: var(--font-size-medium);
+  font-weight: 100;
+  background-color: transparent;
+}
+
 .error {
   background: tomato;
   text-align: center;
