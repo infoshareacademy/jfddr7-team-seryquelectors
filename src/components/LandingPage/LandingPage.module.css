@@ -154,11 +154,13 @@ body {
 }
 
 ::-webkit-file-upload-button {
+  font-family: "Work Sans", sans-serif;
   border: solid 1px white;
   color: white;
   font-size: var(--font-size-medium);
-  font-weight: 100;
-  background-color: transparent;
+  font-weight: 200;
+  background: transparent;
+  cursor: pointer;
 }
 
 .error {
