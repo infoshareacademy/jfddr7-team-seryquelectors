@@ -1,0 +1,98 @@
+:root {
+  --black: #2f353a;
+  --light-black: #363d42;
+}
+
+.mainContainer {
+  display: flex;
+  background: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.window {
+  position: relative;
+  bottom: 50px;
+  width: 700px;
+  height: 400px;
+  background: var(--black);
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.9), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+  display: grid;
+  grid-template-areas:
+    "author author cat"
+    "desc desc parti"
+    "date time likes";
+  padding: 20px;
+  border-radius: 25px;
+  color: white;
+}
+.window > * {
+  margin: 15px;
+  background-color: var(--light-black);
+  border-radius: 8px;
+  padding: 5px 0px 0px 10px;
+}
+
+.participantsList::-webkit-scrollbar {
+  display: none;
+  width: 9px;
+  border-radius: 0 0 3px 3px;
+}
+
+.participantsList::-webkit-scrollbar-track {
+  padding-top: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.participantsList::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+.author {
+  grid-area: author;
+  height: 70px;
+}
+
+.category {
+  grid-area: cat;
+}
+
+.description {
+  grid-area: desc;
+  height: 200px;
+}
+
+.participants {
+  grid-area: parti;
+}
+
+.participantsList {
+  height: 80%;
+  overflow: scroll;
+}
+
+.date {
+  grid-area: date;
+}
+
+.time {
+  grid-area: time;
+}
+
+.likes {
+  grid-area: likes;
+}
+
+.aboutMe {
+  margin-top: 5px;
+}
+
+.likes > p > img {
+  height: 13px;
+}
