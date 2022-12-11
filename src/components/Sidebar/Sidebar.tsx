@@ -1,91 +1,168 @@
 import { DocumentData } from "firebase/firestore";
-import { useContext } from "react";
-import { GlobalDataContext } from "../../providers/global";
+import { useContext, useState, useEffect, SelectHTMLAttributes } from "react";
+import { AuthContext } from "../../providers/global";
 import AddEventForm from "../addEventForm/AddEventForm";
 import EventCard from "../EventCard/EventCard";
-import styles from "./Sidebar.module.scss";
+import styles from "./Sidebar.module.css";
 
-type DD = DocumentData;
+// export const images = [
+//   { src: "../../image1.png", name: "image.png" },
+//   { src: "/image2.png", name: "image.png" },
+//   { src: "/image3.png", name: "image.png" },
+// ];
 
 export const Sidebar = () => {
-  const { sidebar, setSidebar, showForm, user, allEvents, currentUser, filter, setFilter } = useContext(GlobalDataContext);
-
-  const userEvents = allEvents.filter((e: DD) => e.email === user);
-  const participateEvents = allEvents.filter((e: DD) => e.participants.includes(currentUser.userJson) && e.email !== user);
+  const { showForm, user, allEvents, currentUser, filter, setFilter } =
+    useContext(AuthContext);
+  const [sidebar, setSidebar] = useState<string>("upcommingEvents");
+  const userEvents = allEvents.filter((e: DocumentData) => e.email === user);
+  const participateEvents = allEvents.filter(
+    (e: DocumentData) =>
+      e.participants.includes(currentUser.userJson) && e.email !== user
+  );
   const otherEvents =
-    filter === "none"
+    filter == "none"
       ? allEvents
-          .filter((e: DD) => !e.participants.includes(currentUser.userJson) || e.email === user)
-          .sort((a: DD, b: DD) => {
+          .filter(
+            (e: DocumentData) =>
+              !e.participants.includes(currentUser.userJson) || e.email === user
+          )
+          .sort((a: DocumentData, b: DocumentData) => {
             return b.likes.length - a.likes.length;
           })
       : allEvents
-          .filter((e: DD) => (!e.participants.includes(currentUser.userJson) || e.email === user) && e.category.indexOf(filter) > -1)
-          .sort((a: DD, b: DD) => {
+          .filter(
+            (e: DocumentData) =>
+              (!e.participants.includes(currentUser.userJson) ||
+                e.email === user) &&
+              e.category.indexOf(filter) > -1
+          )
+          .sort((a: DocumentData, b: DocumentData) => {
             return b.likes.length - a.likes.length;
           });
 
   return (
-    <div className={styles.sidebar}>
+    <div className={styles.SidebarWrapper}>
       <div className={styles.options}>
-        <button className={sidebar === "myEvents" ? styles["options__button--active"] : styles.options__button} onClick={() => setSidebar("myEvents")}>
+        <button
+          onClick={() => {
+            setSidebar("myEvents");
+          }}
+        >
           Moje wydarzenia
         </button>
-        <button className={sidebar === "eventsIParticipateIn" ? styles["options__button--active"] : styles.options__button} onClick={() => setSidebar("eventsIParticipateIn")}>
+        <button onClick={() => setSidebar("eventsIParticipateIn")}>
           Biorę udział w...
         </button>
-        <button className={sidebar === "upcommingEvents" ? styles["options__button--active"] : styles.options__button} onClick={() => setSidebar("upcommingEvents")}>
+        <button onClick={() => setSidebar("upcommingEvents")}>
           Nadchodzące wydarzenia
         </button>
-        <button className={sidebar === "addEvent" ? styles["options__button--active"] : styles["options__button--add"]} onClick={() => setSidebar("addEvent")}>
+        <button
+          onClick={() => {
+            setSidebar("addEvent");
+          }}
+        >
           Dodaj wydarzenie
         </button>
       </div>
 
       <div className={styles.events}>
-        {/* OUR EVENTS (CREATED BY US) */}
         {sidebar === "myEvents" ? (
           <>
-            <div className={styles.events__view}>Twoje wydarzenia ({userEvents.length}):</div>
+            <div className={styles.filter}>
+              Twoje wydarzenia ({userEvents.length}):
+            </div>
 
-            {userEvents.map((e: DD) => {
-              return <EventCard creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} />;
+            {userEvents.map((e: DocumentData) => {
+              return (
+                <EventCard
+                  creatorName={e.name}
+                  category={e.category}
+                  description={e.description}
+                  date={e.date}
+                  time={e.time}
+                  email={e.email}
+                  key={e.id}
+                  id={e.id}
+                  participants={e.participants}
+                  likes={e.likes}
+                />
+              );
             })}
           </>
         ) : null || sidebar === "eventsIParticipateIn" ? (
-          // PARTICIPATED EVENTS
           <>
-            <div className={styles.events__view}>Biorę udział w ({participateEvents.length}):</div>
+            <div className={styles.filter}>
+              Biorę udział w ({participateEvents.length}):
+            </div>
 
-            {participateEvents.map((e: DD) => {
-              return <EventCard creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} />;
+            {participateEvents.map((e: DocumentData) => {
+              return (
+                <EventCard
+                  creatorName={e.name}
+                  category={e.category}
+                  description={e.description}
+                  date={e.date}
+                  time={e.time}
+                  email={e.email}
+                  key={e.id}
+                  id={e.id}
+                  participants={e.participants}
+                  likes={e.likes}
+                />
+              );
             })}
           </>
         ) : null}
-        {/* // ALL EVENTS IN GDANSK (INCL. ADDED BY YOU) */}
         {sidebar === "upcommingEvents" ? (
           <>
-            <div className={styles.events__view}>
-              <span className={styles.events__selectlabel}>Nadchodzące wydarzenia ({otherEvents.length}):</span>
+            <div className={styles.filter}>
+              <span>Nadchodzące wydarzenia ({otherEvents.length}):</span>
               <br />
-              <select className={styles.events__select} name="activitySort" onChange={(e) => setFilter(e.target.value)} value={filter}>
-                <option value="none">Pokaż wszystkie</option>
-                <option value="sport">🟢 Sport</option>
-                <option value="nauka">🟣 Nauka</option>
-                <option value="kultura">🟡 Kultura</option>
-              </select>
+              <div className={styles.spanSelect}>
+                <select
+                  name="activitySort"
+                  onChange={(e) => {
+                    setFilter(e.target.value);
+                  }}
+                  value={filter}
+                >
+                  <option value="none">Pokaż wszystkie</option>
+                  <option value="sport">🟢 Sport</option>
+                  <option value="nauka">🟣 Nauka</option>
+                  <option value="kultura">🟡 Kultura</option>
+                </select>
+              </div>
             </div>
 
-            {otherEvents.map((e: DD) => {
-              return <EventCard other creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} />;
+            {otherEvents.map((e: DocumentData) => {
+              return (
+                <EventCard
+                  other
+                  creatorName={e.name}
+                  category={e.category}
+                  description={e.description}
+                  date={e.date}
+                  time={e.time}
+                  email={e.email}
+                  key={e.id}
+                  id={e.id}
+                  participants={e.participants}
+                  likes={e.likes}
+                />
+              );
             })}
           </>
         ) : null || sidebar === "addEvent" ? (
-          showForm ? (
-            <AddEventForm />
-          ) : (
-            <div className={styles.events__view}>Proszę, kliknij na mapę i wybierz miejsce spotkania</div>
-          )
+          <>
+            {showForm ? (
+              <AddEventForm />
+            ) : (
+              <div className={styles.filter}>
+                Proszę kliknij na mapę i wybierz miejsce spotkania
+              </div>
+            )}
+          </>
         ) : null}
       </div>
     </div>

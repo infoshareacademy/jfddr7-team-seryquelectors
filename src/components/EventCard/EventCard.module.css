@@ -1,0 +1,55 @@
+.eventCard {
+  color: black;
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 5px 0;
+  margin: 10px 5px;
+  color: white;
+  background-color: #232c34;
+}
+
+.eventCard p {
+  padding: 5px;
+  margin: 5px 5px;
+}
+
+.detailsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.detailsWrapper details summary {
+  flex-grow: 1;
+  font-size: 12px;
+}
+
+.category {
+  font-size: 12px;
+}
+
+.description {
+  font-size: 12px;
+}
+
+.email {
+  font-size: 12px;
+}
+
+.cardButton {
+  border-radius: 8px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+}
+
+.cardButton > img {
+  height: 16px;
+  padding-right: 3px;
+}
+
+.eventName {
+  display: flex;
+  justify-content: space-between;
+}

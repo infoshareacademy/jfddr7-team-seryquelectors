@@ -1,0 +1,87 @@
+.NavbarWrapper {
+  background-color: #232c34;
+  color: white;
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+  align-content: center;
+  position: fixed;
+  z-index: 999;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.9), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+  width: 100vw;
+}
+.NavbarWrapper h1 {
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin-left: 10px;
+}
+
+.NavbarWrapper svg {
+  height: 100%;
+  margin-right: 15px;
+}
+
+.NavbarWrapper button {
+  margin: 0;
+}
+
+.NavbarWrapper h1 .NavbarWrapper button {
+  background-color: #9fb6c0d5;
+  border-radius: 4px;
+  border: 0;
+  box-shadow: rgba(235, 237, 240, 0.5) 0 -1px 3px 0 inset,
+    rgba(0, 44, 97, 0.1) 0 3px 6px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  margin: 0px;
+  min-height: 40px;
+  min-width: 120px;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.NavbarWrapper button:hover {
+  background-color: #badfafd0;
+  transform: translateY(-2px);
+}
+
+.NavbarWrapper .logoutAvatarWrapper {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.NavbarWrapper .avatarWrapper {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin-right: 20px;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.NavbarWrapper .avatarWrapper img {
+  margin: 0;
+  margin-right: 5px;
+  border-radius: 50%;
+  padding: 4px;
+  background-color: #1d242c;
+  border: 1px solid gray;
+}

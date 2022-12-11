@@ -1,11 +1,23 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { LatLngExpression } from "leaflet";
 import { useContext, useState } from "react";
 import { useEffect } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { db } from "../../firebase";
-import { GlobalDataContext } from "../../providers/global";
-import { icons } from "../icons";
-import styles from "./EventDetails.module.scss";
+import { AuthContext } from "../../providers/global";
+import styles from "./EventDetails.module.css";
+
+interface Props {
+  creatorName: string;
+  category: string;
+  description: string;
+  date: string;
+  time: string;
+  email: string;
+  participants: string[];
+  id: string;
+  likes: string[];
+  setShowMore: Dispatch<SetStateAction<boolean>>;
+}
 
 interface UserData {
   avatar: undefined | string;
@@ -20,61 +32,58 @@ interface UserJSON {
   user: string;
 }
 
-interface EventData {
-  category: string;
-  date: string;
-  description: string;
-  email: string;
-  id: string;
-  likes: string[];
-  name: string;
-  participants: string[];
-  position: LatLngExpression;
-  time: string;
-}
-const EventDetails = () => {
-  const { showDetails, setShowDetails } = useContext(GlobalDataContext);
-
-  const [authorDescription, setAuthorDescription] = useState<null | string>(null);
-  const [details, setDetails] = useState<EventData>({} as EventData);
+const EventDetails = ({
+  creatorName,
+  category,
+  description,
+  date,
+  time,
+  email,
+  participants,
+  id,
+  likes,
+  setShowMore,
+}: Props) => {
+  const { currentUser, setCurrentUser, user } = useContext(AuthContext);
+  const [authorDescription, setAuthorDescription] = useState<null | string>(
+    null
+  );
 
   useEffect(() => {
-    //get 'fresh' event data from Firestore
-    getDocs(query(collection(db, "events"), where("id", "==", showDetails))).then((querySnapshot) => {
-      const eventData: EventData[] = [];
-      querySnapshot.forEach((doc) => {
-        eventData.push(doc.data() as EventData);
-      });
-      //when get, also fetch data about author
-      getDocs(query(collection(db, "users"), where("email", "==", eventData[0].email))).then((querySnapshot) => {
+    getDocs(query(collection(db, "users"), where("email", "==", email))).then(
+      (querySnapshot) => {
         const userData: UserData[] = [];
         querySnapshot.forEach((doc) => {
           userData.push(doc.data() as UserData);
         });
         setAuthorDescription(userData[0].userDescription);
-        setDetails(eventData[0]);
-      });
-    });
+      }
+    );
   }, []);
-  return (
-    <div className={styles.background} onClick={() => setShowDetails(null)}>
-      <div className={styles.window}>
-        <div className={styles.window__author}>
-          <p>Autor:</p>
-          {details.name}
-          <p className={styles.window__aboutme}>O mnie: {authorDescription}</p>
-        </div>
-        <div className={styles.window__description}>
-          <div className={styles.window__category}>Kategoria: {details.category}</div>
 
-          <p className={styles.window__categoryheader}>Opis wydarzenia:</p>
-          {details.description}
+  const likeIcon =
+    "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/facebook/327/red-heart_2764-fe0f.png";
+
+  return (
+    <div className={styles.mainContainer} onClick={() => setShowMore(false)}>
+      <div className={styles.window}>
+        <div className={styles.author}>
+          <p>Autor:</p>
+          {creatorName}
+          <p className={styles.aboutMe}>O mnie: {authorDescription}</p>
         </div>
-        <div className={styles.window__participants}>
+        <div className={styles.category}>
+          <p>Kategoria</p>
+          {category}
+        </div>
+        <div className={styles.description}>
+          <p>Opis wydarzenia:</p>
+          {description}
+        </div>
+        <div className={styles.participants}>
           Uczestnicy:
-          <div className={styles.window__list}>
-            {/* get stringified participants data, parse it and return as name + email */}
-            {details.participants?.map((el, i) => {
+          <div className={styles.participantsList}>
+            {participants.map((el, i) => {
               const parsedUserJSON = JSON.parse(el) as UserJSON;
               return (
                 <p key={i}>
@@ -84,20 +93,22 @@ const EventDetails = () => {
             })}
           </div>{" "}
         </div>
-        <div className={styles.window__date}>
+        <div className={styles.date}>
           <p>Data startu:</p>
-          {details.date}
+          {date}
         </div>
-        <div className={styles.window__time}>
+        <div className={styles.time}>
           <p>Godzina startu:</p>
-          {new Date().getTime() < new Date(details.date + " " + details.time).getTime() ? details.time : "Wydarzenie jest w trakcie!"}
+          {new Date().getTime() < new Date(date + " " + time).getTime()
+            ? time
+            : "Wydarzenie jest w trakcie!"}
         </div>
-        <div className={styles.window__likes}>
+        <div className={styles.likes}>
           <p>
-            <img className={styles.window__img} src={icons[1]} alt="heart icon" />
+            <img src={likeIcon} alt="bin" />
             Polubienia:
           </p>
-          {details.likes?.length}
+          {likes.length}
         </div>
       </div>
     </div>
