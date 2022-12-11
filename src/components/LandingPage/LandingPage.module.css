@@ -1,6 +1,18 @@
+:root {
+  --font-size-large: 35px;
+  --font-size-medium: 18px;
+  --font-size-small: 16px;
+}
+
+body {
+  overflow-x: hidden;
+}
+
 .wrapper {
+  position: relative;
   background-color: #394653;
-  min-height: 95vh;
+  width: 100%;
+  flex-grow: 1;
   display: flex;
   padding: 0;
   margin: 0;
@@ -17,29 +29,38 @@
   bottom: 0px;
   left: 0px;
   opacity: 0.25;
+  flex-grow: 1;
 }
 
-.wrapper h1 {
+.wrapper h2 {
   position: relative;
   font-weight: 500;
   letter-spacing: 4px;
-  font-size: 35px;
+  font-size: var(--font-size-large);
   text-align: center;
   display: flex;
   justify-content: center;
 }
 
-.wrapper h1 svg {
-  position: relative;
+.wrapper h2 svg {
   margin-right: 10px;
+  height: 100%;
 }
 
-.wrapper h2 {
+.wrapper h1 {
   position: relative;
   margin-top: 30px;
   text-align: center;
   font-weight: 300;
-  font-size: 45px;
+  font-size: var(--font-size-large);
+}
+
+.formWrapper h2 {
+  position: relative;
+  margin-top: 30px;
+  text-align: center;
+  font-weight: 300;
+  font-size: var(--font-size-large);
 }
 
 .about {
@@ -55,13 +76,14 @@
 
 .about p {
   font-weight: 300;
-  font-size: 18px;
+  font-size: var(--font-size-small);
   position: relative;
   padding: 40px;
   text-align: center;
 }
 
 .formWrapper {
+  margin-bottom: 10px;
   min-width: 40%;
   box-sizing: border-box;
   display: flex;
@@ -87,19 +109,19 @@
   position: relative;
   color: white;
   background-color: transparent;
-  font-size: 20px;
+  font-size: var(--font-size-medium);
   border: none;
-  border-bottom: 2px solid white;
+  border-bottom: 1px solid white;
   box-sizing: border-box;
   padding: 6px;
-  margin-top: 25px;
+  margin-top: 20px;
   font-weight: 300;
 }
 
 .formWrapper form input:focus {
   outline: none;
   border: none;
-  border-bottom: 2px solid white;
+  border-bottom: 1px solid white;
   font-weight: 300;
   background-color: transparent;
 }
@@ -123,12 +145,20 @@
   box-sizing: border-box;
   padding: 6px;
   margin-top: 25px;
-  font-size: 20px;
+  font-size: var(--font-size-medium);
 }
 
 .formWrapper form button:hover {
   font-weight: 300;
   cursor: pointer;
+}
+
+::-webkit-file-upload-button {
+  border: solid 1px white;
+  color: white;
+  font-size: var(--font-size-medium);
+  font-weight: 100;
+  background-color: transparent;
 }
 
 .error {
@@ -139,9 +169,9 @@
 }
 
 .toogleButton {
-  margin-top: 16px;
-  font-weight: 700;
-  font-size: 16px;
+  margin-top: var(--font-size-small);
+  font-weight: 500;
+  font-size: var(--font-size-small);
   position: relative;
   text-align: center;
   cursor: pointer;
@@ -149,9 +179,22 @@
 
 .textarea {
   position: relative;
-  margin-top: 20px;
+  margin-top: var(--font-size-medium);
   resize: none;
   outline: transparent;
+
+  color: white;
+  background-color: transparent;
+  font-size: var(--font-size-medium);
+  border: 1px solid white;
+  box-sizing: border-box;
+  padding: 6px;
+  margin-top: 20px;
+  font-weight: 300;
+}
+
+.textarea::placeholder {
+  color: white;
 }
 
 .textarea:focus {
@@ -161,38 +204,53 @@
 form .addImage {
   display: flex;
   width: 100%;
+  position: relative;
+  color: white;
+  background-color: transparent;
+  font-size: var(--font-size-medium);
+  border: none;
+  box-sizing: border-box;
+  font-weight: 300;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
 }
 
 form .addImage input,
 form .addImage input:focus,
 form .addImage input:hover,
 form .addImage input:active {
+  max-width: 280px;
   margin: 0;
   padding: 0;
   margin-top: 10px;
   border: none;
   font-weight: 300;
   min-width: none;
-  font-size: 20px;
+  font-size: var(--font-size-medium);
+  position: relative;
+  box-sizing: border-box;
 }
 
 form .addImage img {
+  box-sizing: border-box;
   margin-top: 5px;
   position: relative;
-  width: 35px;
-  height: 35px;
+  width: calc(var(--font-size-large) + 10px);
+  height: calc(var(--font-size-large) + 10px);
   border: 2px solid #394653;
   border-radius: 50%;
-  padding: 5px;
 }
 
 form .uploadAvatar {
+  align-self: center;
   border: none;
   position: relative;
-  font-weight: 200;
-  width: 50%;
-  font-size: 20px;
-  background-color: #7f859e;
+  text-align: center;
+  font-weight: 100;
+  width: 100%;
+  font-size: var(--font-size-medium);
+  background-color: rgba(127, 133, 158, 0.9);
   color: white;
   margin: 0;
   padding: 2px;
@@ -205,4 +263,99 @@ form .uploadAvatar:hover {
   background-color: #616b93;
   color: white;
   cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --font-size-large: 26px;
+    --font-size-medium: 16px;
+    --font-size-small: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --font-size-large: 24px;
+    --font-size-medium: 15px;
+    --font-size-small: 13px;
+  }
+}
+
+/* 960px and below,
+  the flex changes from row to column */
+
+@media (max-width: 960px) {
+  .about {
+    margin-top: 20px;
+  }
+
+  .about h1 {
+    margin-top: 10px;
+    max-width: 90%;
+  }
+
+  .wrapper {
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .wrapper h2 {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+  }
+
+  .wrapper h2 svg {
+    margin-right: 10px;
+    height: 100%;
+    min-width: 1em;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+  }
+
+  .wrapper h2 svg path {
+    height: 100%;
+    min-width: 1em;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+  }
+
+  .formWrapper {
+    margin-top: 20px;
+  }
+
+  .formWrapper h2 {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --font-size-large: 22px;
+    --font-size-medium: 14.5px;
+    --font-size-small: 12.5px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --font-size-large: 20px;
+    --font-size-medium: 13.5px;
+    --font-size-small: 12px;
+  }
+}
+
+@media (max-width: 320px) {
+  :root {
+    --font-size-large: 17px;
+    --font-size-medium: 13px;
+    --font-size-small: 11px;
+  }
 }
