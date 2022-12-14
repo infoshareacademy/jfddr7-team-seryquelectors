@@ -7,6 +7,7 @@ import { ReactElement } from "react";
 
 const LocationMarker = (): ReactElement => {
   const { setIsClosed, position, setSidebar, setPosition, allEvents, showForm, setShowForm, filter, setShowDetails } = useContext(GlobalDataContext);
+
   const map = useMapEvents({
     click(e) {
       setPosition([e.latlng.lat, e.latlng.lng]);
@@ -16,6 +17,7 @@ const LocationMarker = (): ReactElement => {
       map.flyTo(e.latlng, map.getZoom());
     },
   });
+
   const sortedEvents =
     filter === "none"
       ? allEvents
@@ -24,6 +26,7 @@ const LocationMarker = (): ReactElement => {
           .sort((a: DocumentData, b: DocumentData) => {
             return b.likes.length - a.likes.length;
           });
+
   return (
     <>
       {sortedEvents.map((e: DocumentData, i) => {
