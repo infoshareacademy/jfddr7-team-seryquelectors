@@ -11,12 +11,13 @@ import { ReactElement } from "react";
 
 export const LandingPage = (): ReactElement => {
   const navigate = useNavigate();
-  const { setUser, setName, setUserDescription, name, userDescription } = useContext(GlobalDataContext);
+  const { setUser, setUserDescription, userDescription } = useContext(GlobalDataContext);
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<null | string>(null);
   const [showLogin, setShowLogin] = useState<boolean>(true);
+  const [name, setName] = useState<string>("");
 
   const ERRORS = {
     INVALID_INPUTS: "Niepoprawny email lub hasło.",
