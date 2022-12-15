@@ -49,8 +49,6 @@ interface AuthContextState {
   setAllEvents: (event: object[]) => void;
   showForm: boolean;
   setShowForm: (e: boolean) => void;
-  name: string | null;
-  setName: (user: string | null) => void;
   userDescription: string | null;
   setUserDescription: (user: string | null) => void;
   fetchUsers: () => void;
