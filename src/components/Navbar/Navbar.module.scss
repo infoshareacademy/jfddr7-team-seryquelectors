@@ -37,7 +37,7 @@
     padding: 4px;
     background-color: App.$input-background;
     border: 0.5px solid white;
-    width: clamp(20px, 15%, Home.$navbar-height - 15px);
+    height: min(calc(Home.$navbar-height - 10px), 10vw);
   }
   &__logout {
     align-self: center;

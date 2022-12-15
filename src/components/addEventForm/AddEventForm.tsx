@@ -6,7 +6,7 @@ import { GlobalDataContext } from "../../providers/global";
 import { NewEvent } from "../../react-app-env";
 import styles from "./AddEventForm.module.scss";
 
-const AddEventForm = () : ReactElement => {
+const AddEventForm = (): ReactElement => {
   const { position, setSidebar, user, setShowForm, currentUser } = useContext(GlobalDataContext);
 
   let defaultTime: string | number = new Date().getTime() + 3600000;
@@ -19,7 +19,7 @@ const AddEventForm = () : ReactElement => {
     description: "",
     position: position,
     email: user,
-    date: new Date().toLocaleDateString("en-CA"),
+    date: "2023-01-25",
     time: defaultTime,
     category: "",
     participants: [currentUser.userJson],
