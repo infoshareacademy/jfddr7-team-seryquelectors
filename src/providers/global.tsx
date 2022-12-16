@@ -19,7 +19,6 @@ export const GlobalDataProvider: FC<AuthProviderProps> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<UserData>({} as UserData);
   const [filter, setFilter] = useState<string>("none");
   const [showDetails, setShowDetails] = useState<string | null>(null);
-  const [sidebar, setSidebar] = useState<string>("upcommingEvents");
   const [isClosed, setIsClosed] = useState<boolean>(false);
 
   //real time refresh
@@ -45,5 +44,5 @@ export const GlobalDataProvider: FC<AuthProviderProps> = ({ children }) => {
     });
   };
 
-  return <GlobalDataContext.Provider value={{ user, setUser, position, setPosition, allEvents, setAllEvents, showForm, setShowForm, userDescription, setUserDescription, fetchUsers, currentUser, setCurrentUser, filter, setFilter, setShowDetails, showDetails, sidebar, setSidebar, isClosed, setIsClosed }}>{children}</GlobalDataContext.Provider>;
+  return <GlobalDataContext.Provider value={{ user, setUser, position, setPosition, allEvents, setAllEvents, showForm, setShowForm, userDescription, setUserDescription, fetchUsers, currentUser, setCurrentUser, filter, setFilter, setShowDetails, showDetails, isClosed, setIsClosed }}>{children}</GlobalDataContext.Provider>;
 };

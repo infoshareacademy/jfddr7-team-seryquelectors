@@ -1,17 +1,19 @@
 import { collection, doc, DocumentReference, setDoc } from "firebase/firestore";
 import { ReactElement } from "react";
 import { FormEvent, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { db } from "../../firebase";
 import { GlobalDataContext } from "../../providers/global";
 import { NewEvent } from "../../react-app-env";
 import styles from "./AddEventForm.module.scss";
 
 const AddEventForm = (): ReactElement => {
-  const { position, setSidebar, user, setShowForm, currentUser } = useContext(GlobalDataContext);
+  const { position, user, setShowForm, currentUser } = useContext(GlobalDataContext);
 
   let defaultTime: string | number = new Date().getTime() + 3600000;
   defaultTime = new Date(defaultTime).toLocaleTimeString().slice(0, -3);
 
+  const navigate = useNavigate();
   const eventRef: DocumentReference = doc(collection(db, "events"));
   const { id } = eventRef;
   const [formData, setFormData] = useState<NewEvent>({
@@ -34,7 +36,7 @@ const AddEventForm = (): ReactElement => {
   const addEvent = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     setShowForm(false);
-    setSidebar("myEvents");
+    navigate("/home/my");
     await setDoc(doc(db, "events", formData.id), formData);
   };
 
