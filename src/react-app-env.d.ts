@@ -58,8 +58,6 @@ interface AuthContextState {
   setFilter: (a: string) => void;
   showDetails: string | null;
   setShowDetails: (a: string | null) => void;
-  sidebar: string;
-  setSidebar: (a: string) => void;
   isClosed: boolean;
   setIsClosed: (arg: boolean) => void;
 }

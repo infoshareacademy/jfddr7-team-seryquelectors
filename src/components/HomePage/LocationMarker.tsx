@@ -4,16 +4,17 @@ import { DocumentData } from "firebase/firestore";
 import { greenIcon, goldIcon, violetIcon } from "../../images/Icon";
 import { GlobalDataContext } from "../../providers/global";
 import { ReactElement } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LocationMarker = (): ReactElement => {
-  const { setIsClosed, position, setSidebar, setPosition, allEvents, showForm, setShowForm, filter, setShowDetails } = useContext(GlobalDataContext);
-
+  const { setIsClosed, position, setPosition, allEvents, showForm, setShowForm, filter, setShowDetails } = useContext(GlobalDataContext);
+  const navigate = useNavigate();
   const map = useMapEvents({
     click(e) {
       setPosition([e.latlng.lat, e.latlng.lng]);
       setShowForm(true);
-      setSidebar("addEvent");
       setIsClosed(true);
+      navigate("add");
       map.flyTo(e.latlng, map.getZoom());
     },
   });

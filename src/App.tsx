@@ -29,7 +29,7 @@ function App() {
     return (
       <>
         <Routes>
-          <Route path="home" element={<Home />} />
+          <Route path="home/*" element={<Home />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         {showDetails ? <EventDetails /> : null}
