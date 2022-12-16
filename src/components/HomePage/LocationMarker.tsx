@@ -7,15 +7,17 @@ import { ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 
 const LocationMarker = (): ReactElement => {
-  const { setIsClosed, position, setPosition, allEvents, showForm, setShowForm, filter, setShowDetails } = useContext(GlobalDataContext);
+  const { setIsClosed, position, setPosition, allEvents, showForm, setShowForm, filter, setShowDetails, user } = useContext(GlobalDataContext);
   const navigate = useNavigate();
   const map = useMapEvents({
     click(e) {
-      setPosition([e.latlng.lat, e.latlng.lng]);
-      setShowForm(true);
-      setIsClosed(true);
-      navigate("add");
-      map.flyTo(e.latlng, map.getZoom());
+      if(user) {
+        setPosition([e.latlng.lat, e.latlng.lng]);
+        setShowForm(true);
+        setIsClosed(true);
+        navigate("add");
+        map.flyTo(e.latlng, map.getZoom());
+      }
     },
   });
 

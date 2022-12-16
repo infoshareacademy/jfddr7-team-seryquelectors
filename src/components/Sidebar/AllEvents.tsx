@@ -4,10 +4,10 @@ import { DD } from "../../react-app-env";
 import EventCard from "../EventCard/EventCard";
 import styles from "./Sidebar.module.scss";
 
-const AllEvents : React.FC = ()  => {
-  const {  user, allEvents, currentUser, filter, setFilter } = useContext(GlobalDataContext);
-  const otherEvents =
-    filter === "none"
+const AllEvents: React.FC = () => {
+  const { user, allEvents, currentUser, filter, setFilter } = useContext(GlobalDataContext);
+  const otherEvents = user
+    ? filter === "none"
       ? allEvents
           .filter((e: DD) => !e.participants.includes(currentUser.userJson) || e.email === user)
           .sort((a: DD, b: DD) => {
@@ -17,7 +17,10 @@ const AllEvents : React.FC = ()  => {
           .filter((e: DD) => (!e.participants.includes(currentUser.userJson) || e.email === user) && e.category.indexOf(filter) > -1)
           .sort((a: DD, b: DD) => {
             return b.likes.length - a.likes.length;
-          });
+          })
+    : filter === "none"
+    ? allEvents
+    : allEvents.filter((e: DD) => e.category.indexOf(filter) > -1);
   return (
     <div className={styles.events}>
       <div className={styles.events__view}>

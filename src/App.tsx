@@ -11,7 +11,7 @@ import Footer from "./components/Footer/Footer";
 import EventDetails from "./components/EventDetails/EventDetails";
 
 function App() {
-  const { user, setUser, showDetails } = useContext(GlobalDataContext);
+  const { setUser, showDetails } = useContext(GlobalDataContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,28 +19,15 @@ function App() {
       if (u) {
         setUser(u.email);
         navigate("home");
-      } else {
-        navigate("/");
       }
     });
   }, []);
 
-  if (user) {
-    return (
-      <>
-        <Routes>
-          <Route path="home/*" element={<Home />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-        {showDetails ? <EventDetails /> : null}
-        <Footer />
-      </>
-    );
-  }
   return (
     <>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="home/*" element={<Home />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       {showDetails ? <EventDetails /> : null}
