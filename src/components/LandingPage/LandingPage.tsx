@@ -124,6 +124,9 @@ export const LandingPage = (): ReactElement => {
         <h2 className={styles.infos__header}>Łatwiejsze spotkania w Gdańsku</h2>
         <p className={styles.infos__about}>
           Szukasz towarzysza do wspólnej aktywności? Dobrze trafiłeś! <br /> Niezależnie od tego czy chcesz iść poćwiczyć na siłownię czy szukasz przyjaciela do wspólnej nauki, <br /> GoGather ma dla Ciebie towarzysza.
+          <p className={styles.formsection__toggleButton} onClick={() => navigate("home")}>
+            Kliknij tutaj i zobacz, jak to działa.
+          </p>
         </p>
       </div>
       <div className={styles.formsection}>

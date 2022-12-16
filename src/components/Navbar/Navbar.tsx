@@ -8,7 +8,7 @@ import Hamburger from "../Hamburger/Hamburger";
 import { GlobalDataContext } from "../../providers/global";
 import { ReactElement } from "react";
 
-export const Navbar = () : ReactElement => {
+export const Navbar = (): ReactElement => {
   const navigate = useNavigate();
   const { setUser, currentUser, fetchUsers, isClosed } = useContext(GlobalDataContext);
 
@@ -36,13 +36,21 @@ export const Navbar = () : ReactElement => {
         GoGather
       </h1>
       <div className={styles.navbar__user}>
-        <img className={styles.navbar__avatar} alt="user avatar" src={currentUser.avatar} />
-        <p>{currentUser.name}</p>
+        {currentUser ? (
+          <>
+            <img className={styles.navbar__avatar} alt="user avatar" src={currentUser.avatar} />
+            <p>{currentUser.name}</p>
 
-        <svg className={styles.navbar__logout} onClick={handleLogOut} xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 0 24 24" width="35px" fill="#FFFFFF">
-          <path d="M0 0h24v24H0z" fill="none" />
-          <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
-        </svg>
+            <svg className={styles.navbar__logout} onClick={handleLogOut} xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 0 24 24" width="35px" fill="#FFFFFF">
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
+            </svg>
+          </>
+        ) : (
+          <button className={styles.navbar__button} onClick={() => navigate("/")}>
+            Dołącz!
+          </button>
+        )}
       </div>
     </div>
   );

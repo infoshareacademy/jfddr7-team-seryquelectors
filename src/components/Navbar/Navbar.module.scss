@@ -1,5 +1,6 @@
 @use "../HomePage/Home.module.scss";
 @use "../../App.scss";
+@use "../Sidebar/Sidebar.module.scss";
 
 .navbar {
   background-color: App.$primary;
@@ -14,6 +15,15 @@
   &__switch {
     width: 30%;
     padding: 25px;
+  }
+  &__button {
+    @extend %sidebar-elements-styles;
+    margin-right: 10px;
+    padding: 1vw;
+    &:hover {
+      background: App.$button-over;
+      transition: background 0.5s;
+    }
   }
   &__logo {
     font-weight: 500;
