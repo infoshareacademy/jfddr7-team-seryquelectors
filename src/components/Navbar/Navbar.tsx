@@ -2,7 +2,7 @@ import styles from "./Navbar.module.scss";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Sidebar } from "../Sidebar/Sidebar";
 import Hamburger from "../Hamburger/Hamburger";
 import { GlobalDataContext } from "../../providers/global";
@@ -10,11 +10,9 @@ import { ReactElement } from "react";
 
 export const Navbar = (): ReactElement => {
   const navigate = useNavigate();
-  const { setUser, currentUser, fetchUsers, isClosed } = useContext(GlobalDataContext);
+  const { setUser, currentUser, isClosed, fetchUsers } = useContext(GlobalDataContext);
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+  useEffect(() => fetchUsers());
 
   const handleLogOut = (): void => {
     signOut(auth);
@@ -36,7 +34,7 @@ export const Navbar = (): ReactElement => {
         GoGather
       </h1>
       <div className={styles.navbar__user}>
-        {currentUser ? (
+        {currentUser?.userJson ? (
           <>
             <img className={styles.navbar__avatar} alt="user avatar" src={currentUser.avatar} />
             <p>{currentUser.name}</p>

@@ -11,7 +11,7 @@ import Footer from "./components/Footer/Footer";
 import EventDetails from "./components/EventDetails/EventDetails";
 
 function App() {
-  const { setUser, showDetails } = useContext(GlobalDataContext);
+  const { setUser, showDetails, fetchUsers } = useContext(GlobalDataContext);
   const navigate = useNavigate();
 
   useEffect(() => {
