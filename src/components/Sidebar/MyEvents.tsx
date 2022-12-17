@@ -4,7 +4,7 @@ import { DD } from "../../react-app-env";
 import EventCard from "../EventCard/EventCard";
 import styles from "./Sidebar.module.scss";
 
-const MyEvents  : React.FC = () => {
+const MyEvents: React.FC = () => {
   const { user, allEvents } = useContext(GlobalDataContext);
   const userEvents = allEvents.filter((e: DD) => e.email === user);
 
@@ -13,7 +13,7 @@ const MyEvents  : React.FC = () => {
       <p className={styles.events__view}>Twoje wydarzenia ({userEvents.length}):</p>
 
       {userEvents.map((e: DD) => {
-        return <EventCard creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} />;
+        return <EventCard key={e.id} id={e.id} />;
       })}
     </div>
   );

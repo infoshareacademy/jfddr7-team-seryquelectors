@@ -1,32 +1,24 @@
-import { ReactElement, useContext, useState } from "react";
+import { ReactElement, useContext } from "react";
 import styles from "./EventCard.module.scss";
 import { GlobalDataContext } from "../../providers/global";
-import { deleteDoc, doc, DocumentReference, getDoc, updateDoc } from "firebase/firestore";
-import { db } from "../../firebase";
 import Controls from "./Controls";
+import { EventData, DD } from "../../react-app-env";
 
 interface Props {
-  creatorName: string;
-  category: string;
-  description: string;
-  date: string;
-  time: string;
-  email: string;
-  participants: string[];
   id: string;
-  likes: string[];
   other?: boolean;
 }
 
-const EventCard = ({ creatorName, category, description, date, time, email, participants, id, likes, other }: Props): ReactElement => {
-  const { user, currentUser, setShowDetails } = useContext(GlobalDataContext);
-  const compareTime: boolean = new Date().getTime() < new Date(date + " " + time).getTime();
+const EventCard = ({ id, other }: Props): ReactElement => {
+  const { user, allEvents } = useContext(GlobalDataContext);
+  const { name, category, description, date, time, email, participants, likes } = allEvents.find((el: DD) => el.id === id) as EventData;
 
+  const compareTime: boolean = new Date().getTime() < new Date(date + " " + time).getTime();
   return (
     <>
       <div className={styles.eventcard}>
         <p className={styles.eventcard__author}>
-          {creatorName} {email === user && other ? "(Ty)" : null}
+          {name} {email === user && other ? "(Ty)" : null}
           <span className={styles.category}>{category}</span>
         </p>
 

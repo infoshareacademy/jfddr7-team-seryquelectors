@@ -35,7 +35,7 @@ const AllEvents: React.FC = () => {
       </div>
 
       {otherEvents.map((e: DD) => {
-        return <EventCard other creatorName={e.name} category={e.category} description={e.description} date={e.date} time={e.time} email={e.email} key={e.id} id={e.id} participants={e.participants} likes={e.likes} />;
+        return <EventCard other key={e.id} id={e.id} />;
       })}
     </div>
   );
