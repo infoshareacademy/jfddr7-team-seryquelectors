@@ -13,6 +13,7 @@ const EventDetails = (): ReactElement => {
 
   const [authorDescription, setAuthorDescription] = useState<null | string>(null);
   const [details, setDetails] = useState<EventData>({} as EventData);
+  const { category, date, description, likes, name, participants, time } = details;
 
   useEffect(() => {
     //get 'fresh' event data from Firestore
@@ -35,29 +36,28 @@ const EventDetails = (): ReactElement => {
   return (
     <div className={styles.background} onClick={() => setShowDetails(null)}>
       <div className={styles.window}>
-        
         <div className={styles.window__author}>
           <p>Autor:</p>
-          {details.name}
+          {name}
           <p className={styles.window__aboutme}>O mnie: {authorDescription}</p>
         </div>
 
         <div className={styles.window__description}>
-          <div className={styles.window__category}>Kategoria: {details.category}</div>
+          <div className={styles.window__category}>Kategoria: {category}</div>
 
           <p className={styles.window__categoryheader}>Opis wydarzenia:</p>
-          {details.description}
+          {description}
         </div>
 
         <div className={styles.window__participants}>
           Uczestnicy:
           <div className={styles.window__list}>
             {/* get stringified participants data, parse it and return as name + email */}
-            {details.participants?.map((el, i) => {
-              const parsedUserJSON = JSON.parse(el) as UserJSON;
+            {participants?.map((el, i) => {
+              const { participantName, user } = JSON.parse(el) as UserJSON;
               return (
                 <p key={i}>
-                  {parsedUserJSON.participantName} ({parsedUserJSON.user})
+                  {participantName} ({user})
                 </p>
               );
             })}
@@ -66,19 +66,19 @@ const EventDetails = (): ReactElement => {
 
         <div className={styles.window__date}>
           <p>Data startu:</p>
-          {details.date}
+          {date}
         </div>
 
         <div className={styles.window__time}>
           <p>Godzina startu:</p>
-          {new Date().getTime() < new Date(details.date + " " + details.time).getTime() ? details.time : "Wydarzenie jest w trakcie!"}
+          {new Date().getTime() < new Date(date + " " + time).getTime() ? time : "Wydarzenie jest w trakcie!"}
         </div>
 
         <div className={styles.window__likes}>
           <p>
             <img className={styles.window__img} src={icons[1]} alt="heart icon" /> Polubienia:
           </p>
-          {details.likes?.length}
+          {likes?.length}
         </div>
       </div>
       <p className={styles.exit}>Naciśnij gdziekolwiek poza kartą, aby wyjść.</p>
