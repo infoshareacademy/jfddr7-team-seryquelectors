@@ -21,7 +21,7 @@ const AddEventForm = (): ReactElement => {
     description: "",
     position: position,
     email: user,
-    date: "2023-01-25",
+    date: new Date().toLocaleDateString("en-CA"),
     time: defaultTime,
     category: "",
     participants: [currentUser.userJson],
